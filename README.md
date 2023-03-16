@@ -6,8 +6,6 @@
 > All the datasets in the project are publicly available 16S datasets
 * Noguera-Julian
   - Accession: [PRJNA307231](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA307231)
-* ~~Fodor~~
-  - ~~Accession: [PRJNA391915](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA391915)~~
 * Vangay
   - Accession: [PRJEB28687](https://www.ncbi.nlm.nih.gov/bioproject/PRJEB28687)
 * Jones

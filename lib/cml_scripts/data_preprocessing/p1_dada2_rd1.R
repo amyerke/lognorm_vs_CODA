@@ -116,7 +116,7 @@ saveRDS(seqtab, file.path(output_dir, "r_objects","ForwardReads_DADA2.rds"))
 write.table(seqtab,file.path(output_dir,"tables","ForwardReads_DADA2.txt"),sep="\t")
 saveRDS(rowSums(seqtab), file.path(output_dir, "r_objects","raw_ASV_total_row_seqs.rds"))
 
-fastaRef <- file.path(home_dir, "taxonomy", "rdp_train_set_16.fa.gz")
+fastaRef <- file.path(home_dir, "lib, "taxonomy", "rdp_train_set_16.fa.gz")
 taxTab <- dada2::assignTaxonomy(seqtab, refFasta = fastaRef, multithread=TRUE)
 unname(head(taxTab))
 

@@ -74,7 +74,7 @@ print("Imported R objects")
 
 
 ##-Build tree------------------------------------------------------##
-tree <- phyloseq::read_tree(file.path(home_dir, "taxonomy" , "silva","viFy10M5J2nvIBpCLM-QMQ_newick.txt"))
+tree <- phyloseq::read_tree(file.path(home_dir, "lib, "taxonomy" , "silva","viFy10M5J2nvIBpCLM-QMQ_newick.txt"))
 
 print(paste("outputting file to", silva_outf))
 pdf(file = silva_outf)

@@ -8,7 +8,7 @@ if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocMana
 print("finished loading libraries")
 
 ##-Establish directory layout---------------------------------------##
-home_dir <- file.path('~','git','balance_tree_exploration')
+home_dir <- file.path('~','git',"lognorm_vs_CODA")
 projects <- c("Jones", "Zeller","Vangay", "Noguera-Julian")
 proj_metaname <- c("patient_metadata.tsv", "patient_metadata.csv", "patient_metadata.tsv", "patient_metadata.tsv")
 proj_meta_delim <- c("\t",",","\t","\t")

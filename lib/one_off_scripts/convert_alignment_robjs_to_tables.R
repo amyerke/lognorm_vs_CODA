@@ -7,7 +7,7 @@ if (!requireNamespace("DECIPHER", quietly = TRUE)) BiocManager::install("DECIPHE
 library("DECIPHER")
 
 print("Establish directory layout.")
-home_dir <- file.path('~','git','balance_tree_exploration')
+home_dir <- file.path('~','git',"lognorm_vs_CODA")
 project <- "Jones"
 output_dir <- file.path(home_dir, project, 'output')
 setwd(file.path(home_dir))

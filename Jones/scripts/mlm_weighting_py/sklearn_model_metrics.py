@@ -29,7 +29,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 
 print("Establishing directory layout.")
-home_dir = os.path.expanduser(os.path.join("~", "git", "balance_tree_exploration"))#expanduser allows tilda (~) to work
+home_dir = os.path.expanduser(os.path.join("~", "git", "lognorm_vs_CODA"))#expanduser allows tilda (~) to work
 project = "Jones"
 output_dir = os.path.join(home_dir, project, "output")
 silva_philr_dir = os.path.join(output_dir, "tables", "silva_philr_weights")

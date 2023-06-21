@@ -14,7 +14,7 @@ library("ggplot2")
 library("reshape2")
 
 ##-Establish directory layout---------------------------------------##
-home_dir <- file.path('~','git','balance_tree_exploration')
+home_dir <- file.path('~','git',"lognorm_vs_CODA")
 project <- "Vangay"
 #home_dir <- file.path('cloud','project')
 output_dir <- file.path(home_dir, project, 'output')

@@ -43,7 +43,7 @@ parser.add_argument("-m", "--metadata_cols",
                   action="store_false", dest="meta_col",
                   help="Metadata columns to analyse")
 parser.add_argument("-d", "--homedir",
-                  default=os.path.expanduser(os.path.join("~", "git", "balance_tree_exploration")),
+                  default=os.path.expanduser(os.path.join("~", "git", "lognorm_vs_CODA")),
                   help="path to git balance treee exploration git repository", dest="homedir", metavar="homedir")
 parser.add_argument("-p", "--project", default="string",
                   help="project folder", metavar="project")

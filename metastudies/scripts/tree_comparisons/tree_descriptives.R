@@ -25,7 +25,7 @@ library("compositions")
 print("finished loading libraries")
 
 ##-Establish directory layout---------------------------------------##
-home_dir <- file.path('~','git','balance_tree_exploration')
+home_dir <- file.path('~','git',"lognorm_vs_CODA")
 projects <- c("Jones", "Vangay", "Zeller", "Noguera-Julian")
 
 ##-Functions--------------------------------------------------------##

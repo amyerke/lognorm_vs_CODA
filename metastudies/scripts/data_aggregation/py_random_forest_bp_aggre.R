@@ -9,7 +9,7 @@ if (!requireNamespace("qpdf", quietly = TRUE)) install.packages("qpdf")
 print("finished loading libraries")
 
 ##-Establish directory layout---------------------------------------##
-home_dir <- file.path('~','git','balance_tree_exploration')
+home_dir <- file.path('~','git',"lognorm_vs_CODA")
 projects <- c("Jones", "Zeller", "Vangay", "Noguera-Julian")
 rf_bp_filename <- "bp_sklearn_random_forest_manual_0.75train.pdf"
 output_path <- file.path(home_dir, "dissertation_supplement", "rf_bp_py","sklearn_rf_bp.pdf")

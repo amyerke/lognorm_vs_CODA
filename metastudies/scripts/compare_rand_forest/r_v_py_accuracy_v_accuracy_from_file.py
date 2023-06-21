@@ -35,7 +35,7 @@ parser = argparse.ArgumentParser(description="This script runs a random forest t
 # parser.add_option("-f", "--file", dest="filename",
 #                   help="write report to FILE", metavar="FILE")
 parser.add_argument("-d", "--homedir",
-                  default=os.path.expanduser(os.path.join("~", "git", "balance_tree_exploration")),
+                  default=os.path.expanduser(os.path.join("~", "git", "lognorm_vs_CODA")),
                   help="path to git balance treee exploration git repository", dest="homedir", metavar="homedir")
 options, unknown = parser.parse_known_args()
 

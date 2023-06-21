@@ -25,7 +25,7 @@ import argparse
 # --------------------------------------------------------------------------
 print("Establishing directory layout.")
 # --------------------------------------------------------------------------
-home_dir = os.path.expanduser(os.path.join("~", "git", "balance_tree_exploration"))
+home_dir = os.path.expanduser(os.path.join("~", "git", "lognorm_vs_CODA"))
 project = "Jones"
 output_dir = os.path.join(home_dir, project, "output")
 assert os.path.exists(output_dir)

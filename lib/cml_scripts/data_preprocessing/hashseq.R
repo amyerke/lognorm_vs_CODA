@@ -19,7 +19,7 @@ library("optparse")
 print("Loading cml options")
 option_list <- list(
   optparse::make_option(c("-i", "--input_dir"), type="character", 
-              default=file.path('~','git','balance_tree_exploration'), 
+              default=file.path('~','git',"lognorm_vs_CODA"), 
               help="dataset dir path", metavar="home dir"),
   optparse::make_option(c("-o", "--output_dir"), type="character", default=NULL, 
               help="output_dir", metavar="project"),

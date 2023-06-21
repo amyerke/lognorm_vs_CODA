@@ -11,7 +11,7 @@ if (length(args)==0) {
   # args[2] = "out.txt"
 }
 
-home_dir <- file.path('~','git','balance_tree_exploration')
+home_dir <- file.path('~','git',"lognorm_vs_CODA")
 #project <- "Noguera-Julian"
 project <- args[1]
 

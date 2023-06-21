@@ -17,7 +17,7 @@ palette( brewer.pal(7,"Accent") )
 library(randomForest)
 library(compositions)
 ##-Establish directory layout---------------------------------------##
-home_dir <- file.path('~','git','balance_tree_exploration')
+home_dir <- file.path('~','git',"lognorm_vs_CODA")
 project <- "Jones"
 output_dir <- file.path(home_dir, project, 'output')
 setwd(file.path(home_dir))

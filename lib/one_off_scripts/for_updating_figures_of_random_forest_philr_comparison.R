@@ -174,7 +174,7 @@ if (!requireNamespace("data.table", quietly = TRUE)) BiocManager::install("data.
 library("data.table")
 
 ##-Establish directory layout---------------------------------------##
-home_dir <- file.path('~','git','balance_tree_exploration')
+home_dir <- file.path('~','git',"lognorm_vs_CODA")
 project <- "Zeller"
 output_dir <- file.path(home_dir, project, 'output')
 

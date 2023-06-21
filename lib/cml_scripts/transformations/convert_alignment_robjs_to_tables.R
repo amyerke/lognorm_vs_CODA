@@ -11,7 +11,7 @@ library("optparse")
 
 option_list <- list(
   optparse::make_option(c("-d", "--homedir"), type="character", 
-                        default=file.path('~','git','balance_tree_exploration'), 
+                        default=file.path('~','git',"lognorm_vs_CODA"), 
                         help="dataset dir path", metavar="character"),
   optparse::make_option(c("-p", "--project"), type="character", default=NULL, 
                         help="project folder", metavar="character")

@@ -15,7 +15,7 @@ print("Reading cml arguments")
 # --------------------------------------------------------------------------
 option_list <- list(
   optparse::make_option(c("-d", "--homedir"), type="character", 
-                        default=file.path('~','git','balance_tree_exploration'), 
+                        default=file.path('~','git',"lognorm_vs_CODA"), 
                         help="dataset dir path"),
   optparse::make_option(c("-t", "--tree_fname"), type="character", default="viFy10M5J2nvIBpCLM-QMQ_newick.txt", 
                         help="project folder")

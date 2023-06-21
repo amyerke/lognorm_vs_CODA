@@ -11,7 +11,7 @@ library(SRAdb)
 srafile = getSRAdbFile()
 con = dbConnect('SQLite',srafile)
 ##-Establish directory layout---------------------------------------##
-home_dir <- file.path('~','git','balance_tree_exploration')
+home_dir <- file.path('~','git',"lognorm_vs_CODA")
 project <- "Vangay"
 download_dir <- file.path(home_dir, project, "downloaded_seqs")
 ##-Download SRA files ----------------------------------------------##

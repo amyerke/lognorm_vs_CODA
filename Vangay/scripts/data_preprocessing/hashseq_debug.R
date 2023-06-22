@@ -13,8 +13,8 @@ if (!requireNamespace("HashSeq", quietly = TRUE)){
 
 print("Running hashseq")
 
-HashSeq::inferTrueSequences(inputDir = "/users/amyerke/git/balance_tree_exploration/Vangay/downloaded_seqs", 
-                            outputDir = "/users/amyerke/git/balance_tree_exploration/Vangay/output/hashseq",
+HashSeq::inferTrueSequences(inputDir = "/users/amyerke/git/lognorm_vs_CODA/Vangay/downloaded_seqs", 
+                            outputDir = "/users/amyerke/git/lognorm_vs_CODA/Vangay/output/hashseq",
                             abundanceThreshold = 1000)
 
 print("R Script complete.")

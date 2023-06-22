@@ -21,7 +21,7 @@ echo Using $SLURM_NTASKS processors across $SLURM_NNODES nodes
 #module load anaconda3/2020.11
 #conda activate testing_pyCaret
 
-srun python ~/git/balance_tree_exploration/Jones/scripts/mlm_weighting_py/ref_tree_caret.py
+srun python ~/git/lognorm_vs_CODA/Jones/scripts/mlm_weighting_py/ref_tree_caret.py
 
 echo ""
 echo "======================================================"

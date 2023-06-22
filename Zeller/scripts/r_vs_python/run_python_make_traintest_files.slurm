@@ -22,7 +22,7 @@ export PYTHONUNBUFFERED=TRUE #lets print statements show up without flush=True
 
 module load anaconda3/2020.11
 conda activate testing_pyCaret
-python ~/git/balance_tree_exploration/lib/cml_scripts/r_vs_python/python_make_traintest_files.py \
+python ~/git/lognorm_vs_CODA/lib/cml_scripts/r_vs_python/python_make_traintest_files.py \
   --project Zeller \
   --use_all_meta True \
   --metada_fn patient_metadata.csv \

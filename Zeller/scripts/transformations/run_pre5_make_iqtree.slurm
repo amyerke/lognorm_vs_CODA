@@ -18,8 +18,8 @@ echo Running on host: `hostname`
 echo Using $SLURM_NTASKS processors across $SLURM_NNODES nodes
 
 module load R
-srun Rscript ~/git/balance_tree_exploration/lib/cml_scripts/transformations/convert_alignment_robjs_to_tables.R \
-  -d ~/git/balance_tree_exploration \
+srun Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/transformations/convert_alignment_robjs_to_tables.R \
+  -d ~/git/lognorm_vs_CODA \
   -p Zeller
 
 echo ""

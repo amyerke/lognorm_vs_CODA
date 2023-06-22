@@ -23,7 +23,7 @@ conda activate testing_pyCaret
 
 echo launching Jones
 
-srun --nodes=1 python ~/git/balance_tree_exploration/lib/cml_scripts/random_forest/random_forest_manual_train_ntree_mtry.py\
+srun --nodes=1 python ~/git/lognorm_vs_CODA/lib/cml_scripts/random_forest/random_forest_manual_train_ntree_mtry.py\
   -p Jones \
   -a True \
   -f patient_metadata.tsv \
@@ -33,7 +33,7 @@ srun --nodes=1 python ~/git/balance_tree_exploration/lib/cml_scripts/random_fore
 
 echo launching Vangay
 
-srun --nodes=1 python ~/git/balance_tree_exploration/lib/cml_scripts/random_forest/random_forest_manual_train_ntree_mtry.py\
+srun --nodes=1 python ~/git/lognorm_vs_CODA/lib/cml_scripts/random_forest/random_forest_manual_train_ntree_mtry.py\
   -p Vangay \
   -a True \
   -f patient_metadata.tsv \
@@ -43,7 +43,7 @@ srun --nodes=1 python ~/git/balance_tree_exploration/lib/cml_scripts/random_fore
 
 echo launching Zeller
 
-srun --nodes=1 python ~/git/balance_tree_exploration/lib/cml_scripts/random_forest/random_forest_manual_train_ntree_mtry.py\
+srun --nodes=1 python ~/git/lognorm_vs_CODA/lib/cml_scripts/random_forest/random_forest_manual_train_ntree_mtry.py\
   -p Zeller \
   -a True \
   -f patient_metadata.csv \
@@ -54,7 +54,7 @@ srun --nodes=1 python ~/git/balance_tree_exploration/lib/cml_scripts/random_fore
 
 echo launching Noguera-Julian
 
-srun --nodes=1 python ~/git/balance_tree_exploration/lib/cml_scripts/random_forest/random_forest_manual_train_ntree_mtry.py\
+srun --nodes=1 python ~/git/lognorm_vs_CODA/lib/cml_scripts/random_forest/random_forest_manual_train_ntree_mtry.py\
   -p Noguera-Julian \
   -a True \
   -f patient_metadata.tsv \

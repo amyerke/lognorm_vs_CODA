@@ -21,38 +21,38 @@ module load R
 
 echo launching Jones
 
-srun --nodes=1Rscript ~/git/balance_tree_exploration/lib/cml_scripts/random_forest/random_forest_philr_comparison.R \
-  -d ~/git/balance_tree_exploration \
+srun --nodes=1Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/random_forest/random_forest_philr_comparison.R \
+  -d ~/git/lognorm_vs_CODA \
   -p Jones \
-  -m ~/git/balance_tree_exploration/Jones/patient_metadata.tsv \
+  -m ~/git/lognorm_vs_CODA/Jones/patient_metadata.tsv \
   -r Run \
   -n 20
 
 echo launching Vangay
 
-srun --nodes=1 Rscript ~/git/balance_tree_exploration/lib/cml_scripts/random_forest/random_forest_philr_comparison.R \
-  -d ~/git/balance_tree_exploration \
+srun --nodes=1 Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/random_forest/random_forest_philr_comparison.R \
+  -d ~/git/lognorm_vs_CODA \
   -p Vangay \
-  -m ~/git/balance_tree_exploration/Vangay/patient_metadata.tsv \
+  -m ~/git/lognorm_vs_CODA/Vangay/patient_metadata.tsv \
   -r run_accession \
   -n 20
 
 # echo launching Zeller
 
-# srun --nodes=1 Rscript ~/git/balance_tree_exploration/lib/cml_scripts/random_forest/random_forest_philr_comparison.R \
-#   -d ~/git/balance_tree_exploration \
+# srun --nodes=1 Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/random_forest/random_forest_philr_comparison.R \
+#   -d ~/git/lognorm_vs_CODA \
 #   -p Zeller \
-#   -m ~/git/balance_tree_exploration/Zeller/patient_metadata.csv \
+#   -m ~/git/lognorm_vs_CODA/Zeller/patient_metadata.csv \
 #   -l , \
 #   -r Run \
 #   -n 20
 
 echo launching Noguera-Julian
 
-srun --nodes=1 Rscript ~/git/balance_tree_exploration/lib/cml_scripts/random_forest/random_forest_philr_comparison.R \
-  -d ~/git/balance_tree_exploration \
+srun --nodes=1 Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/random_forest/random_forest_philr_comparison.R \
+  -d ~/git/lognorm_vs_CODA \
   -p Noguera-Julian \
-  -m ~/git/balance_tree_exploration/Noguera-Julian/patient_metadata.tsv \
+  -m ~/git/lognorm_vs_CODA/Noguera-Julian/patient_metadata.tsv \
   -r Run \
   -n 20
 

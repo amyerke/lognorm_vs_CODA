@@ -20,7 +20,7 @@ echo Using $SLURM_NTASKS processors across $SLURM_NNODES nodes
 
 module load R/3.6.0
 
-srun Rscript /users/amyerke/git/balance_tree_exploration/Vangay/scripts/random_forest/rand_tree_vs_philr_auc.R
+srun Rscript /users/amyerke/git/lognorm_vs_CODA/Vangay/scripts/random_forest/rand_tree_vs_philr_auc.R
 
 echo ""
 echo "======================================================"

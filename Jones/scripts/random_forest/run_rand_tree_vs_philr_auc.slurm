@@ -21,10 +21,10 @@ echo Using $SLURM_NTASKS processors across $SLURM_NNODES nodes
 
 module load R
 
-Rscript ~/git/balance_tree_exploration/lib/cml_scripts/random_forest/random_forest_philr_comparison.R \
-  -d ~/git/balance_tree_exploration \
+Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/random_forest/random_forest_philr_comparison.R \
+  -d ~/git/lognorm_vs_CODA \
   -p Jones \
-  -m ~/git/balance_tree_exploration/Jones/patient_metadata.tsv \
+  -m ~/git/lognorm_vs_CODA/Jones/patient_metadata.tsv \
   -r Run \
   -n 20
 

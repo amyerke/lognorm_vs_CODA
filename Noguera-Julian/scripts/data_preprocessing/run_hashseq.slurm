@@ -20,9 +20,9 @@ echo Using $SLURM_NTASKS processors across $SLURM_NNODES nodes
 
 module load R
 
-srun Rscript ~/git/balance_tree_exploration/lib/cml_scripts/data_preprocessing/hashseq.R \
-	-i ~/git/balance_tree_exploration/Noguera-Julian/downloaded_seqs \
-	-o ~/git/balance_tree_exploration/Noguera-Julian/output/hashseq
+srun Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/data_preprocessing/hashseq.R \
+	-i ~/git/lognorm_vs_CODA/Noguera-Julian/downloaded_seqs \
+	-o ~/git/lognorm_vs_CODA/Noguera-Julian/output/hashseq
 
 echo ""
 echo "======================================================"

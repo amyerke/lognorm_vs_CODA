@@ -20,8 +20,8 @@ echo Using $SLURM_NTASKS processors across $SLURM_NNODES nodes
 
 module load anaconda3/2020.11
 conda activate testing_pyCaret
-python ~/git/balance_tree_exploration/metastudies/compare_rand_forest/intra_dataset_random_forest_comp.py\
-  -d ~/git/balance_tree_exploration
+python ~/git/lognorm_vs_CODA/metastudies/compare_rand_forest/intra_dataset_random_forest_comp.py\
+  -d ~/git/lognorm_vs_CODA
 
 conda deactivate
 module unload anaconda3/2020.11

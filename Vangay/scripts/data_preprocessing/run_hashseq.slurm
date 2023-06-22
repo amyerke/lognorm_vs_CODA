@@ -20,7 +20,7 @@ echo Using $SLURM_NTASKS processors across $SLURM_NNODES nodes
 
 module load R
 
-Rscript ~/git/balance_tree_exploration/Vangay/scripts/data_preprocessing/hashseq_debug.R
+Rscript ~/git/lognorm_vs_CODA/Vangay/scripts/data_preprocessing/hashseq_debug.R
 
 echo ""
 echo "======================================================"

@@ -22,8 +22,8 @@ export PYTHONUNBUFFERED=TRUE #lets print statements show up without flush=True
 
 module load anaconda3/2020.11
 conda activate testing_pyCaret
-python ~/git/balance_tree_exploration/lib/cml_scripts/r_vs_python/skl_random_forest_from_files.py \
-  -d ~/git/balance_tree_exploration \
+python ~/git/lognorm_vs_CODA/lib/cml_scripts/r_vs_python/skl_random_forest_from_files.py \
+  -d ~/git/lognorm_vs_CODA \
   -p Jones 
 # conda deactivate
 # module unload anaconda3/2020.11

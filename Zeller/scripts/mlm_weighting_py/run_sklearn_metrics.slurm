@@ -21,7 +21,7 @@ export PYTHONUNBUFFERED=TRUE #lets print statements show up without flush=True
 
 module load anaconda3/2020.11
 conda activate testing_pyCaret
-srun python ~/git/balance_tree_exploration/lib/cml_scripts/mlm_metrics/sklearn_model_metrics.py\
+srun python ~/git/lognorm_vs_CODA/lib/cml_scripts/mlm_metrics/sklearn_model_metrics.py\
   -p Zeller \
   -a True \
   -f patient_metadata.csv \

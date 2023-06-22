@@ -1,7 +1,7 @@
 #!/usr/bin/env Rscript
 # Running the p2_blast.sh with command line args
 # if this doesn't work, you might need to run the scripts 
-# in balance_tree_exploration/r_libraries/cml_scripts/creat_ref_tree_blst_db
+# in lognorm_vs_CODA/r_libraries/cml_scripts/creat_ref_tree_blst_db
 
 rm(list = ls()) #clear workspace
 
@@ -25,7 +25,7 @@ tryCatch(
          minimized = FALSE, invisible = TRUE, timeout = 0)
   },
   error=function(cond) {
-    print('Opps, an error is thrown, did you run balance_tree_exploration/r_libraries/cml_scripts/creat_ref_tree_blst_db?')
+    print('Opps, an error is thrown, did you run lognorm_vs_CODA/r_libraries/cml_scripts/creat_ref_tree_blst_db?')
     message(cond)
   },
   warning=function(cond) {

@@ -22,7 +22,7 @@ echo "Loaded Anaconda."
 source activate testing_pyCaret
 echo "activated testing_pyCaret conda env"
 export PYTHONUNBUFFERED=TRUE
-python ~/git/balance_tree_exploration/lib/cml_scripts/random_forest/random_forest_manual_train_ntree_mtry.py \
+python ~/git/lognorm_vs_CODA/lib/cml_scripts/random_forest/random_forest_manual_train_ntree_mtry.py \
   -p Zeller \
   -a True \
   -f patient_metadata.csv \

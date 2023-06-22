@@ -20,7 +20,7 @@ echo Using $SLURM_NTASKS processors across $SLURM_NNODES nodes
 
 module load R
 
-srun bash ~/git/balance_tree_exploration/lib/cml_scripts/make_ref_tree/p2_blast.sh ~/git/balance_tree_exploration Zeller
+srun bash ~/git/lognorm_vs_CODA/lib/cml_scripts/make_ref_tree/p2_blast.sh ~/git/lognorm_vs_CODA Zeller
 
 echo ""
 echo "======================================================"

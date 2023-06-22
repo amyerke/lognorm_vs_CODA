@@ -21,9 +21,9 @@ echo Using $SLURM_NTASKS processors across $SLURM_NNODES nodes
 
 module load R
 
-Rscript ~/git/balance_tree_exploration/lib/cml_scripts/read_depth/explore_many_read_depth.R \
+Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/read_depth/explore_many_read_depth.R \
 -p Noguera-Julian \
--d ~/git/balance_tree_exploration/
+-d ~/git/lognorm_vs_CODA/
 
 
 echo ""

@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript
 # Running the p0_dada2_find_trunLen.R with command line args
-# Note: download result with scp amy@hpc.uncc.edu:~/git/balance_tree_exploration/McDonald/output/graphics/plotQualF.png .
+# Note: download result with scp amy@hpc.uncc.edu:~/git/lognorm_vs_CODA/McDonald/output/graphics/plotQualF.png .
 
 
 rm(list = ls()) #clear workspace

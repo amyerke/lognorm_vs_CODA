@@ -20,10 +20,10 @@ echo Using $SLURM_NTASKS processors across $SLURM_NNODES nodes
 
 module load R
 
-srun Rscript ~/git/balance_tree_exploration/lib/cml_scripts/transformations/p6_iqtree2phyloseq_obj.R \
--d ~/git/balance_tree_exploration \
+srun Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/transformations/p6_iqtree2phyloseq_obj.R \
+-d ~/git/lognorm_vs_CODA \
 -p Jones \
--m ~/git/balance_tree_exploration/Jones/SraRunTable.txt \
+-m ~/git/lognorm_vs_CODA/Jones/SraRunTable.txt \
 -l , \
 -r Run
 

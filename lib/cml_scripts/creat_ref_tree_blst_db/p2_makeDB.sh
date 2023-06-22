@@ -3,7 +3,7 @@
 #  https://www.ncbi.nlm.nih.gov/books/NBK279688/
 module load blast
 
-cd ~/git/balance_tree_exploration/lib/ref_tree_objs
+cd ~/git/lognorm_vs_CODA/lib/ref_tree_objs
 # -parse_seqids option is required to keep the original sequence identifiers. Otherwise makeblastdb will generate its own identifiers.
 makeblastdb -in treeFasta.fasta -out db/tree -parse_seqids -dbtype nucl
 

@@ -20,9 +20,9 @@ echo Using $SLURM_NTASKS processors across $SLURM_NNODES nodes
 
 module load R
 
-srun Rscript ~/git/balance_tree_exploration/r_libraries/cml_scripts/transformations/p2_denovo_tree_UPGMA.R -d ~/git/balance_tree_exploration \
+srun Rscript ~/git/lognorm_vs_CODA/r_libraries/cml_scripts/transformations/p2_denovo_tree_UPGMA.R -d ~/git/lognorm_vs_CODA \
 -p Noguera-Julian \
--m ~/git/balance_tree_exploration/Noguera-Julian/SraRunTable.txt \
+-m ~/git/lognorm_vs_CODA/Noguera-Julian/SraRunTable.txt \
 -l , \
 -r Run
 

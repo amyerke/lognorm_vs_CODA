@@ -21,9 +21,9 @@ echo Using $SLURM_NTASKS processors across $SLURM_NNODES nodes
 
 module load R
 
-Rscript ~/git/balance_tree_exploration/lib/cml_scripts/random_forest/rf_comparison_variable_ntree.R \
+Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/random_forest/rf_comparison_variable_ntree.R \
   -p Zeller \
-  -m ~/git/balance_tree_exploration/Zeller/patient_metadata.csv \
+  -m ~/git/lognorm_vs_CODA/Zeller/patient_metadata.csv \
   -l , \
   -r Run \
   -n 20 \

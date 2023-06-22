@@ -1,7 +1,7 @@
 # Author: Aaron Yerke
 print("Script for downloading scripts from silva tree and 
 building fasta for blast data base. Expects tree to be in 
-home_dir/ref_tree_objs/silva.") 
+home_dir/lib/ref_tree_objs/silva.") 
 
 if (!requireNamespace("BiocManager", quietly = TRUE)){
   install.packages("BiocManager")

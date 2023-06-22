@@ -6,7 +6,7 @@ home_dir=$1 #first comandline argument is the project name
 project=$2
 echo "Found arguments ${home_dir} and ${project}."
 
-db_path=${home_dir}/ref_tree_objs/db/tree
+db_path=${home_dir}/lib/ref_tree_objs/db/tree
 
 echo "Cd to ~/git/balance_tree_exploration/${project}/output/tree_process_blast."
 cd ~/git/balance_tree_exploration/${project}/output/tree_process_blast

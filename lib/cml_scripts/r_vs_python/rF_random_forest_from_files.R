@@ -61,7 +61,7 @@ input_dir <- file.path(output_dir, "tables", "r_v_py_train_test_tables")
 base::setwd(input_dir)
 
 ##-Functions--------------------------------------------------------##
-source(file.path(home_dir, "lib", "statistical_functions.R"))
+
 source(file.path(home_dir, "lib", "table_manipulations.R"))
 
 ##-Set up constants-------------------------------------------------##

@@ -54,7 +54,7 @@ project <- opt$project
 output_dir <- file.path(home_dir, project, 'output')
 
 ##-Functions--------------------------------------------------------##
-source(file.path(home_dir, "lib", "statistical_functions.R"))
+
 source(file.path(home_dir, "lib", "table_manipulations.R"))
 
 ##-Set up constants-------------------------------------------------##

@@ -40,7 +40,7 @@ raw_ps_to_clean_ps <- function(ps) {
   return(ps_clean)
 }
 
-source(file.path(home_dir, "lib", "statistical_functions.R"))
+
 source(file.path(home_dir, "lib", "table_manipulations.R"))
 
 ##-Create tree attribute vectors------------------------------------##

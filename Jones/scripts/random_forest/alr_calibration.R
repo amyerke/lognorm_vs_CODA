@@ -135,7 +135,7 @@ output_dir <- file.path(home_dir, project, 'output')
 setwd(file.path(home_dir))
 
 ##-Functions--------------------------------------------------------##
-source(file.path(home_dir, "lib", "statistical_functions.R"))
+
 source(file.path(home_dir, "lib", "table_manipulations.R"))
 
 ##-Set up constants-------------------------------------------------##

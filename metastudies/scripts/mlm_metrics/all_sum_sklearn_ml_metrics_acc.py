@@ -4,7 +4,7 @@ Starting: {__file__}
 Author: Aaron Yerke (aaronyerke@gmail.com)
 For determining if PhILR weighting schemes improve any ML techniques.
 This was useful: https://machinelearningmastery.com/compare-machine-learning-algorithms-python-scikit-learn/
-Compare Algorithms
+And to compare algorithms
 This script creates summary mlm metrics pdf that combines all projects.
 """)
 
@@ -128,14 +128,14 @@ for proj in range(len(projects)):
 		print(f"Preparing models for {philr_group}.")
 		# --------------------------------------------------------------------------
 		models = []
-		models.append(('LR', LogisticRegression(max_iter=1000)))
+		models.append(('LogR', LogisticRegression(max_iter=1000)))
 		models.append(('LDA', LinearDiscriminantAnalysis()))
 		models.append(('KNN', KNeighborsClassifier()))
 		models.append(('DTREE', DecisionTreeClassifier()))
 		models.append(('RF', RandomForestClassifier()))
 		models.append(('GausNB', GaussianNB()))
 		models.append(('SVM', SVC()))
-
+		models.append(())
 		# --------------------------------------------------------------------------
 		print(f"Building {scoring} scores for each weighing scheme.\
 			Results found at {result_fpath} for {philr_group}.")

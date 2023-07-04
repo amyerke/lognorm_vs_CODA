@@ -23,12 +23,23 @@ lognorm <- function(table){
 }
 
 proportions_transform <- function(table){
+	# RC/n where RC = raw count and n = number of
+	# sequences in a sample
   table<-sweep(table,1,rowSums(table),"/")
   return(table)
 }
 
 heilinger_transformation <- function(table){
+	# √(RC/n) where RC = raw count and n = number of
+	# sequences in a sample
   table<-sweep(table,1,rowSums(table),"/")
   table<-sqrt(table)
   return(table)
+}
+
+filt_seq_dpth <- function(min_read_depth, df) {
+	#function to remove samples below min read depth
+	#because vegan's rrarefy doesn't seem to be doing it
+  df <- df[rowSums(df) > min_read_depth, ]
+	return(df)
 }

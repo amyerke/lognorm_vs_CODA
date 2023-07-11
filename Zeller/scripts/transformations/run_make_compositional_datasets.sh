@@ -20,7 +20,7 @@ echo Using $SLURM_NTASKS processors across $SLURM_NNODES nodes
 
 module load R
 
-Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/transformations/make_compositional_datasets.R \
+Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/transformations/make_nonilr_datasets.R \
   -d ~/git/lognorm_vs_CODA \
   -p Zeller \
   -m ~/git/lognorm_vs_CODA/Zeller/patient_metadata.csv \

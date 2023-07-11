@@ -29,7 +29,7 @@ proportions_transform <- function(table){
   return(table)
 }
 
-heilinger_transformation <- function(table){
+heilinger_transform <- function(table){
 	# √(RC/n) where RC = raw count and n = number of
 	# sequences in a sample
   table<-sweep(table,1,rowSums(table),"/")

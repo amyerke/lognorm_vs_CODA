@@ -4,9 +4,11 @@
 
 rm(list = ls()) #clear workspace
 
+####-Functions--------------------------------------------------------####
 print("Loading custom functions.")
 raw_ps_to_clean_ps <- function(ps) {
   #requires ape, phyloseq and philr_tutorial_normalization 
+  #performs philr tutorial normalization on phyloseq obj
   clean_otu = data.frame(ps@otu_table@.Data)
   clean_otu = philr_tutorial_normalization(clean_otu)
   ps_clean = phyloseq::phyloseq( otu_table(clean_otu, taxa_are_rows = F), 
@@ -16,15 +18,16 @@ raw_ps_to_clean_ps <- function(ps) {
   return(ps_clean)
 }
 
-##-Load Depencencies------------------------------------------------##
+####-Load Depencencies------------------------------------------------####
 if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")
 if (!requireNamespace("rgr", quietly = TRUE)) install.packages("rgr")
 library("rgr")
 if (!requireNamespace("data.table", quietly = TRUE)) BiocManager::install("data.table")
 library("data.table")
+if (!requireNamespace("vegan", quietly = TRUE)) BiocManager::install("vegan")
+library("vegan")
 if (!requireNamespace("optparse", quietly = TRUE)){
-  install.packages("optparse")
-}
+  install.packages("optparse")}
 library("optparse")
 print("finished loading libraries")
 
@@ -53,16 +56,14 @@ home_dir <- opt$homedir
 project <- opt$project
 output_dir <- file.path(home_dir, project, 'output')
 
-##-Functions--------------------------------------------------------##
-
 source(file.path(home_dir, "lib", "table_manipulations.R"))
 
-##-Set up constants-------------------------------------------------##
+#### Set up constants ####
 random_seed <- 36
 
-# --------------------------------------------------------------------------
+#### Importing and preprocessing tables, starting with DADA2 ####
 print("Importing and preprocessing tables, starting with DADA2")
-# --------------------------------------------------------------------------
+
 initial_table <- data.frame(readRDS(file.path(output_dir, "r_objects", "ForwardReads_DADA2.rds")))
 
 print("creating DADA2 lognorm, ALR and CLR")
@@ -92,6 +93,23 @@ print("creating DADA2 CLR")
 df <- as.data.frame(rgr::clr(as.matrix(initial_table + 1)))
 saveRDS(df, file = file.path(output_dir,"r_objects", "clr_asv.rds"))
 write.csv(df, file = file.path(output_dir,"tables", "clr_asv.csv"))
+
+print("creating DADA2 proportions")
+df <- proportions_transform(initial_table)
+saveRDS(df, file = file.path(output_dir,"r_objects", "propotions_asv.rds"))
+write.csv(df, file = file.path(output_dir,"tables", "propotions_asv.csv"))
+
+print("creating DADA2 heilinger")
+df <- heilinger_transform(initial_table)
+saveRDS(df, file = file.path(output_dir,"r_objects", "heilinger_asv.rds"))
+write.csv(df, file = file.path(output_dir,"tables", "heilinger_asv.csv"))
+
+print("Creating rarefied dataset at 1000 read depth")
+rd <- 1000
+low_abund_removed <- filt_seq_dpth(rd, initial_table)
+df <- vegan::rrarefy(low_abund_removed, rd)
+saveRDS(df, file = file.path(output_dir,"r_objects", paste0(rd,"_rrarefy_asv.rds")))
+write.csv(df, file = file.path(output_dir,"tables", paste0(rd,"_rrarefy_asv.csv")))
 
 # print("Creating hashseq lognorm, ALR and CLR.")
 # hashseq <- data.frame(data.table::fread(file = file.path(output_dir,"hashseq", "hashseq.csv"),
@@ -123,10 +141,5 @@ write.csv(df, file = file.path(output_dir,"tables", "clr_asv.csv"))
 #   saveRDS(HashSeq_alr, file = file.path(output_dir,"r_objects", "alr_hashseq.rds"))
 #   write.csv(HashSeq_alr, file = file.path(output_dir,"tables", "alr_hashseq.csv"))
 # }
-
-# --------------------------------------------------------------------------
-print("Now creating PhILR tables and counts tables")
-# --------------------------------------------------------------------------
-
 
 print("Reached end of script.")

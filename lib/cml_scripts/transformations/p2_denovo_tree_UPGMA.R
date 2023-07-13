@@ -29,7 +29,11 @@ option_list <- list(
   optparse::make_option(c("-s", "--outputfilesuffix"), type="character", default="",
                         help="output_file_suffix", metavar="character"),
   optparse::make_option(c("-f", "--filter_level"), type="numeric", default="0",
-                        help="taxonimic level for making otu table 1-6", metavar="numeric")
+                        help="taxonimic level for making otu table 1-6", metavar="numeric"),
+  optparse::make_option(c("-i", "--input_table"), type="character", default="ForwardReads_DADA2.rds",
+                        help="input file name, must be in project/r_objects/"),
+  optparse::make_option(c("-x", "--output_file_prefix"), type="character", default="",
+                        help="output_file_prefix", metavar = "outputPrefix")
   ); 
 
 opt_parser <- optparse::OptionParser(option_list=option_list);
@@ -63,7 +67,7 @@ output_dir <- file.path(home_dir, project, 'output')
 print("Established directory layout")
 
 ##-Import R objects and data preprocessing--------------------------##
-seqtab <- readRDS(file.path( output_dir, "r_objects", "ForwardReads_DADA2.rds"))
+seqtab <- readRDS(file.path( output_dir, "r_objects", opt$input_table))
 print(paste("Loaded seqtab."))
 taxTab <- readRDS(file.path( output_dir, "r_objects", "ForwardReads_DADA2_taxonomy.rds"))
 print("Imported R objects")
@@ -104,7 +108,7 @@ plot_tree(ps, "treeonly", nodeplotblank, ladderize="left")
 
 dev.off()
 
-saveRDS(ps, file.path(output_dir, "r_objects","denovo_tree_UPGMA_phyloseq_obj.rds"))
+saveRDS(ps, file.path(output_dir, "r_objects", paste0(opt$output_file_prefix, "denovo_tree_UPGMA_phyloseq_obj.rds")))
 
 print("script complete")
 

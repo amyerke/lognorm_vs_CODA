@@ -30,6 +30,8 @@ if (!requireNamespace("data.table", quietly = TRUE)) BiocManager::install("data.
 library("data.table")
 if (!requireNamespace("vegan", quietly = TRUE)) BiocManager::install("vegan")
 library("vegan")
+if (!requireNamespace("phyloseq", quietly = TRUE)) BiocManager::install("phyloseq")
+library("phyloseq")
 if (!requireNamespace("optparse", quietly = TRUE)){
   install.packages("optparse")}
 library("optparse")

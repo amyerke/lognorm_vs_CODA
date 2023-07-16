@@ -18,13 +18,13 @@ option_list <- list(
   optparse::make_option(c("-d", "--homedir"), type="character", 
               default=file.path('~','git',"lognorm_vs_CODA"), 
               help="dataset dir path", metavar="character"),
-  optparse::make_option(c("-p", "--project"), type="character", default=NULL, 
+  optparse::make_option(c("-p", "--project"), type="character", default="Jones", 
               help="project folder", metavar="character"),
-  optparse::make_option(c("-m", "--metadata"), type="character", default=NULL,
+  optparse::make_option(c("-m", "--metadata"), type="character", default="~/git/lognorm_vs_CODA/Jones/patient_metadata.tsv",
               help="metadata file path with filename", metavar="character"),
-  optparse::make_option(c("-l", "--metadata_delim"), type="character", default=NULL,
+  optparse::make_option(c("-l", "--metadata_delim"), type="character", default="\t",
               help="metadata file deliminator", metavar="character"),
-  optparse::make_option(c("-r", "--metadata_rowname"), type="character", default=NULL,
+  optparse::make_option(c("-r", "--metadata_rowname"), type="character", default="Run",
               help="metadata file row to use for row names", metavar="character"),
   optparse::make_option(c("-s", "--outputfilesuffix"), type="character", default="",
                         help="output_file_suffix", metavar="character"),
@@ -42,9 +42,7 @@ opt <- optparse::parse_args(opt_parser);
 
 print(opt)
 
-##-load other dependencies------------------------------------------##
-# ‘ape’, ‘dplyr’, ‘reshape2’, ‘plyr’
-# .cran_packages <- c("ggplot2", "gridExtra")
+####-load other dependencies------------------------------------------####
 if (!requireNamespace("BiocManager", quietly = TRUE)){
   install.packages("BiocManager", type = "source", 
                    repos = "http://archive.linux.duke.edu/cran/")}
@@ -59,7 +57,7 @@ library("DECIPHER")
 
 print("external libraries loaded")
 
-##-Establish directory layout---------------------------------------##
+####-Establish directory layout---------------------------------------####
 home_dir <- opt$homedir
 project <- opt$project
 output_dir <- file.path(home_dir, project, 'output')
@@ -70,6 +68,7 @@ print("Established directory layout")
 seqtab <- readRDS(file.path( output_dir, "r_objects", opt$input_table))
 print(paste("Loaded seqtab."))
 taxTab <- readRDS(file.path( output_dir, "r_objects", "ForwardReads_DADA2_taxonomy.rds"))
+alignment <- readRDS(file.path(output_dir, "r_objects","ForwardReads_DADA2_alignment.rds"))
 print("Imported R objects")
 
 ##-import tables----------------------------------------------------##
@@ -82,7 +81,7 @@ myMeta <- read.table(opt$metadata,
 
 print("Imported tables")
 
-##-Build tree------------------------------------------------------##
+####-Build tree------------------------------------------------------####
 phangAlign <- phangorn::phyDat(as(alignment, "matrix"), type="DNA")
 dm <- phangorn::dist.ml(phangAlign)#create distance matrix
 treeNJ <- phangorn::upgma(dm) #make tree

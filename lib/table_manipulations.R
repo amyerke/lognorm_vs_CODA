@@ -1,7 +1,7 @@
 # Author: Aaron Yerke (aaronyerke@gmail.com)
 # Library of table manipulating functions
 
-##-Functions--------------------------------------------------------##
+####-Functions--------------------------------------------------------####
 philr_tutorial_normalization <- function(df) {
   # The philr tutorial https://bioconductor.org/packages/release/bioc/vignettes/philr/inst/doc/philr-intro.R uses this block for normalizations: 
   # ps <-  filter_taxa(ps, function(x) sum(x > 3) > (0.2*length(x)), TRUE)
@@ -43,3 +43,4 @@ filt_seq_dpth <- function(min_read_depth, df) {
   df <- df[rowSums(df) > min_read_depth, ]
 	return(df)
 }
+

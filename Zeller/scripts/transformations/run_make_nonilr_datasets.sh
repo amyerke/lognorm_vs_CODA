@@ -23,8 +23,6 @@ module load R
 Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/transformations/make_nonilr_datasets.R \
   -d ~/git/lognorm_vs_CODA \
   -p Zeller \
-  -m ~/git/lognorm_vs_CODA/Zeller/patient_metadata.csv \
-  -l , \
   -r Run
 
 echo ""

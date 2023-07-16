@@ -22,8 +22,18 @@ raw_ps_to_clean_ps <- function(ps) {
 }
 
 ####-Load Depencencies------------------------------------------------####
+options(repos = list(CRAN="http://cran.rstudio.com/"))
 if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")
+if (!requireNamespace("compositions", quietly = TRUE)) BiocManager::install("compositions", if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")
 if (!requireNamespace("compositions", quietly = TRUE)) BiocManager::install("compositions")
+library("compositions")
+if (!requireNamespace("data.table", quietly = TRUE)) BiocManager::install("data.table")
+library("data.table")
+if (!requireNamespace("vegan", quietly = TRUE)) BiocManager::install("vegan")
+library("vegan")
+if (!requireNamespace("optparse", quietly = TRUE)){
+  install.packages("optparse")}
+library("optparse"))
 library("compositions")
 if (!requireNamespace("data.table", quietly = TRUE)) BiocManager::install("data.table")
 library("data.table")

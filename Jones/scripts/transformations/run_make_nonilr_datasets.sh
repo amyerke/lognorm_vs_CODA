@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --partition=Orion                                    		# Partition/queue requested on server
-#SBATCH --job-name=create_rf_datasets                                   		# Job name
+#SBATCH --job-name=make_nonilr_ds                                   		# Job name
 #SBATCH --time=100:00:00                                      		# Time limit (hrs:min:sec)
 #SBATCH --nodes=1                                         			# Number of nodes requested
 #SBATCH --ntasks-per-node=1                          			# Number of CPUs (processor cores/tasks)

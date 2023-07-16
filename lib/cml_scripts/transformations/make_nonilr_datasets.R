@@ -23,8 +23,8 @@ raw_ps_to_clean_ps <- function(ps) {
 
 ####-Load Depencencies------------------------------------------------####
 if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")
-if (!requireNamespace("rgr", quietly = TRUE)) install.packages("rgr")
-library("rgr")
+if (!requireNamespace("compositions", quietly = TRUE)) BiocManager::install("compositions")
+library("compositions")
 if (!requireNamespace("data.table", quietly = TRUE)) BiocManager::install("data.table")
 library("data.table")
 if (!requireNamespace("vegan", quietly = TRUE)) BiocManager::install("vegan")
@@ -46,7 +46,7 @@ option_list <- list(
                         should be an r object"),
   optparse::make_option(c("-r", "--output_file_prefix"), type="character", 
                         default="",
-                        help="prefix to identify different types of output files"),
+                        help="prefix to identify different types of output files")
 ); 
 
 opt_parser <- optparse::OptionParser(option_list=option_list);
@@ -89,12 +89,12 @@ my_zeros <- apply(initial_table, 2, function(x) {
 alr_col <- which(my_zeros == min(my_zeros))[1]
 # alr_col_num <- grep(alr_col, colnames(initial_table))
 print("creating DADA2 ALR")
-df <- as.data.frame(rgr::alr(as.matrix(initial_table + 1), j = as.numeric(alr_col)))
+df <- as.data.frame(compositions::alr(as.matrix(initial_table + 1), ivar = as.numeric(alr_col)))
 saveRDS(df, file = file.path(output_dir,"r_objects", "alr_asv.rds"))
 write.csv(df, file = file.path(output_dir,"tables", "alr_asv.csv"))
   
 print("creating DADA2 CLR")
-df <- as.data.frame(rgr::clr(as.matrix(initial_table + 1)))
+df <- as.data.frame(compositions::clr(as.matrix(initial_table + 1)))
 saveRDS(df, file = file.path(output_dir,"r_objects", "clr_asv.rds"))
 write.csv(df, file = file.path(output_dir,"tables", "clr_asv.csv"))
 
@@ -138,12 +138,12 @@ my_zeros <- apply(initial_table, 2, function(x) {
 alr_col <- which(my_zeros == min(my_zeros))[1]
 # alr_col_num <- grep(alr_col, colnames(initial_table))
 print("creating DADA2 ALR")
-df <- as.data.frame(rgr::alr(as.matrix(initial_table + 1), j = as.numeric(alr_col)))
+df <- as.data.frame(compositions::alr(as.matrix(initial_table + 1), ivar = as.numeric(alr_col)))
 saveRDS(df, file = file.path(output_dir,"r_objects", "filtered_90prcnt_alr_asv.rds"))
 write.csv(df, file = file.path(output_dir,"tables", "filtered_90prcnt_alr_asv.csv"))
 
 print("creating DADA2 CLR")
-df <- as.data.frame(rgr::clr(as.matrix(initial_table + 1)))
+df <- as.data.frame(compositions::clr(as.matrix(initial_table + 1)))
 saveRDS(df, file = file.path(output_dir,"r_objects", "filtered_90prcnt_clr_asv.rds"))
 write.csv(df, file = file.path(output_dir,"tables", "filtered_90prcnt_clr_asv.csv"))
 

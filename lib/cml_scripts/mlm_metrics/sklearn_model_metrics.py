@@ -3,7 +3,8 @@ print(f"""
 Starting: {__file__}
 Author: Aaron Yerke (aaronyerke@gmail.com)
 For determining if PhILR weighting schemes improve any ML techniques.
-This was useful: https://machinelearningmastery.com/compare-machine-learning-algorithms-python-scikit-learn/
+This was useful: 
+https://machinelearningmastery.com/compare-machine-learning-algorithms-python-scikit-learn/
 Compare Algorithms
 This script creates several plots and tables.
 The first boxplot shows each algorithm by PhILR weighting scheme.
@@ -28,6 +29,7 @@ import matplotlib.colors as mcolors
 from pandas.api.types import is_string_dtype
 from sklearn import model_selection
 from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import LinearRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier
@@ -84,7 +86,7 @@ philr_part_weights = ["uniform","gm.counts","anorm","anorm.x.gm.counts","enorm",
 philr_ilr_weights = ["uniform","blw","blw.sqrt","mean.descendants"]
 scoring = "accuracy"
 col_names = ["metadata", "ilr_weight", "part_weight", "model", "split1", "split2", "split3", "split4", "split5", "split6", "split7", "split8", "split9", "split10"]
-model_symbols = ["|", "<", "*", "x", "o", "^", ","]
+model_symbols = ["|", "<", "*", "x", "o", "^", ",", "$S$"]
 
 for philr_group in philr_groups:
 	main_output_label = f"{output_label}_{philr_group}"
@@ -126,7 +128,8 @@ for philr_group in philr_groups:
 	print(f"Preparing models for {philr_group}.")
 	# --------------------------------------------------------------------------
 	models = []
-	models.append(('LR', LogisticRegression(max_iter=1000)))
+	models.append(('LogR', LogisticRegression(max_iter=1000)))
+	models.append(('LinR', LinearRegression()))
 	models.append(('LDA', LinearDiscriminantAnalysis()))
 	models.append(('KNN', KNeighborsClassifier()))
 	models.append(('DTREE', DecisionTreeClassifier()))

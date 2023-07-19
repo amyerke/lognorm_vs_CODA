@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --partition=Orion                                    		# Partition/queue requested on server
-#SBATCH --job-name=testing_pyCaret                                   		# Job name
+#SBATCH --job-name=testing_transforms_conda                                   		# Job name
 #SBATCH --time=25:00:00                                      		# Time limit (hrs:min:sec)
 #SBATCH --nodes=1                                         			# Number of nodes requested
 #SBATCH --ntasks-per-node=1                          			# Number of CPUs (processor cores/tasks)
@@ -19,7 +19,7 @@ echo Running on host: `hostname`
 echo Using $SLURM_NTASKS processors across $SLURM_NNODES nodes
 
 #module load anaconda3/2020.11
-#conda activate testing_pyCaret
+#conda activate testing_transforms_conda
 
 srun python ~/git/lognorm_vs_CODA/Jones/scripts/mlm_weighting_py/ref_tree_caret.py
 

@@ -3,16 +3,13 @@
 #  conda install -c conda-forge pycaret
 #To run:
 #  conda env create --file python_env.yml
-name: testing_pyCaret
+name: testing_transforms_conda
 dependencies:
   - python=3.8
   - numpy
   - matplotlib
-  - bokeh
   - scikit-learn
   - scipy
   - statsmodels
   - pip
-  - pip:
-    - pycaret
     

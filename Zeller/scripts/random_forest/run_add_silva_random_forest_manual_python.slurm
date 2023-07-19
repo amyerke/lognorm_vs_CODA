@@ -19,8 +19,8 @@ echo Using $SLURM_NTASKS processors across $SLURM_NNODES nodes
 
 module load anaconda3
 echo "Loaded Anaconda."
-source activate testing_pyCaret
-echo "activated testing_pyCaret conda env"
+source activate testing_transforms_conda
+echo "activated testing_transforms_conda conda env"
 export PYTHONUNBUFFERED=TRUE
 python ~/git/lognorm_vs_CODA/lib/cml_scripts/random_forest/add_silva_random_forest_manual_train.py\
   -p Zeller \

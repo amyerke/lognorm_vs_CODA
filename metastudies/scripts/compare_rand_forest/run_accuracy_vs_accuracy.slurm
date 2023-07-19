@@ -24,7 +24,7 @@ echo Running on host: `hostname`
 echo Using $SLURM_NTASKS processors across $SLURM_NNODES nodes
 
 module load anaconda3/2020.11
-conda activate testing_pyCaret
+conda activate testing_transforms_conda
 python ~/git/lognorm_vs_CODA/metastudies/scripts/compare_rand_forest/python_accuracy_v_accuracy.py\
   -d ~/git/lognorm_vs_CODA
 

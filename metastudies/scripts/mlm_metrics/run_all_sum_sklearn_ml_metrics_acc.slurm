@@ -19,7 +19,7 @@ echo Running on host: `hostname`
 echo Using $SLURM_NTASKS processors across $SLURM_NNODES nodes
 
 module load anaconda3/2020.11
-conda activate testing_pyCaret
+conda activate testing_transforms_conda
 python metastudies/scripts/mlm_metrics/all_sum_sklearn_ml_metrics_acc.py
 
 echo ""

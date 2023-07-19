@@ -21,7 +21,7 @@ echo Using $SLURM_NTASKS processors across $SLURM_NNODES nodes
 export PYTHONUNBUFFERED=TRUE #lets print statements show up without flush=True
 
 module load anaconda3/2020.11
-conda activate testing_pyCaret
+conda activate testing_transforms_conda
 python ~/git/lognorm_vs_CODA/lib/cml_scripts/mlm_metrics/sklearn_model_metrics.py\
   -p Jones \
   -a True \

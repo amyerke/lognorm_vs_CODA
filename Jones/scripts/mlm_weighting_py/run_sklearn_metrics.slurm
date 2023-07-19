@@ -1,11 +1,11 @@
 #!/bin/bash
 
-#SBATCH --partition=Pisces                            # Partition/queue requested on server
-#SBATCH --job-name=model_metrics                     # Job name
-#SBATCH --time=0:40:00                               # Time limit (hrs:min:sec)
+#SBATCH --partition=Pisces                           # Partition/queue requested on server
+#SBATCH --job-name=model_metrics_Jones               # Job name
+#SBATCH --time=2:40:00                               # Time limit (hrs:min:sec)
 #SBATCH --nodes=1                                    # Number of nodes requested
 #SBATCH --ntasks-per-node=1                          # Number of CPUs (processor cores/tasks)
-#SBATCH --mem=50gb                                   # Memory limit
+#SBATCH --mem=75gb                                   # Memory limit
 #SBATCH --mail-type=BEGIN,END,FAIL                   # Mail events (NONE, BEGIN, END, FAIL, ALL)
 #SBATCH --mail-user=amyerke@uncc.edu                 # Specified email address
 #SBATCH --output=/users/amyerke/slurmLogs/%x.%j.log     # Set directory for standard output

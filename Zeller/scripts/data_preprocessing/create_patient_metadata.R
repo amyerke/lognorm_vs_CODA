@@ -14,6 +14,9 @@ if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocMana
 if (!requireNamespace("optparse", quietly = TRUE)){
   install.packages("optparse")}
 library("optparse")
+if (!requireNamespace("data.table", quietly = TRUE)){
+  install.packages("data.table")}
+library("data.table")
 print("finished loading libraries")
 
 #### Read command line objects ####
@@ -54,6 +57,6 @@ df <- df[,selected_columns]
 my_missing <- sort(colSums(df == ""), decreasing = TRUE)/nrow(df)*100
 print(my_missing)
 
-write.csv(df, file = file.path(home_dir, project, "patient_metadata.csv"), 
+data.table::fwrite(df, file = file.path(home_dir, project, "patient_metadata.csv"), 
           row.names = F)
 

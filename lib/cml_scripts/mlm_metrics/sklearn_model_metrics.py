@@ -160,12 +160,15 @@ for philr_group in philr_groups:
 					if is_string_dtype(spetz_var) == True and spetz_var.isnull().sum() < 5:
 						print("evaluate each model in turn.")
 						for name, model in models:
-							kfold = model_selection.KFold(n_splits=10, random_state=seed, shuffle=True)
-							cv_results = model_selection.cross_val_score(model, my_df, spetz_var, cv=kfold, scoring=scoring)
-							# result_str = np.array2string(cv_results, separator=",",suffix="/n")
-							result_str = ",".join(map(str, cv_results.tolist()))
-							msg = f"{m_c},{iw},{pw},{name},{result_str}\n"
-							fl.write(msg)
+							try:
+								kfold = model_selection.KFold(n_splits=10, random_state=seed, shuffle=True)
+								cv_results = model_selection.cross_val_score(model, my_df, spetz_var, cv=kfold, scoring=scoring)
+								# result_str = np.array2string(cv_results, separator=",",suffix="/n")
+								result_str = ",".join(map(str, cv_results.tolist()))
+								msg = f"{m_c},{iw},{pw},{name},{result_str}\n"
+								fl.write(msg)
+							except:
+								print(f"There was a problem with: category {m_c} and model {name} ")
 	# --------------------------------------------------------------------------
 	print(f"Finished recording accuracy. Heading towards boxplot creation for {philr_group}.")
 	# --------------------------------------------------------------------------

@@ -167,8 +167,9 @@ for philr_group in philr_groups:
 								result_str = ",".join(map(str, cv_results.tolist()))
 								msg = f"{m_c},{iw},{pw},{name},{result_str}\n"
 								fl.write(msg)
-							except:
+							except Exception as error:
 								print(f"There was a problem with: category {m_c} and model {name} ")
+								print(error)
 	# --------------------------------------------------------------------------
 	print(f"Finished recording accuracy. Heading towards boxplot creation for {philr_group}.")
 	# --------------------------------------------------------------------------

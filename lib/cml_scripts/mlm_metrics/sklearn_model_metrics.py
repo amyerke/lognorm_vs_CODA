@@ -129,7 +129,6 @@ for philr_group in philr_groups:
 	# --------------------------------------------------------------------------
 	models = []
 	models.append(('LogR', LogisticRegression(max_iter=1000)))
-	models.append(('LinR', LinearRegression()))
 	models.append(('LDA', LinearDiscriminantAnalysis()))
 	models.append(('KNN', KNeighborsClassifier()))
 	models.append(('DTREE', DecisionTreeClassifier()))

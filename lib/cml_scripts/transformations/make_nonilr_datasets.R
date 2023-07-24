@@ -2,7 +2,7 @@
 # Script for making noncoda and coda tables to run through my random forest
 # Requires raw data2 output. It also makes a 90% filtered asv table and makes
 # the same transformations using this table.
-# I.e. #creating an asv dataset where asvs that are in less than 10% of the
+# I.e. creating an asv dataset where asvs that are in less than 10% of the
 # samples are removed
 
 rm(list = ls()) #clear workspace
@@ -119,12 +119,16 @@ saveRDS(df, file = file.path(output_dir,"r_objects", paste0(rd,"_rrarefy_asv.rds
 write.csv(df, file = file.path(output_dir,"tables", paste0(rd,"_rrarefy_asv.csv")))
 
 #### Creating the filtered dataset and repeating all transformations ####
+print("Creating the prevalence filtered dataset and repeating all transformations")
 initial_table <- initial_table[sapply(initial_table, function(x) mean(x == 0) <= 0.9)]
+saveRDS(df, file = file.path(output_dir,"r_objects", "filtered_90prcnt_dada2.rds"))
+write.csv(df, file = file.path(output_dir,"tables", "filtered_90prcnt_dada2.csv"))
+
 
 print("creating filtered DADA2 lognorm, ALR and CLR")
 if (!dir.exists(file.path(output_dir,"r_objects", "lognorm_asv.rds"))) {
   df <- lognorm(initial_table)
-  saveRDS(df, file = file.path(output_dir,"r_objects", "filtered_90prcnt_lognorm_asv.rds"))
+  saveRDS(df, file = file.path(output_dir,"r_objects", "filtered_90prcnt_lognorm_dada2.rds"))
   write.csv(df, file = file.path(output_dir,"tables", "filtered_90prcnt_lognorm_dada2.csv"))
 }
 #TODO: Add filtered silva lognorm

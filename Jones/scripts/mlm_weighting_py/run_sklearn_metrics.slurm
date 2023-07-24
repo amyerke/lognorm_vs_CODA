@@ -2,7 +2,7 @@
 
 #SBATCH --partition=Pisces                           # Partition/queue requested on server
 #SBATCH --job-name=model_metrics_Jones               # Job name
-#SBATCH --time=2:40:00                               # Time limit (hrs:min:sec)
+#SBATCH --time=12:40:00                              # Time limit (hrs:min:sec)
 #SBATCH --nodes=1                                    # Number of nodes requested
 #SBATCH --ntasks-per-node=1                          # Number of CPUs (processor cores/tasks)
 #SBATCH --mem=75gb                                   # Memory limit

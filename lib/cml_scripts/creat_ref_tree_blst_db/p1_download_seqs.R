@@ -7,17 +7,17 @@ if (!requireNamespace("BiocManager", quietly = TRUE)) {
   install.packages("BiocManager")
   BiocManager::install("ape")
 }
-library('ape')
+library("ape")
 if (!requireNamespace("optparse", quietly = TRUE)) install.packages("optparse")
 library("optparse")
 # --------------------------------------------------------------------------
 print("Reading cml arguments")
 # --------------------------------------------------------------------------
 option_list <- list(
-  optparse::make_option(c("-d", "--homedir"), type="character", 
-                        default=file.path('~','git',"lognorm_vs_CODA"), 
+  optparse::make_option(c("-d", "--homedir"), type="character",
+                        default=file.path("~","git","lognorm_vs_CODA"),
                         help="dataset dir path"),
-  optparse::make_option(c("-t", "--tree_fname"), type="character", 
+  optparse::make_option(c("-t", "--tree_fname"), type="character",
 	default="viFy10M5J2nvIBpCLM-QMQ_newick.txt", 
                         help="project folder")
 );
@@ -40,11 +40,11 @@ print(paste("Build tree fasta at", fastaFile))
 # --------------------------------------------------------------------------
 
 tree <- read.tree(file.path(output_dir, "silva",opt$tree_fname))
-for (i in 1:length(tree$tip.label)){
-  lab = tree$tip.label[i]
-  id = strsplit(lab, "_")[[1]][1]
-  myGen = ape:::read.GenBank(id, as.character=T, species.names = FALSE)
-  myDna = lapply(myGen, function(x) paste0(x, collapse = ''))
+for (i in 1:seq_along()(tree$tip.label)){
+  lab <- tree$tip.label[i]
+  id <- strsplit(lab, "_")[[1]][1]
+  myGen <- ape:::read.GenBank(id, as.character=T, species.names = FALSE)
+  myDna <- lapply(myGen, function(x) paste0(x, collapse = ''))
   cat(paste0(">", id, "\n", paste0(myDna), "\n"), file = fastaFile, append=TRUE)
   Sys.sleep(.45)
 }

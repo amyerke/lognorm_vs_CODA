@@ -1,9 +1,9 @@
 # Author: Aaron Yerke
 print("Script for downloading scripts from silva tree and 
 building fasta for blast data base. Expects tree to be in 
-home_dir/lib/ref_tree_objs/silva.") 
+home_dir/lib/ref_tree_objs/silva.")
 
-if (!requireNamespace("BiocManager", quietly = TRUE)){
+if (!requireNamespace("BiocManager", quietly = TRUE)) {
   install.packages("BiocManager")
   BiocManager::install("ape")
 }
@@ -17,7 +17,8 @@ option_list <- list(
   optparse::make_option(c("-d", "--homedir"), type="character", 
                         default=file.path('~','git',"lognorm_vs_CODA"), 
                         help="dataset dir path"),
-  optparse::make_option(c("-t", "--tree_fname"), type="character", default="viFy10M5J2nvIBpCLM-QMQ_newick.txt", 
+  optparse::make_option(c("-t", "--tree_fname"), type="character", 
+	default="viFy10M5J2nvIBpCLM-QMQ_newick.txt", 
                         help="project folder")
 );
 
@@ -35,7 +36,7 @@ setwd(file.path(output_dir))
 fastaFile <- "treeFasta.fasta"
 
 # --------------------------------------------------------------------------
-print(paste("Build tree fasta at", fastaFile)
+print(paste("Build tree fasta at", fastaFile))
 # --------------------------------------------------------------------------
 
 tree <- read.tree(file.path(output_dir, "silva",opt$tree_fname))
@@ -47,4 +48,3 @@ for (i in 1:length(tree$tip.label)){
   cat(paste0(">", id, "\n", paste0(myDna), "\n"), file = fastaFile, append=TRUE)
   Sys.sleep(.45)
 }
-

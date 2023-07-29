@@ -49,9 +49,10 @@ output_dir <- file.path(home_dir, project, 'output')
 asv_table <- readRDS(file.path(output_dir, "r_objects", opt$input_table))
 print("Finished establishing directory layout")
 
-alignment <- DECIPHER::AlignSeqs(DNAStringSet(names(asv_table)), anchor=NA,verbose=FALSE)
+alignment <- DECIPHER::AlignSeqs(DNAStringSet(colnames(asv_table)), anchor=NA,verbose=FALSE)
 
 saveRDS(alignment, file.path(output_dir, "r_objects", paste0(opt$output_file, ".rds")))
 write.table(alignment, 
             file = file.path(output_dir, "tables", paste0(opt$output_file, ".aln")),
             sep = ",")
+print("Reached end of script!")

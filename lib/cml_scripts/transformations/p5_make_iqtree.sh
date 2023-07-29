@@ -6,11 +6,15 @@ NC='\033[0m' # No Color
 
 home_dir=$1 #first comandline argument is the project name
 project=$2
+aligned=$3
 
-echo "Found arguments ${home_dir} and ${project}."
+echo "Found arguments ${home_dir}, ${project}, and ${aligned}."
 
-#my_fasta is made from 
-aligned=$home_dir/$project/output/trees/ForwardReads_DADA2_taxonomy.aln
+#my_fasta is made from
+if [ "$aligned" = ""]; then
+    echo "aligned will default to"
+    aligned=$home_dir/$project/output/trees/ForwardReads_DADA2_taxonomy.aln
+    echo "$aligned"
 
 #check for fastq file that is our starting point
 if [ -f "$aligned" ]; then

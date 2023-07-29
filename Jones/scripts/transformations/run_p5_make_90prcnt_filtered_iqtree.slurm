@@ -20,7 +20,7 @@ echo Using $SLURM_NTASKS processors across $SLURM_NNODES nodes
 bash ~/git/lognorm_vs_CODA/lib/cml_scripts/transformations/p5_make_iqtree.sh \
   ~/git/lognorm_vs_CODA \
 	Jones \
-	filtered_90prcnt_aln.aln
+	~/git/lognorm_vs_CODA/Jones/output/tables/filtered_90prcnt_aln.aln
 
 echo ""
 echo "======================================================"

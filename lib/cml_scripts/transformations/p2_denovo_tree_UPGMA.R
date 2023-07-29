@@ -33,7 +33,10 @@ option_list <- list(
   optparse::make_option(c("-i", "--input_table"), type="character", default="ForwardReads_DADA2.rds",
                         help="input file name, must be in project/r_objects/"),
   optparse::make_option(c("-x", "--output_file_prefix"), type="character", default="",
-                        help="output_file_prefix", metavar = "outputPrefix")
+                        help="output_file_prefix", metavar = "outputPrefix"),
+  optparse::make_option(c("-a", "--alignment_file"), type="character", default="ForwardReads_DADA2_alignment.rds",
+                        help="alignment file, should be an R object in output/r_objects/",
+                        metavar = "algnmnt")
   ); 
 
 opt_parser <- optparse::OptionParser(option_list=option_list);
@@ -68,7 +71,7 @@ print("Established directory layout")
 seqtab <- readRDS(file.path( output_dir, "r_objects", opt$input_table))
 print(paste("Loaded seqtab."))
 taxTab <- readRDS(file.path( output_dir, "r_objects", "ForwardReads_DADA2_taxonomy.rds"))
-alignment <- readRDS(file.path(output_dir, "r_objects","ForwardReads_DADA2_alignment.rds"))
+alignment <- readRDS(file.path(output_dir, "r_objects",opt$alignment_file))
 print("Imported R objects")
 
 ##-import tables----------------------------------------------------##

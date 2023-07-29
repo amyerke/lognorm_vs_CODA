@@ -20,7 +20,7 @@ echo Using $SLURM_NTASKS processors across $SLURM_NNODES nodes
 
 module load R
 
-Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/transformations/make_alignment.R
+Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/transformations/make_alignment.R \
 --homedir ~/git/lognorm_vs_CODA \
 --project Jones \
 --input_table filtered_90prcnt_dada2.rds \

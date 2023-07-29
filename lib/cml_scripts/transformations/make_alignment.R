@@ -46,7 +46,7 @@ project <- opt$project
 output_dir <- file.path(home_dir, project, 'output')
 
 #asv tables are in each project in "project"/output/tables/ForwardReads_DADA2.txt
-asv_table <- readRDS(file.path("output", "r_objects", opt$input_table))
+asv_table <- readRDS(file.path(output_dir, "r_objects", opt$input_table))
 print("Finished establishing directory layout")
 
 alignment <- DECIPHER::AlignSeqs(DNAStringSet(names(asv_table)), anchor=NA,verbose=FALSE)

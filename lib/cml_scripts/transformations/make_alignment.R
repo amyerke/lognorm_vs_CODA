@@ -26,7 +26,7 @@ option_list <- list(
                         help="dataset dir path", metavar="character"),
   optparse::make_option(c("-p", "--project"), type="character", default="Vangay", 
                         help="project folder", metavar="character"),
-  optparse::make_option(c("-i", "--initial_table"), type="character", 
+  optparse::make_option(c("-i", "--input_table"), type="character", 
                         default="ForwardReads_DADA2_taxonomy.rds",
                         help="should be an r object, in project r_objects file"),
   optparse::make_option(c("-o", "--output_file"), type="character", 
@@ -46,7 +46,7 @@ project <- opt$project
 output_dir <- file.path(home_dir, project, 'output')
 
 #asv tables are in each project in "project"/output/tables/ForwardReads_DADA2.txt
-asv_table <- file.path("output", "r_objects", opt$initial_table)
+asv_table <- file.path("output", "r_objects", opt$input_table)
 print("Finished establishing directory layout")
 
 alignment <- DECIPHER::AlignSeqs(DNAStringSet(names(asv_table)), anchor=NA,verbose=FALSE)

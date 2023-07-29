@@ -15,6 +15,7 @@ if [ "$aligned" = ""]; then
     echo "aligned will default to"
     aligned=$home_dir/$project/output/trees/ForwardReads_DADA2_taxonomy.aln
     echo "$aligned"
+fi
 
 #check for fastq file that is our starting point
 if [ -f "$aligned" ]; then

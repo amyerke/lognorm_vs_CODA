@@ -51,6 +51,9 @@ print("Finished establishing directory layout")
 
 alignment <- DECIPHER::AlignSeqs(DNAStringSet(colnames(asv_table)), anchor=NA,verbose=FALSE)
 
+writeXStringSet(alignment, file = file.path(output_dir, "tables", paste0(opt$output_file, ".fasta")), 
+                append=FALSE, compress=FALSE, compression_level=NA, format="fasta")
+
 saveRDS(alignment, file.path(output_dir, "r_objects", paste0(opt$output_file, ".rds")))
 write.table(alignment, 
             file = file.path(output_dir, "tables", paste0(opt$output_file, ".aln")),

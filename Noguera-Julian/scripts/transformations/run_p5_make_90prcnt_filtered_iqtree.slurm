@@ -8,8 +8,8 @@
 #SBATCH --mem=50gb                                        		# Memory limit
 #SBATCH --mail-type=BEGIN,END,FAIL                          	# Mail events (NONE, BEGIN, END, FAIL, ALL)
 #SBATCH --mail-user=amyerke@uncc.edu                        	# Specified email address
-#SBATCH --output=/users/amyerke/slurmLogs/Zeller_%x.%j.out     # Set directory for standard output
-#SBATCH --error=/users/amyerke/slurmLogs/Zeller_%x.%j.out      # Set directory for error log
+#SBATCH --output=/users/amyerke/slurmLogs/Noguera-Julian_%x.%j.out     # Set directory for standard output
+#SBATCH --error=/users/amyerke/slurmLogs/Noguera-Julian_%x.%j.out      # Set directory for error log
 #SBATCH --get-user-env
 
 ### Display the job context
@@ -19,8 +19,8 @@ echo Using $SLURM_NTASKS processors across $SLURM_NNODES nodes
 
 bash ~/git/lognorm_vs_CODA/lib/cml_scripts/transformations/p5_make_iqtree.sh \
   ~/git/lognorm_vs_CODA \
-	Zeller \
-	~/git/lognorm_vs_CODA/Zeller/output/tables/filtered_90prcnt_aln.fasta
+	Noguera-Julian \
+	~/git/lognorm_vs_CODA/Noguera-Julian/output/tables/filtered_90prcnt_aln.fasta
 
 echo ""
 echo "======================================================"

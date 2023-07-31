@@ -67,14 +67,14 @@ output_dir <- file.path(home_dir, project, 'output')
 
 print("Established directory layout")
 
-##-Import R objects and data preprocessing--------------------------##
+####-Import R objects and data preprocessing--------------------------####
 seqtab <- readRDS(file.path( output_dir, "r_objects", opt$input_table))
 print(paste("Loaded seqtab."))
 taxTab <- readRDS(file.path( output_dir, "r_objects", "ForwardReads_DADA2_taxonomy.rds"))
 alignment <- readRDS(file.path(output_dir, "r_objects",opt$alignment_file))
 print("Imported R objects")
 
-##-import tables----------------------------------------------------##
+####-import tables----------------------------------------------------####
 myMeta <- read.table(opt$metadata,
                     sep=opt$metadata_delim,
                     header=TRUE,

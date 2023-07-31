@@ -88,7 +88,7 @@ print("Imported tables")
 phangAlign <- phangorn::phyDat(as(alignment, "matrix"), type="DNA")
 dm <- phangorn::dist.ml(phangAlign)#create distance matrix
 treeNJ <- phangorn::upgma(dm) #make tree
-fit <- phangorn::pml(treeNJ, data=phangAlign)#fit model
+# fit <- phangorn::pml(treeNJ, data=phangAlign)#fit model
 # fitGTR <- update(fit, k=4, inv=0.2)#fit model with updated parameters
 # fitGTR <- phangorn::optim.pml(fitGTR, model="GTR", optInv=TRUE, optGamma=TRUE,
 #                     rearrangement = "stochastic", control = pml.control(trace = 0))

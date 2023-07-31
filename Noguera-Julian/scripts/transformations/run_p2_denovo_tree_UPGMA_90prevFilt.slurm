@@ -20,36 +20,49 @@ echo Using $SLURM_NTASKS processors across $SLURM_NNODES nodes
 
 module load R
 
-Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/transformations/p2_denovo_tree_UPGMA.R 
+Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/transformations/p2_denovo_tree_UPGMA.R \
 --homedir ~/git/lognorm_vs_CODA \
 --project Noguera-Julian \
---metadat ~/git/lognorm_vs_CODA/Noguera-Julian/SraRunTable.txt \
+--metadata ~/git/lognorm_vs_CODA/Noguera-Julian/SraRunTable.txt \
 --metadata_delim , \
 --metadata_rowname Run \
 --input_table filtered_90prcnt_dada2.rds \
---output_file_prefix filtered_90prcnt
+--output_file_prefix filtered_90prcnt \
+--alignment_file filtered_90prcnt_aln.rds
 
 # Options:
-#   -d CHARACTER, --homedir=CHARACTER
-# dataset dir path
+# 	-d CHARACTER, --homedir=CHARACTER
+# 		dataset dir path
 # 
-# -p CHARACTER, --project=CHARACTER
-# project folder
+# 	-p CHARACTER, --project=CHARACTER
+# 		project folder
 # 
-# -m CHARACTER, --metadata=CHARACTER
-# metadata file path with filename
+# 	-m CHARACTER, --metadata=CHARACTER
+# 		metadata file path with filename
 # 
-# -l CHARACTER, --metadata_delim=CHARACTER
-# metadata file deliminator
+# 	-l CHARACTER, --metadata_delim=CHARACTER
+# 		metadata file deliminator
 # 
-# -r CHARACTER, --metadata_rowname=CHARACTER
-# metadata file row to use for row names
+# 	-r CHARACTER, --metadata_rowname=CHARACTER
+# 		metadata file row to use for row names
 # 
-# -s CHARACTER, --outputfilesuffix=CHARACTER
-# output_file_suffix
+# 	-s CHARACTER, --outputfilesuffix=CHARACTER
+# 		output_file_suffix
 # 
-# -f NUMERIC, --filter_level=NUMERIC
-# taxonimic level for making otu table 1-6
+# 	-f NUMERIC, --filter_level=NUMERIC
+# 		taxonimic level for making otu table 1-6
+# 
+# 	-i INPUT_TABLE, --input_table=INPUT_TABLE
+# 		input file name, must be in project/r_objects/
+# 
+# 	-x OUTPUTPREFIX, --output_file_prefix=OUTPUTPREFIX
+# 		output_file_prefix
+# 
+# 	-a ALGNMNT, --alignment_file=ALGNMNT
+# 		alignment file, should be an R object in output/r_objects/
+# 
+# 	-h, --help
+# 		Show this help message and exit
 
 echo ""
 echo "======================================================"

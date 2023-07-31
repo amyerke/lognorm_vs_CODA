@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --partition=Orion                              		# Partition/queue requested on server
-#SBATCH --job-name=run_p2_denovo_tree_UPGMA_Jones     		# Job name
+#SBATCH --job-name=p2_90%_filt_denovo_tree_UPGMA_Jones 		# Job name
 #SBATCH --time=24:00:00                                		# Time limit (hrs:min:sec)
 #SBATCH --nodes=1                                    			# Number of nodes requested
 #SBATCH --ntasks-per-node=1                          			# Number of CPUs (processor cores/tasks)

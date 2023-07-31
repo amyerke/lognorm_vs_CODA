@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --partition=Orion                                    		# Partition/queue requested on server
-#SBATCH --job-name=run_p2_denovo_tree_UPGMA_Van                   		# Job name
+#SBATCH --job-name=p2_denovo_tree_UPGMA_Vangay             		# Job name
 #SBATCH --time=24:00:00                                      		# Time limit (hrs:min:sec)
 #SBATCH --nodes=1                                         			# Number of nodes requested
 #SBATCH --ntasks-per-node=1                          			# Number of CPUs (processor cores/tasks)
@@ -9,7 +9,7 @@
 #SBATCH --mail-type=BEGIN,END,FAIL                              	# Mail events (NONE, BEGIN, END, FAIL, ALL)
 #SBATCH --mail-user=amyerke@uncc.edu                            	# Specified email address
 #SBATCH --output=/users/amyerke/slurmLogs/%x.%j.out     # Set directory for standard output
-#SBATCH --error=/users/amyerke/slurmLogs/%x.%j.err      # Set directory for error log
+#SBATCH --error=/users/amyerke/slurmLogs/%x.%j.out      # Set directory for error log
 ##SBATCH --uid=amyerke
 #SBATCH --get-user-env
 
@@ -23,9 +23,8 @@ module load R
 Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/transformations/p2_denovo_tree_UPGMA.R \
 --homedir ~/git/lognorm_vs_CODA \
 --project Vangay \
---metadata ~/git/lognorm_vs_CODA/Vangay/SraRunTable.txt \
---metadata_delim , \
---metadata_rowname Run \
+--metadata ~/git/lognorm_vs_CODA/Vangay/patient_metadata.tsv \
+--metadata_rowname run_accession \
 --input_table filtered_90prcnt_dada2.rds \
 --output_file_prefix filtered_90prcnt \
 --alignment_file filtered_90prcnt_aln.rds

@@ -120,7 +120,7 @@ write.csv(df, file = file.path(output_dir,"tables", paste0(rd,"_rrarefy_asv.csv"
 
 #### Creating the filtered dataset and repeating all transformations ####
 print("Creating the prevalence filtered dataset and repeating all transformations")
-initial_table <- initial_table[sapply(initial_table, function(x) mean(x == 0) <= 0.9)]
+initial_table <- initial_table[,sapply(initial_table, function(x) mean(x == 0) < 0.9)]
 saveRDS(df, file = file.path(output_dir,"r_objects", "filtered_90prcnt_dada2.rds"))
 write.csv(df, file = file.path(output_dir,"tables", "filtered_90prcnt_dada2.csv"))
 

@@ -57,7 +57,8 @@ if (!requireNamespace("phyloseq", quietly = TRUE)){BiocManager::install("phylose
 library("phyloseq")
 if (!requireNamespace("DECIPHER", quietly = TRUE)){BiocManager::install("DECIPHER")}
 library("DECIPHER")
-
+if (!requireNamespace("data.table", quietly = TRUE)){BiocManager::install("data.table")}
+library("data.table")
 print("external libraries loaded")
 
 ####-Establish directory layout---------------------------------------####
@@ -75,12 +76,16 @@ alignment <- readRDS(file.path(output_dir, "r_objects",opt$alignment_file))
 print("Imported R objects")
 
 ####-import tables----------------------------------------------------####
-myMeta <- read.table(opt$metadata,
-                    sep=opt$metadata_delim,
-                    header=TRUE,
-                    row.names = opt$metadata_rowname,
-                    check.names = FALSE,
-                    stringsAsFactors=FALSE)
+# myMeta <- data.table::fread(opt$metadata,
+#                     sep=opt$metadata_delim,
+#                     header=TRUE,
+#                     row.names = opt$metadata_rowname,
+#                     check.names = FALSE,
+#                     stringsAsFactors=FALSE)
+
+myMeta <- data.frame(data.table::fread(file = opt$metadata, check.names=FALSE,
+                             header=TRUE, data.table=FALSE),
+           row.names = opt$metadata_rowname, check.names=FALSE, stringsAsFactors=FALSE)
 
 print("Imported tables")
 

@@ -85,7 +85,8 @@ print("Imported R objects")
 
 myMeta <- data.frame(data.table::fread(file = opt$metadata, check.names=FALSE,
                              header=TRUE, data.table=FALSE),
-           row.names = opt$metadata_rowname, check.names=FALSE, stringsAsFactors=FALSE)
+           row.names = as.character(opt$metadata_rowname), 
+           check.names=FALSE, stringsAsFactors=FALSE)
 
 print("Imported tables")
 

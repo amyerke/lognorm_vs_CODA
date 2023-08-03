@@ -25,7 +25,7 @@ Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/transformations/p2_denovo_tree_UPG
 --project Zeller \
 --metadata ~/git/lognorm_vs_CODA/Zeller/SraRunTable.txt \
 --metadata_delim , \
---metadata_rowname Run \
+--metadata_rowname Run\
 --input_table filtered_90prcnt_dada2.rds \
 --output_file_prefix filtered_90prcnt \
 --alignment_file filtered_90prcnt_aln.rds

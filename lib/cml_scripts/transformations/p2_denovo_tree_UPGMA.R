@@ -45,6 +45,8 @@ opt <- optparse::parse_args(opt_parser);
 
 print(opt)
 
+print(paste("getwd()", getwd()))
+
 ####-load other dependencies------------------------------------------####
 if (!requireNamespace("BiocManager", quietly = TRUE)){
   install.packages("BiocManager", type = "source", 
@@ -76,17 +78,30 @@ alignment <- readRDS(file.path(output_dir, "r_objects",opt$alignment_file))
 print("Imported R objects")
 
 ####-import tables----------------------------------------------------####
-# myMeta <- data.table::fread(opt$metadata,
-#                     sep=opt$metadata_delim,
-#                     header=TRUE,
-#                     row.names = opt$metadata_rowname,
-#                     check.names = FALSE,
-#                     stringsAsFactors=FALSE)
+# myMeta <- read.table("~/git/lognorm_vs_CODA/Zeller/patient_metadata.csv",
+#                      sep=",",
+#                      header=TRUE,
+#                      row.names = "Run",
+#                      check.names = FALSE,
+#                      stringsAsFactors=FALSE)
+# print(paste("test worked"))
+# 
+# print(paste("~/git/lognorm_vs_CODA/Zeller/patient_metadata.csv", opt$metadata))
+# print(paste(",",opt$metadata_delim))
+# print(paste("Run",opt$metadata_rowname))
 
-myMeta <- data.frame(data.table::fread(file = opt$metadata, check.names=FALSE,
-                             header=TRUE, data.table=FALSE),
-           row.names = as.character(opt$metadata_rowname), 
-           check.names=FALSE, stringsAsFactors=FALSE)
+
+myMeta <- read.table(opt$metadata,
+                    sep=opt$metadata_delim,
+                    header=TRUE,
+                    row.names = opt$metadata_rowname,
+                    check.names = FALSE,
+                    stringsAsFactors=FALSE)
+
+# myMeta <- data.frame(data.table::fread(file = opt$metadata, check.names=FALSE,
+#                              header=TRUE, data.table=FALSE),
+#            row.names = as.character(opt$metadata_rowname), 
+#            check.names=FALSE, stringsAsFactors=FALSE)
 
 print("Imported tables")
 

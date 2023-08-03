@@ -23,8 +23,7 @@ module load R
 Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/transformations/p2_denovo_tree_UPGMA.R \
 --homedir ~/git/lognorm_vs_CODA \
 --project Jones \
---metadata ~/git/lognorm_vs_CODA/Jones/SraRunTable.txt \
---metadata_delim , \
+--metadata ~/git/lognorm_vs_CODA/Jones/patient_metadata.tsv \
 --metadata_rowname Run \
 --input_table filtered_90prcnt_dada2.rds \
 --output_file_prefix filtered_90prcnt \

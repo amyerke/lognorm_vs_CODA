@@ -23,9 +23,9 @@ module load R
 Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/transformations/p2_denovo_tree_UPGMA.R \
 --homedir ~/git/lognorm_vs_CODA \
 --project Zeller \
---metadata ~/git/lognorm_vs_CODA/Zeller/SraRunTable.txt \
+--metadata ~/git/lognorm_vs_CODA/Zeller/patient_metadata.csv \
 --metadata_delim , \
---metadata_rowname Run\
+--metadata_rowname Run \
 --input_table filtered_90prcnt_dada2.rds \
 --output_file_prefix filtered_90prcnt \
 --alignment_file filtered_90prcnt_aln.rds

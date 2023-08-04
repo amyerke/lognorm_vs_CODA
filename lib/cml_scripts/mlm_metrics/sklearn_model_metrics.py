@@ -93,7 +93,7 @@ for philr_group in philr_groups:
 	philr_dir = os.path.join(output_dir, "tables", philr_group)
 	if not os.path.exists(philr_dir):
 		print(f"""{philr_dir} does not exist.
-			Use lib/cml_scripts/mlm_metrics/PhILR_random_trees_and_counts_tables.R 
+			Use lib/cml_scripts/transformations/PhILR_random_trees_and_counts_tables.R 
 			to create it.""")
 		sys.exit()
 

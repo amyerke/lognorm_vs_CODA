@@ -8,7 +8,7 @@
 #     or (in article format)
 #     https://f1000research.com/articles/5-1492/v2
 rm(list = ls()) #clear workspace
-##-cml argument processing------------------------------------------##
+####-cml argument processing------------------------------------------####
 if (!requireNamespace("optparse", quietly = TRUE)){
   install.packages("optparse")
 }

@@ -20,7 +20,11 @@ echo Using $SLURM_NTASKS processors across $SLURM_NNODES nodes
 
 module load R
 
-Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/make_ref_tree/p3_parse_blast.R -d ~/git/lognorm_vs_CODA -p Zeller
+Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/make_ref_tree/p3_parse_blast.R \
+  -d ~/git/lognorm_vs_CODA \
+  -p Zeller \
+  -i output_90prcnt_filt.txt \
+  -o parsed_output_90prcnt_filt.csv
 
 echo ""
 echo "======================================================"

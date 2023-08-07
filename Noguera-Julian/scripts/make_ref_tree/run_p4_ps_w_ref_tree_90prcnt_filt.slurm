@@ -23,7 +23,7 @@ module load R
 Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/make_ref_tree/p4_ps_w_ref_tree.R \
   --homedir ~/git/lognorm_vs_CODA \
   --project Noguera-Julian \
-  --metadata ~/git/lognorm_vs_CODA/Noguera-Julian/~/git/lognorm_vs_CODA/Noguera-Julian/SraRunTable.txt \
+  --metadata ~/git/lognorm_vs_CODA/Noguera-Julian/SraRunTable.txt \
   --metadata_delim , \
   --metadata_rowname Run \
   --modified_LTP_fn ltp_90prcnt_filt_tree.pdf \

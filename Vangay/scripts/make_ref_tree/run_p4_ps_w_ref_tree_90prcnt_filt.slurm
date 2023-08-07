@@ -23,7 +23,7 @@ module load R
 Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/make_ref_tree/p4_ps_w_ref_tree.R \
   --homedir ~/git/lognorm_vs_CODA \
   --project Vangay \
-  --metadata ~/git/lognorm_vs_CODA/Vangay/~/git/lognorm_vs_CODA/Vangay/patient_metadata.tsv \
+  --metadata ~/git/lognorm_vs_CODA/Vangay/patient_metadata.tsv \
   --metadata_rowname run_accession \
   --modified_LTP_fn ltp_90prcnt_filt_tree.pdf \
   --ps_LTP_rds ltp_90prcnt_filt.rds \

@@ -25,10 +25,10 @@ Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/make_ref_tree/p4_ps_w_ref_tree.R
   --project Zeller \
   --metadata ~/git/lognorm_vs_CODA/Zeller/patient_metadata.csv \
   --metadata_delim , \
-  --metadata_rowname Run
-  --modified_LTP_fn ltp_90prcnt_filt_tree.pdf
-  --ps_LTP_rds ltp_90prcnt_filt.rds
-  --seq_count_table filtered_90prcnt_dada2.rds
+  --metadata_rowname Run \
+  --modified_LTP_fn ltp_90prcnt_filt_tree.pdf \
+  --ps_LTP_rds ltp_90prcnt_filt.rds \
+  --seq_count_table filtered_90prcnt_dada2.rds \
   --tree_key parsed_output_90prcnt_filt.csv
 
 echo ""

@@ -98,6 +98,6 @@ hist(myT, breaks = 150, xlab = "Sequences per node tip", main = "Histogram of se
 barplot(myT, las = 2, xlab = "Sequences per node tip", main = "Histogram of seqs per node tip")
 dev.off()
 
-write.csv(df, file = out$output)
+write.csv(df, file = opt$output)
 
 print("Script complete!")

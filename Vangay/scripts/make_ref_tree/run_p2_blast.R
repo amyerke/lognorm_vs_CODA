@@ -29,7 +29,7 @@ tryCatch(
     message(cond)
   },
   warning=function(cond) {
-    print('Oppsa warning is thrown')
+    print('Opps! warning is thrown')
     message(cond)
     # Choose a return value in case of warning
     #return(NULL)

@@ -8,8 +8,8 @@
 #SBATCH --mem=50gb                                                   # Memory limit
 #SBATCH --mail-type=BEGIN,END,FAIL                                   # Mail events (NONE, BEGIN, END, FAIL, ALL)
 #SBATCH --mail-user=amyerke@uncc.edu                                 # Specified email address
-#SBATCH --output=/users/amyerke/slurmLogs/Noguera-Julian_%x.%j.out   # Set directory for standard output
-#SBATCH --error=/users/amyerke/slurmLogs/Noguera-Julian_%x.%j.out    # Set directory for error log
+#SBATCH --output=/users/amyerke/slurmLogs/Jones_%x.%j.out   # Set directory for standard output
+#SBATCH --error=/users/amyerke/slurmLogs/Jones_%x.%j.out    # Set directory for error log
 ##SBATCH --uid=amyerke
 #SBATCH --get-user-env
 
@@ -22,7 +22,7 @@ module load R
 
 Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/make_ref_tree/p1_make_asv_fasta.R \
 --homedir ~/git/lognorm_vs_CODA \
---project Noguera-Julian \
+--project Jones \
 --input_rds filtered_90prcnt_dada2.rds \
 --output filtered_90prcnt_dada2.fasta
 

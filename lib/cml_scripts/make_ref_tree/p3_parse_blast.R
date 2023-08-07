@@ -15,17 +15,24 @@
 # Comparison stategy: compare ppos (if tie, go with biggest alignment length)
 
 print("Begining cml argument processing.")
+####-read in external libraries---------------------------------------####
 if (!requireNamespace("optparse", quietly = TRUE)){
   install.packages("optparse")
 }
 library("optparse")
 
+####-cml argument processing------------------------------------------####
 option_list <- list(
   make_option(c("-d", "--homedir"), type="character", 
               default=file.path('~','git',"lognorm_vs_CODA"), 
-              help="dataset dir path", metavar="character"),
+              help="dataset dir path"),
   make_option(c("-p", "--project"), type="character", default=NULL, 
-              help="project folder name in homedir", metavar="character")
+              help="project folder name in homedir"),
+  make_option(c("-i", "--input_file"), type="character", default="output.txt", 
+              help="blast output from p2"),
+  make_option(c("-o", "--output"), type="character", 
+              default="parsed_output.csv", 
+              help="name of output file, will be found in tree_process_blast")
 ); 
 
 opt_parser <- OptionParser(option_list=option_list);
@@ -40,7 +47,7 @@ output_dir <- file.path(home_dir, project, 'output')
 
 setwd(file.path(output_dir, "tree_process_blast"))
 
-input_file <- "output.txt"
+input_file <- opt$input_file
 
 df <- data.frame(#qseqid=character(),
                  sseqid=character(),
@@ -63,12 +70,10 @@ while ( TRUE ) {
   # print(paste(sseq, bitsc))
   if (evalue < 10^-10){
     if ( qseq %in% row.names(df)){
-      
       if (bitsc > df[qseq, "bitscore"]){
         count = df[qseq,count_matched]
         df[qseq,] = list(sseq, bitsc, count + 1)
       }
-      
     }else{
       newRow <- data.frame(sseqid=sseq,
                            bitscore=bitsc,
@@ -76,10 +81,7 @@ while ( TRUE ) {
       row.names(newRow) = qseq
       df = rbind(df, newRow)
     }
-
   }
-
-  # break
 }
 close(con)
 
@@ -96,21 +98,6 @@ hist(myT, breaks = 150, xlab = "Sequences per node tip", main = "Histogram of se
 barplot(myT, las = 2, xlab = "Sequences per node tip", main = "Histogram of seqs per node tip")
 dev.off()
 
-# df = df[!duplicated(df),]
-# 
-# print(paste("deduplicated nrow:", nrow(df)))
-# 
-# myT = table(df[,"sseqid"])
-# 
-# print(paste("ave seq/node:", mean(myT), "\nmax seq/node:", max(myT)))
-# 
-# hist(myT, breaks = 150, xlab = "Sequences per node tip", main = "Histogram of seqs per node tip")
-# barplot(myT, las = 2, xlab = "Sequences per node tip", main = "Histogram of seqs per node tip")
+write.csv(df, file = out$output)
 
-write.csv(df, file = "parsed_output.csv")
-
-con <- gzfile(file.path( output_dir, "r_objects", "ForwardReads_DADA2_taxonomy.rds"))
-taxTab <- readRDS(con)
-close(con)
-
-print(nrow(taxTab))
+print("Script complete!")

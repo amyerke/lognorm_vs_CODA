@@ -4,6 +4,8 @@ module load blast/2.9.0+
 
 home_dir=$1 #first comandline argument is the project name
 project=$2
+fasta=$3
+output=$4
 echo "Found arguments ${home_dir} and ${project}."
 
 db_path=${home_dir}/lib/ref_tree_objs/db/tree
@@ -13,9 +15,9 @@ cd ~/git/lognorm_vs_CODA/${project}/output/tree_process_blast
 # cd ~/git/lognorm_vs_CODA/Fodor/output/tree_process_blast
 
 echo "Attempting to blastn."
-blastn -query dada2seqs.fasta \
+blastn -query ${fasta} \
   -db ${db_path} \
-  -out output.txt \
+  -out ${output} \
   -outfmt "6 qseqid sseqid pident length evalue bitscore score ppos"
 
 echo "Reached end of script"

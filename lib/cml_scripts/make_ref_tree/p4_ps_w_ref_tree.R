@@ -30,7 +30,7 @@ option_list <- list(
                         help="project folder"),
   optparse::make_option(c("-m", "--metadata"), type="character", default=NULL,
                         help="metadata file path with filename"),
-  optparse::make_option(c("-l", "--metadata_delim"), type="character", default=NULL,
+  optparse::make_option(c("-l", "--metadata_delim"), type="character", default="\t",
                         help="metadata file deliminator"),
   optparse::make_option(c("-r", "--metadata_rowname"), type="character", default=NULL,
                         help="metadata file row to use for row names"),

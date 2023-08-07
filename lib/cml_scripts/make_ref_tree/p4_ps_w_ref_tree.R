@@ -85,7 +85,7 @@ taxaTab <- readRDS(file.path( output_dir, "r_objects", opt$taxonomy))
 print("Imported R objects")
 
 ####-Build tree------------------------------------------------------####
-tree <- phyloseq::read_tree(file.path(home_dir, "lib", "taxonomy",
+tree <- phyloseq::read_tree(file.path(home_dir, "lib", "ref_tree_objs",
         "silva","viFy10M5J2nvIBpCLM-QMQ_newick.txt"))
 
 print(paste("outputting unmodified tree image file to", silva_outf))

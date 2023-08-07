@@ -21,7 +21,7 @@ rm(list = ls()) #clear workspace
 home_dir <- file.path('~','git',"lognorm_vs_CODA")
 project <- "Vangay"
 output_dir <- file.path(home_dir, project, "output")
-cml_scripts <- file.path(home_dir, "r_libraries", "cml_scripts")
+cml_scripts <- file.path(home_dir, "lib", "cml_scripts")
 r_script <- file.path(cml_scripts, "transformations", "p4_philr_transform.R")
 seq_depth <- file.path(output_dir, "tables", "total_seq_depth.csv")
 

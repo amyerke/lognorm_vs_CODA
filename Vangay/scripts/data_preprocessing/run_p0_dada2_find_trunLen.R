@@ -9,7 +9,7 @@ rm(list = ls()) #clear workspace
 home_dir <- file.path('~','git',"lognorm_vs_CODA")
 project <- "Vangay"
 
-r_script <- file.path(home_dir, "r_libraries", "cml_scripts", "data_preprocessing","p0_dada2_find_trunLen.R")
+r_script <- file.path(home_dir, "lib", "cml_scripts", "data_preprocessing","p0_dada2_find_trunLen.R")
 
 my_args <- paste(
   "-d", home_dir,

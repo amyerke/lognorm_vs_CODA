@@ -20,7 +20,7 @@ echo Using $SLURM_NTASKS processors across $SLURM_NNODES nodes
 
 module load R
 
-srun Rscript ~/git/lognorm_vs_CODA/r_libraries/cml_scripts/make_ref_tree/p4_ps_w_ref_tree.R -d ~/git/lognorm_vs_CODA \
+srun Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/make_ref_tree/p4_ps_w_ref_tree.R -d ~/git/lognorm_vs_CODA \
   -p Noguera-Julian \
   -m ~/git/lognorm_vs_CODA/Noguera-Julian/SraRunTable.txt \
   -l , \

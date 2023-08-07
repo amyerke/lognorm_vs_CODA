@@ -20,7 +20,7 @@ echo Using $SLURM_NTASKS processors across $SLURM_NNODES nodes
 
 module load R
 
-srun Rscript ~/git/lognorm_vs_CODA/r_libraries/cml_scripts/data_preprocessing/p1_dada2_rd1.R \
+srun Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/data_preprocessing/p1_dada2_rd1.R \
 -d ~/git/lognorm_vs_CODA \
 -p Noguera-Julian \
 -f _1.fastq \

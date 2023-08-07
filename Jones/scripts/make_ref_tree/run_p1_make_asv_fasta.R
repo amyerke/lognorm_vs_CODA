@@ -6,7 +6,7 @@ rm(list = ls()) #clear workspace
 ##-Establish directory layout---------------------------------------##
 home_dir <- file.path('~','git',"lognorm_vs_CODA")
 project <- "Jones"
-cml_scripts <- file.path(home_dir, "r_libraries", "cml_scripts")
+cml_scripts <- file.path(home_dir, "lib", "cml_scripts")
 r_script <- file.path(cml_scripts, "make_ref_tree", "p1_make_asv_fasta.R")
 
 ##-Make args for cml script-----------------------------------------##

@@ -20,7 +20,7 @@ echo Using $SLURM_NTASKS processors across $SLURM_NNODES nodes
 
 module load R
 
-Rscript ~/git/lognorm_vs_CODA/r_libraries/cml_scripts/transformations/p2_denovo_tree_UPGMA.R \
+Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/transformations/p2_denovo_tree_UPGMA.R \
 --homedir ~/git/lognorm_vs_CODA \
 --project Vangay \
 --metadat ~/git/lognorm_vs_CODA/Vangay/SraRunTable.txt \

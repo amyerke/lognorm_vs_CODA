@@ -1,14 +1,14 @@
 #!/usr/bin/env Rscript
 # Running the p2_blast.sh with command line args
 # if this doesn't work, you might need to run the scripts 
-# in lognorm_vs_CODA/r_libraries/cml_scripts/creat_ref_tree_blst_db
+# in lognorm_vs_CODA/lib/cml_scripts/creat_ref_tree_blst_db
 
 rm(list = ls()) #clear workspace
 
 ##-Establish directory layout---------------------------------------##
 home_dir <- file.path('~','git',"lognorm_vs_CODA")
 project <- "Vangay"
-cml_scripts <- file.path(home_dir, "r_libraries", "cml_scripts")
+cml_scripts <- file.path(home_dir, "lib", "cml_scripts")
 r_script <- file.path(cml_scripts, "make_ref_tree", "p2_blast.sh")
 
 ##-Make args for cml script-----------------------------------------##
@@ -25,7 +25,7 @@ tryCatch(
          minimized = FALSE, invisible = TRUE, timeout = 0)
   },
   error=function(cond) {
-    print('Opps, an error is thrown, did you run lognorm_vs_CODA/r_libraries/cml_scripts/creat_ref_tree_blst_db?')
+    print('Opps, an error is thrown, did you run lognorm_vs_CODA/lib/cml_scripts/creat_ref_tree_blst_db?')
     message(cond)
   },
   warning=function(cond) {

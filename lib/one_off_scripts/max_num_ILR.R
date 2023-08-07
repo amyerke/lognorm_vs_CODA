@@ -15,8 +15,8 @@ output_dir <- file.path(home_dir, project, 'output')
 setwd(file.path(home_dir))
 
 ##-Functions--------------------------------------------------------##
-source(file.path(home_dir, "r_libraries", "statistical_functions.R"))
-source(file.path(home_dir, "r_libraries", "table_manipulations.R"))
+source(file.path(home_dir, "lib", "statistical_functions.R"))
+source(file.path(home_dir, "lib", "table_manipulations.R"))
 
 ##-Import tables and data preprocessing-----------------------------##
 asv_table <- readRDS(file.path(output_dir, "r_objects", "ForwardReads_DADA2.rds"))

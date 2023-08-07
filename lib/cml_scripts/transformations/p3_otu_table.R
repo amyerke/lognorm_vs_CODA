@@ -40,7 +40,7 @@ project <- opt$project
 output_dir <- file.path(home_dir, project, 'output')
 
 ##-Source my own functions------------------------------------------##
-source(file.path(home_dir, "r_libraries", "table_manipulations.R"))
+source(file.path(home_dir, "lib", "table_manipulations.R"))
 
 ##-Import R objects and data preprocessing--------------------------##
 con <- gzfile(file.path( output_dir, "r_objects","ForwardReads_DADA2.rds"))

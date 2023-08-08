@@ -31,7 +31,7 @@ make_PhILR_transform_tables <- function(counts_table,
   }
   if (save_counts_table == TRUE){
     print("Saving counts table.")
-    write.csv(counts_table, 
+    write.table(counts_table, 
               file = file.path(output_folder, paste0(table_name,".csv")),
               sep = ",", row.names = TRUE)
   }
@@ -46,13 +46,12 @@ make_PhILR_transform_tables <- function(counts_table,
     for (tax_w in 1:length(philr_taxa_weights)){
       pw <- philr_taxa_weights[tax_w]
       table_name_full <- paste0(paste(table_name, iw, pw, sep = "_"),".csv")
-      
       if(!file.exists(file.path(output_folder, table_name_full))){
         my_table <- philr::philr(counts_table, tree,
                                  part.weights = philr_taxa_weights[tax_w],
                                  ilr.weights = philr_ilr_weights[ilr_w])
         print(paste0("Saving ", table_name_full, " to ", output_folder))
-        write.csv(my_table, 
+        write.table(my_table, 
                   file = file.path(output_folder, table_name_full),
                   sep = ",", row.names = TRUE)
       }else{
@@ -143,12 +142,12 @@ phylo_label <- "Silva_DADA2"
 print(paste0("Counts table dimensions of ", phylo_label, ": ", dim(phylo_obj@otu_table), collapse = ""))
 make_PhILR_transform_tables(phylo_obj@otu_table,
                             phylo_obj@phy_tree,
-                            phylo_label, 
+                            phylo_label,
                             file.path(output_dir, "tables", phylo_label),
                             save_counts_table = TRUE)
 make_random_tree_philrs(phylo_obj@otu_table,
                         phylo_obj@phy_tree,
-                        phylo_label, 
+                        phylo_label,
                         file.path(output_dir, "tables", phylo_label),
                         3)
 phyloseq::plot_tree(phylo_obj, method = "treeonly", nodelabf=nodeplotblank, title = paste0("orig_ref"))
@@ -161,12 +160,12 @@ phyloseq::plot_tree(phylo_obj, method = "treeonly", nodelabf=nodeplotblank, titl
 print(paste0("Counts table dimensions of ", phylo_label, ": ", dim(phylo_obj@otu_table), collapse = ""))
 make_PhILR_transform_tables(phylo_obj@otu_table,
                             phylo_obj@phy_tree,
-                            phylo_label, 
+                            phylo_label,
                             file.path(output_dir, "tables", phylo_label),
                             save_counts_table = TRUE)
 make_random_tree_philrs(phylo_obj@otu_table,
                         phylo_obj@phy_tree,
-                        phylo_label, 
+                        phylo_label,
                         file.path(output_dir, "tables", phylo_label),
                         3)
 
@@ -184,12 +183,12 @@ phylo_label <- "Filtered_UPGMA_DADA2"
 print(paste0("Counts table dimensions of ", phylo_label, ": ", dim(phylo_obj@otu_table), collapse = ""))
 make_PhILR_transform_tables(phylo_obj@otu_table,
                             phylo_obj@phy_tree,
-                            phylo_label, 
+                            phylo_label,
                             file.path(output_dir, "tables", phylo_label),
                             save_counts_table = TRUE)
 make_random_tree_philrs(phylo_obj@otu_table,
                         phylo_obj@phy_tree,
-                        phylo_label, 
+                        phylo_label,
                         file.path(output_dir, "tables", phylo_label),
                         3)
 
@@ -206,12 +205,12 @@ phylo_label <- "Filtered_IQtree"
 print(paste0("Counts table dimensions of ", phylo_label, ": ", dim(phylo_obj@otu_table), collapse = ""))
 make_PhILR_transform_tables(phylo_obj@otu_table,
                             phylo_obj@phy_tree,
-                            phylo_label, 
+                            phylo_label,
                             file.path(output_dir, "tables", phylo_label),
                             save_counts_table = TRUE)
 make_random_tree_philrs(phylo_obj@otu_table,
                         phylo_obj@phy_tree,
-                        phylo_label, 
+                        phylo_label,
                         file.path(output_dir, "tables", phylo_label),
                         3)
 

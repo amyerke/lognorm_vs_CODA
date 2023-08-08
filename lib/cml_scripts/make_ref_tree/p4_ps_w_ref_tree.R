@@ -26,13 +26,13 @@ option_list <- list(
   optparse::make_option(c("-d", "--homedir"), type="character",
                         default=file.path('~','git',"lognorm_vs_CODA"),
                         help="dataset dir path"),
-  optparse::make_option(c("-p", "--project"), type="character", default=NULL,
+  optparse::make_option(c("-p", "--project"), type="character", default="Jones",
                         help="project folder"),
-  optparse::make_option(c("-m", "--metadata"), type="character", default=NULL,
+  optparse::make_option(c("-m", "--metadata"), type="character", default="patient_metadata.csv",
                         help="metadata file path with filename"),
   optparse::make_option(c("-l", "--metadata_delim"), type="character", default="\t",
                         help="metadata file deliminator"),
-  optparse::make_option(c("-r", "--metadata_rowname"), type="character", default=NULL,
+  optparse::make_option(c("-r", "--metadata_rowname"), type="character", default="Run",
                         help="metadata file row to use for row names"),
   optparse::make_option(c("-g", "--ref_tree_pdf"), type="character",
                         default = "silva_ref_tree.pdf",
@@ -105,7 +105,7 @@ unmatched_ids <- c()
 new_labels <- c()
 
 for (i in seq_along(tree$tip.label)){
-  old_lab = tree$tip.label[i]
+  old_lab = gsub("'", "", tree$tip.label[i])
   id = unlist(strsplit(old_lab, "_"))[1]
   if (id %in% tree_key$sseqid){
     index = which(tree_key$sseqid == id)[1]

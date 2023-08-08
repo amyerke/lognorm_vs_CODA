@@ -19,9 +19,9 @@ echo Running on host: `hostname`
 echo Using $SLURM_NTASKS processors across $SLURM_NNODES nodes
 
 module load R
-Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/transformations/PhILR_random_trees_and_counts_tables.R\
+Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/transformations/PhILR_random_trees_and_counts_tables.R \
   -p Noguera-Julian \
-  -d ~/git/lognorm_vs_CODA/
+  -d ~/git/lognorm_vs_CODA
 
 echo ""
 echo "======================================================"

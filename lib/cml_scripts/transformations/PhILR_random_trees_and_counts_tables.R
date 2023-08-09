@@ -47,6 +47,10 @@ make_PhILR_transform_tables <- function(counts_table,
       pw <- philr_taxa_weights[tax_w]
       table_name_full <- paste0(paste(table_name, iw, pw, sep = "_"),".csv")
       if(!file.exists(file.path(output_folder, table_name_full))){
+        if(any(tree$node.label == "")){
+          my_nodes <- paste0("n", 1:tree$Nnode)
+          tree$node.label <- my_nodes
+        }
         my_table <- philr::philr(counts_table, tree,
                                  part.weights = philr_taxa_weights[tax_w],
                                  ilr.weights = philr_ilr_weights[ilr_w])

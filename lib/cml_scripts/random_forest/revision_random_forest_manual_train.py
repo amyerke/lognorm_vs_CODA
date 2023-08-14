@@ -157,14 +157,14 @@ print("Setting up tables to feed the random forest model.", flush = True)
 # --------------------------------------------------------------------------
 tables = []
 
-#filtered first
+#prevanlence filtered first
 tables.append(("alr_prev_filt_DADA2", (os.path.join(output_dir, "tables", "filtered_90prcnt_alr_asv.csv"), ","), "plum"))
 tables.append(("clr_prev_filt_DADA2", (os.path.join(output_dir, "tables", "filtered_90prcnt_clr_asv.csv"), ","), "plum"))
 tables.append(("raw_prev_filt_DADA2",(os.path.join(output_dir, "tables", "filtered_90prcnt_dada2.csv"),","),"plum"))
 tables.append(("propotions_prev_filt_DADA2", (os.path.join(output_dir, "tables", "filtered_90prcnt_propotions_asv.csv"), ","), "y"))
 tables.append(("Heilinger_prev_filt_DADA2", (os.path.join(output_dir, "tables", "filtered_90prcnt_heilinger_asv.csv"), ","), "y"))
 tables.append(("propotions_DADA2", (os.path.join(output_dir, "tables", "propotions_asv.csv"), ","), "y"))
-tables.append(("Heilinger_DADA2", (os.path.join(output_dir, "tables", "eilinger_asv.csv"), ","), "y"))
+tables.append(("Heilinger_DADA2", (os.path.join(output_dir, "tables", "heilinger_asv.csv"), ","), "y"))
 tables.append(("rarefied_prev_filt_DADA2", (os.path.join(output_dir, "tables", "filtered_90prcnt_1000_rrarefy_asv.csv"), ","), "purple"))
 tables.append(("rarefied_DADA2", (os.path.join(output_dir, "tables", "1000_rrarefy_asv.csv"), ","), "purple"))
 tables.append(("lognorm_prev_filt_DADA2", (os.path.join(output_dir, "tables", "filtered_90prcnt_lognorm_dada2.csv"), ","), "y"))

@@ -228,7 +228,7 @@ with open(result_fpath, "w+") as fl:
 				pred_train, pred_test, resp_train, resp_test = model_selection.train_test_split(my_table, respns_var, train_size=float(train_percent), random_state=rand_int, shuffle=True)
 				print(f"exp{train_percent*len(my_table)} Ptrain:{len(pred_train)}, Ptest{len(pred_test)}, rtest{len(resp_test)}, rtrain:{len(resp_train)}")
 				print(f"meta{len(meta_df)*train_percent}")
-				print(f"IN {m_c}, iter {i}")
+				print(f"IN {name}, {m_c}, iter {i}")
 				if is_numeric_dtype(respns_var) == True:
 					print("going to RandomForestRegressor()")
 					clf = RandomForestRegressor()

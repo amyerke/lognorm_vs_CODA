@@ -90,7 +90,7 @@ def add_random_tree_PhILRs_to_table(lst, \
 	philr_part_weights = ["enorm"], \
 	philr_ilr_weights = ["blw.sqrt"], \
 	color = "w", \
-	num_rand_trees = 10):
+	num_rand_trees = 3):
 	print(f"Adding random trees from {base_fn}.")
 	if not os.path.exists(root_folder):
 		print(f"{root_folder} does not exist. Use PhILR_random_trees_and_counts_tables.R to create it.", flush = True)
@@ -157,6 +157,27 @@ print("Setting up tables to feed the random forest model.", flush = True)
 # --------------------------------------------------------------------------
 tables = []
 
+#prevanlence filtered first
+tables.append(("alr_prev_filt_DADA2", (os.path.join(output_dir, "tables", "filtered_90prcnt_alr_asv.csv"), ","), "plum"))
+tables.append(("clr_prev_filt_DADA2", (os.path.join(output_dir, "tables", "filtered_90prcnt_clr_asv.csv"), ","), "plum"))
+tables.append(("raw_prev_filt_DADA2",(os.path.join(output_dir, "tables", "filtered_90prcnt_dada2.csv"),","),"plum"))
+tables.append(("propotions_prev_filt_DADA2", (os.path.join(output_dir, "tables", "filtered_90prcnt_propotions_asv.csv"), ","), "y"))
+tables.append(("Heilinger_prev_filt_DADA2", (os.path.join(output_dir, "tables", "filtered_90prcnt_heilinger_asv.csv"), ","), "y"))
+tables.append(("propotions_DADA2", (os.path.join(output_dir, "tables", "propotions_asv.csv"), ","), "y"))
+tables.append(("Heilinger_DADA2", (os.path.join(output_dir, "tables", "heilinger_asv.csv"), ","), "y"))
+tables.append(("rarefied_prev_filt_DADA2", (os.path.join(output_dir, "tables", "filtered_90prcnt_1000_rrarefy_asv.csv"), ","), "purple"))
+tables.append(("rarefied_DADA2", (os.path.join(output_dir, "tables", "1000_rrarefy_asv.csv"), ","), "purple"))
+tables.append(("lognorm_prev_filt_DADA2", (os.path.join(output_dir, "tables", "filtered_90prcnt_lognorm_dada2.csv"), ","), "y"))
+tables.append(("Silva_prev_filt_DADA2", (os.path.join(output_dir,"tables", "prev_filt90_Silva_DADA2", "prev_filt90_Silva_DADA2.csv"), ","), "white"))
+tables = add_PhILR_dfs_to_table(tables, os.path.join(output_dir, "tables", "prev_filt90_Silva_DADA2"), "prev_filt90_Silva_DADA2", color = "#050598")
+tables = add_random_tree_PhILRs_to_table(tables, os.path.join(output_dir, "tables", "prev_filt90_Silva_DADA2"), "prev_filt90_Silva_DADA2", color = "#f7d8a0", num_rand_trees=3)
+tables.append(("UPGMA_prev_filt_DADA2", (os.path.join(output_dir,"tables", "prev_filt90_UPGMA_DADA2", "prev_filt90_UPGMA_DADA2.csv"), ","), "white"))
+tables = add_PhILR_dfs_to_table(tables, os.path.join(output_dir, "tables", "prev_filt90_UPGMA_DADA2"), "prev_filt90_UPGMA_DADA2", color = "#050598")
+tables = add_random_tree_PhILRs_to_table(tables, os.path.join(output_dir, "tables", "prev_filt90_UPGMA_DADA2"), "prev_filt90_UPGMA_DADA2", color = "#f7d8a0", num_rand_trees=3)
+tables.append(("IQtree_prev_filt_DADA2", (os.path.join(output_dir,"tables", "prev_filt90_IQtree", "prev_filt90_IQtree.csv"), ","), "white"))
+tables = add_PhILR_dfs_to_table(tables, os.path.join(output_dir, "tables", "prev_filt90_IQtree"), "prev_filt90_IQtree", color = "#050598")
+tables = add_random_tree_PhILRs_to_table(tables, os.path.join(output_dir, "tables", "prev_filt90_IQtree"), "prev_filt90_IQtree", color = "#f7d8a0", num_rand_trees=3)
+
 # tables.append(("lognorm_HashSeq", (os.path.join(output_dir,"tables", "lognorm_hashseq.csv"), ","), "y"))
 tables.append(("alr_DADA2", (os.path.join(output_dir, "tables", "alr_asv.csv"), ","), "white"))
 # tables.append(("alr_HashSeq", (os.path.join(output_dir,"tables", "alr_hashseq.csv"), ","), "g"))
@@ -164,6 +185,7 @@ tables.append(("clr_DADA2", (os.path.join(output_dir, "tables", "clr_asv.csv"), 
 # tables.append(("clr_HashSeq", (os.path.join(output_dir,"tables", "clr_hashseq.csv"), ","), "m"))
 tables.append(("raw_DADA2",(os.path.join(output_dir, "tables", "ForwardReads_DADA2.txt"),"\t"),"white"))
 # tables.append(("HashSeq", (os.path.join(output_dir,  "hashseq", "hashseq.csv"),","), "r"))
+# tables.append(("proportions_DADA2", (os.path.join(output_dir, "tables", "propotions_asv.csv"), ","), "y"))
 tables.append(("lognorm_DADA2", (os.path.join(output_dir, "tables", "lognorm_dada2.csv"), ","), "y"))
 tables.append(("lognorm_Silva_DADA2", (os.path.join(output_dir, "tables", "lognorm_Silva.csv"), ","), "y"))
 tables.append(("Silva_DADA2", (os.path.join(output_dir,"tables", "Silva_DADA2", "Silva_DADA2.csv"), ","), "white"))
@@ -195,6 +217,7 @@ with open(result_fpath, "w+") as fl:
 		# meta_df = meta_df.loc[list(my_table.index.values)
 		for name, table_info, color in tables:
 			my_table = df_factory(table_info[0], table_info[1])
+			my_table[is.na(my_table)] <- 0#remove the na values - hack needed for Vangay proportions trans
 			my_accuracy = [0] * num_iterations
 			random.seed(10)
 			for i in range(num_iterations):
@@ -206,7 +229,7 @@ with open(result_fpath, "w+") as fl:
 				pred_train, pred_test, resp_train, resp_test = model_selection.train_test_split(my_table, respns_var, train_size=float(train_percent), random_state=rand_int, shuffle=True)
 				print(f"exp{train_percent*len(my_table)} Ptrain:{len(pred_train)}, Ptest{len(pred_test)}, rtest{len(resp_test)}, rtrain:{len(resp_train)}")
 				print(f"meta{len(meta_df)*train_percent}")
-				print(f"IN {m_c}, iter {i}")
+				print(f"IN {name}, {m_c}, iter {i}")
 				if is_numeric_dtype(respns_var) == True:
 					print("going to RandomForestRegressor()")
 					clf = RandomForestRegressor()

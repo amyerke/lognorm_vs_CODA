@@ -2,7 +2,7 @@
 
 #SBATCH --partition=Pisces                                    		# Partition/queue requested on server
 #SBATCH --job-name=Jones_python_random_forest_manual   		# Job name
-#SBATCH --time=24:00:00                                      		# Time limit (hrs:min:sec)
+#SBATCH --time=50:00:00                                      		# Time limit (hrs:min:sec)
 #SBATCH --nodes=1                                         			# Number of nodes requested
 #SBATCH --ntasks-per-node=1                          			# Number of CPUs (processor cores/tasks)
 #SBATCH --mem=100gb                                          		# Memory limit

@@ -217,7 +217,7 @@ with open(result_fpath, "w+") as fl:
 		# meta_df = meta_df.loc[list(my_table.index.values)
 		for name, table_info, color in tables:
 			my_table = df_factory(table_info[0], table_info[1])
-			my_table[is.na(my_table)] <- 0#remove the na values - hack needed for Vangay proportions trans
+			my_table = my_table.fillna(0)#remove the na values - hack needed for Vangay proportions trans
 			my_accuracy = [0] * num_iterations
 			random.seed(10)
 			for i in range(num_iterations):

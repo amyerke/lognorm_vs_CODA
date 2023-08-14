@@ -174,7 +174,7 @@ tables = add_random_tree_PhILRs_to_table(tables, os.path.join(output_dir, "table
 tables.append(("UPGMA_prev_filt_DADA2", (os.path.join(output_dir,"tables", "prev_filt90_UPGMA_DADA2", "prev_filt90_UPGMA_DADA2.csv"), ","), "white"))
 tables = add_PhILR_dfs_to_table(tables, os.path.join(output_dir, "tables", "prev_filt90_UPGMA_DADA2"), "prev_filt90_UPGMA_DADA2", color = "#050598")
 tables = add_random_tree_PhILRs_to_table(tables, os.path.join(output_dir, "tables", "prev_filt90_UPGMA_DADA2"), "prev_filt90_UPGMA_DADA2", color = "#f7d8a0", num_rand_trees=3)
-tables.append(("IQtree_prev_filt_DADA2", (os.path.join(output_dir,"tables", "Filtered_IQtree", "prev_filt90_IQtree.csv"), ","), "white"))
+tables.append(("IQtree_prev_filt_DADA2", (os.path.join(output_dir,"tables", "prev_filt90_IQtree", "prev_filt90_IQtree.csv"), ","), "white"))
 tables = add_PhILR_dfs_to_table(tables, os.path.join(output_dir, "tables", "prev_filt90_IQtree"), "prev_filt90_IQtree", color = "#050598")
 tables = add_random_tree_PhILRs_to_table(tables, os.path.join(output_dir, "tables", "prev_filt90_IQtree"), "prev_filt90_IQtree", color = "#f7d8a0", num_rand_trees=3)
 

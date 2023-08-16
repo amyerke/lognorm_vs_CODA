@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # Author: Aaron Yerke, aaronyerke@gmail.com
 
-#This is a script for comparing different transformations 
+#This is a script for comparing different transformations
 # --------------------------------------------------------------------------
 print(f"""Running {__file__}.
 This is a script for comparing random forest output with pvalues. 
@@ -28,7 +28,6 @@ from matplotlib.patches import Rectangle
 import matplotlib.backends.backend_pdf
 import argparse
 import random
-import seaborn as sns
 
 # --------------------------------------------------------------------------
 print("Reading commmandline input with optparse.", flush = True)
@@ -49,35 +48,54 @@ home_dir = os.path.expanduser(options.homedir)
 projects = ["Jones", "Vangay", "Zeller", "Noguera-Julian"]
 output_dir = os.path.join(home_dir, "metastudies", "output")
 assert os.path.exists(output_dir)
-plot_pdf_fpath = os.path.join(output_dir, "summary_pval_acc_vs_acc_python_by_transformation.pdf")
+plot_pdf_fpath = os.path.join(output_dir, "philr_summary_pval_acc_vs_acc_python_by_transformation.pdf")
+plotdata_fpath = os.path.join(home_dir,"metastudies","output","philr_summary_pvalue_plot.csv")
+
 # --------------------------------------------------------------------------
 print("Establishing other constants.", flush = True)
 # --------------------------------------------------------------------------
-comp_ds = ['alr_DADA2', 'clr_DADA2', 'raw_DADA2', 'lognorm_DADA2', "lognorm_Silva_DADA2",'Silva_DADA2', \
-	'Silva_DADA2_blw.sqrt_enorm', 'Shuffle1_PhILR_Silva_DADA2_blw.sqrt_enorm', \
-	'Shuffle2_PhILR_Silva_DADA2_blw.sqrt_enorm', 'Shuffle3_PhILR_Silva_DADA2_blw.sqrt_enorm', \
-	'Filtered_Silva_DADA2', 'Filtered_Silva_DADA2_blw.sqrt_enorm', \
-	'Shuffle1_PhILR_Filtered_Silva_DADA2_blw.sqrt_enorm', \
-	'Shuffle2_PhILR_Filtered_Silva_DADA2_blw.sqrt_enorm', \
-	'Shuffle3_PhILR_Filtered_Silva_DADA2_blw.sqrt_enorm', 'Filtered_UPGMA_DADA2', \
-	'Filtered_UPGMA_DADA2_blw.sqrt_enorm', 'Shuffle1_PhILR_Filtered_UPGMA_DADA2_blw.sqrt_enorm', \
-	'Shuffle2_PhILR_Filtered_UPGMA_DADA2_blw.sqrt_enorm', 'Shuffle3_PhILR_Filtered_UPGMA_DADA2_blw.sqrt_enorm', \
-	'Filtered_IQtree', 'Filtered_IQtree_blw.sqrt_enorm', \
-	'Shuffle1_PhILR_Filtered_IQtree_blw.sqrt_enorm',\
-	'Shuffle2_PhILR_Filtered_IQtree_blw.sqrt_enorm',\
-	'Shuffle3_PhILR_Filtered_IQtree_blw.sqrt_enorm']
+ds_color = {
+			"Silva_prev_filt_DADA2" : 'white',
+			"prev_filt90_Silva_DADA2_blw.sqrt_enorm" : '#050598',
+			"Shuffle1_PhILR_prev_filt90_Silva_DADA2_blw.sqrt_enorm" : '#f7d8a0',
+			"Shuffle2_PhILR_prev_filt90_Silva_DADA2_blw.sqrt_enorm" : '#f7d8a0',
+			"Shuffle3_PhILR_prev_filt90_Silva_DADA2_blw.sqrt_enorm" : '#f7d8a0',
+			"UPGMA_prev_filt_DADA2" : 'white',
+			"prev_filt90_UPGMA_DADA2_blw.sqrt_enorm" : '#050598',
+			"Shuffle1_PhILR_prev_filt90_UPGMA_DADA2_blw.sqrt_enorm" : '#f7d8a0',
+			"Shuffle2_PhILR_prev_filt90_UPGMA_DADA2_blw.sqrt_enorm" : '#f7d8a0',
+			"Shuffle3_PhILR_prev_filt90_UPGMA_DADA2_blw.sqrt_enorm" : '#f7d8a0',
+			"IQtree_prev_filt_DADA2" : 'white',
+			"prev_filt90_IQtree_blw.sqrt_enorm" : '#050598',
+			"Shuffle1_PhILR_prev_filt90_IQtree_blw.sqrt_enorm" : '#f7d8a0',
+			"Shuffle2_PhILR_prev_filt90_IQtree_blw.sqrt_enorm" : '#f7d8a0',
+			"Shuffle3_PhILR_prev_filt90_IQtree_blw.sqrt_enorm" : '#f7d8a0',
+			'Silva_DADA2' : 'white',
+			'Silva_DADA2_blw.sqrt_enorm' : '#050598',
+			'Shuffle1_PhILR_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
+			'Shuffle2_PhILR_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
+			'Shuffle3_PhILR_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
+			'Filtered_Silva_DADA2' : 'white',
+			'Filtered_Silva_DADA2_blw.sqrt_enorm' : '#050598',
+			'Shuffle1_PhILR_Filtered_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
+			'Shuffle2_PhILR_Filtered_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
+			'Shuffle3_PhILR_Filtered_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
+			'Filtered_UPGMA_DADA2' : 'white',
+			'Filtered_UPGMA_DADA2_blw.sqrt_enorm' : '#050598',
+			'Shuffle1_PhILR_Filtered_UPGMA_DADA2_blw.sqrt_enorm' : '#f7d8a0',
+			'Shuffle2_PhILR_Filtered_UPGMA_DADA2_blw.sqrt_enorm' : '#f7d8a0',
+			'Shuffle3_PhILR_Filtered_UPGMA_DADA2_blw.sqrt_enorm' : '#f7d8a0',
+			'Filtered_IQtree' : 'white',
+			'Filtered_IQtree_blw.sqrt_enorm' : '#050598',
+			'Shuffle1_PhILR_Filtered_IQtree_blw.sqrt_enorm' : '#f7d8a0',
+			'Shuffle2_PhILR_Filtered_IQtree_blw.sqrt_enorm' : '#f7d8a0',
+			'Shuffle3_PhILR_Filtered_IQtree_blw.sqrt_enorm' : '#f7d8a0',
+	    }
 
-my_colors = ['white', 'white', 'white', 'y', "y", 'white', '#050598', '#f7d8a0', '#f7d8a0', \
-'#f7d8a0', 'white', '#050598', '#f7d8a0', '#f7d8a0', '#f7d8a0', \
-'white', '#050598', '#f7d8a0', '#f7d8a0', '#f7d8a0', \
-'white', '#050598', '#f7d8a0', '#f7d8a0', '#f7d8a0']
-# comp_ds = ['alr_DADA2', 'clr_DADA2', 'Raw_DADA2', 'lognorm_DADA2', \
-# 	'Filtered_Silva_DADA2','Silva_DADA2', 'Filtered_IQtree', \
-# 	'Filtered_Silva_DADA2_blw.sqrt_enorm', 'Filtered_UPGMA_DADA2', \
-# 	'Filtered_UPGMA_DADA2_blw.sqrt_enorm', 'Filtered_IQtree_blw.sqrt_enorm', \
-# 	'Silva_DADA2_blw.sqrt_enorm']
-my_markers = "o"*len(comp_ds)
-# my_markers = ["o", "s", "P", "v", "X", "x", "1", "*", "+", "_", "D", "|"]
+comp_ds = list(ds_color.keys())
+print(comp_ds)
+my_colors = list(ds_color.values())
+
 train_percent = 0.75
 pdf = matplotlib.backends.backend_pdf.PdfPages(plot_pdf_fpath)
 #set font sizes
@@ -95,7 +113,7 @@ for ds1 in comp_ds:
 		if (ds1 != ds2):
 			for project in projects:
 				if (ds1 != ds2):
-					print(f"{ds1} {ds2}")
+					# print(f"{ds1} {ds2}")
 					ds1_means = []
 					ds2_means = []
 					for project in projects:
@@ -121,7 +139,7 @@ for ds1 in comp_ds:
 #--------------------------------------------------------------------------
 print("Generating graphic")
 #--------------------------------------------------------------------------
-fig = plt.figure(figsize=(11,11))
+fig = plt.figure(figsize=(16,12))
 fig.suptitle(f"Metastudy {train_percent}training each dataset vs others by accuracy, Sklearn RF")
 plt.subplots_adjust(bottom=0.8, left=0.8)
 ax = fig.add_subplot(1,1,1)
@@ -165,6 +183,6 @@ pdf.savefig( fig )
 print("Saving pdf", flush = True)
 pdf.close()
 
-plotdata.to_csv(os.path.join(home_dir,"metastudies","output","summary_pvalue_plot.csv"))
+plotdata.to_csv(plotdata_fpath)
 
 print(f"{__file__} complete!")

@@ -24,11 +24,9 @@ import math as math
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
 import matplotlib.backends.backend_pdf
 import argparse
 import random
-import seaborn as sns
 
 # --------------------------------------------------------------------------
 print("Reading commmandline input with optparse.", flush = True)
@@ -49,30 +47,51 @@ home_dir = os.path.expanduser(options.homedir)
 projects = ["Jones", "Vangay", "Zeller", "Noguera-Julian"]
 output_dir = os.path.join(home_dir, "metastudies", "output")
 assert os.path.exists(output_dir)
-plot_pdf_fpath = os.path.join(output_dir, "summary_ave_acc_vs_acc_python_by_transformation.pdf")
+plot_pdf_fpath = os.path.join(output_dir, "philr_summary_ave_acc_vs_acc_python_by_transformation.pdf")
 # --------------------------------------------------------------------------
 print("Establishing other constants.", flush = True)
 # --------------------------------------------------------------------------
-comp_ds = ['alr_DADA2', 'clr_DADA2', 'raw_DADA2', 'lognorm_DADA2', "lognorm_Silva_DADA2",'Silva_DADA2', \
-	'Silva_DADA2_blw.sqrt_enorm', 'Shuffle1_PhILR_Silva_DADA2_blw.sqrt_enorm', \
-	'Shuffle2_PhILR_Silva_DADA2_blw.sqrt_enorm', 'Shuffle3_PhILR_Silva_DADA2_blw.sqrt_enorm', \
-	'Filtered_Silva_DADA2', 'Filtered_Silva_DADA2_blw.sqrt_enorm', \
-	'Shuffle1_PhILR_Filtered_Silva_DADA2_blw.sqrt_enorm', \
-	'Shuffle2_PhILR_Filtered_Silva_DADA2_blw.sqrt_enorm', \
-	'Shuffle3_PhILR_Filtered_Silva_DADA2_blw.sqrt_enorm', 'Filtered_UPGMA_DADA2', \
-	'Filtered_UPGMA_DADA2_blw.sqrt_enorm', 'Shuffle1_PhILR_Filtered_UPGMA_DADA2_blw.sqrt_enorm', \
-	'Shuffle2_PhILR_Filtered_UPGMA_DADA2_blw.sqrt_enorm', 'Shuffle3_PhILR_Filtered_UPGMA_DADA2_blw.sqrt_enorm', \
-	'Filtered_IQtree', 'Filtered_IQtree_blw.sqrt_enorm', \
-	'Shuffle1_PhILR_Filtered_IQtree_blw.sqrt_enorm',\
-	'Shuffle2_PhILR_Filtered_IQtree_blw.sqrt_enorm',\
-	'Shuffle3_PhILR_Filtered_IQtree_blw.sqrt_enorm']
+ds_color = {
+			"Silva_prev_filt_DADA2" : 'white',
+			"prev_filt90_Silva_DADA2_blw.sqrt_enorm" : '#050598',
+			"Shuffle1_PhILR_prev_filt90_Silva_DADA2_blw.sqrt_enorm" : '#f7d8a0',
+			"Shuffle2_PhILR_prev_filt90_Silva_DADA2_blw.sqrt_enorm" : '#f7d8a0',
+			"Shuffle3_PhILR_prev_filt90_Silva_DADA2_blw.sqrt_enorm" : '#f7d8a0',
+			"UPGMA_prev_filt_DADA2" : 'white',
+			"prev_filt90_UPGMA_DADA2_blw.sqrt_enorm" : '#050598',
+			"Shuffle1_PhILR_prev_filt90_UPGMA_DADA2_blw.sqrt_enorm" : '#f7d8a0',
+			"Shuffle2_PhILR_prev_filt90_UPGMA_DADA2_blw.sqrt_enorm" : '#f7d8a0',
+			"Shuffle3_PhILR_prev_filt90_UPGMA_DADA2_blw.sqrt_enorm" : '#f7d8a0',
+			"IQtree_prev_filt_DADA2" : 'white',
+			"prev_filt90_IQtree_blw.sqrt_enorm" : '#050598',
+			"Shuffle1_PhILR_prev_filt90_IQtree_blw.sqrt_enorm" : '#f7d8a0',
+			"Shuffle2_PhILR_prev_filt90_IQtree_blw.sqrt_enorm" : '#f7d8a0',
+			"Shuffle3_PhILR_prev_filt90_IQtree_blw.sqrt_enorm" : '#f7d8a0',
+			'Silva_DADA2' : 'white',
+			'Silva_DADA2_blw.sqrt_enorm' : '#050598',
+			'Shuffle1_PhILR_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
+			'Shuffle2_PhILR_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
+			'Shuffle3_PhILR_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
+			'Filtered_Silva_DADA2' : 'white',
+			'Filtered_Silva_DADA2_blw.sqrt_enorm' : '#050598',
+			'Shuffle1_PhILR_Filtered_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
+			'Shuffle2_PhILR_Filtered_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
+			'Shuffle3_PhILR_Filtered_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
+			'Filtered_UPGMA_DADA2' : 'white',
+			'Filtered_UPGMA_DADA2_blw.sqrt_enorm' : '#050598',
+			'Shuffle1_PhILR_Filtered_UPGMA_DADA2_blw.sqrt_enorm' : '#f7d8a0',
+			'Shuffle2_PhILR_Filtered_UPGMA_DADA2_blw.sqrt_enorm' : '#f7d8a0',
+			'Shuffle3_PhILR_Filtered_UPGMA_DADA2_blw.sqrt_enorm' : '#f7d8a0',
+			'Filtered_IQtree' : 'white',
+			'Filtered_IQtree_blw.sqrt_enorm' : '#050598',
+			'Shuffle1_PhILR_Filtered_IQtree_blw.sqrt_enorm' : '#f7d8a0',
+			'Shuffle2_PhILR_Filtered_IQtree_blw.sqrt_enorm' : '#f7d8a0',
+			'Shuffle3_PhILR_Filtered_IQtree_blw.sqrt_enorm' : '#f7d8a0',
+	    }
 
-my_colors = ['white', 'white', 'white', 'y', "y", 'white', '#050598', '#f7d8a0', '#f7d8a0', \
-'#f7d8a0', 'white', '#050598', '#f7d8a0', '#f7d8a0', '#f7d8a0', \
-'white', '#050598', '#f7d8a0', '#f7d8a0', '#f7d8a0', \
-'white', '#050598', '#f7d8a0', '#f7d8a0', '#f7d8a0']
-my_markers = "o"*len(comp_ds)
-# my_markers = ["o", "s", "P", "v", "X", "x", "1", "*", "+", "_", "D", "|"]
+comp_ds = list(ds_color.keys())
+print(comp_ds)
+my_colors = list(ds_color.values())
 train_percent = 0.75
 pdf = matplotlib.backends.backend_pdf.PdfPages(plot_pdf_fpath)
 #set font sizes
@@ -105,6 +124,7 @@ for ds1 in comp_ds:
 		print(f"There was a problem with {ds1}")
 	all_means[ds1] = ds1_means
 plotdata = pd.DataFrame(all_means)
+plotdata.replace("propotion", "proportion")# because I mispelled it elsehere
 
 print(f"My mean: {plotdata.mean()}")
 #--------------------------------------------------------------------------
@@ -125,12 +145,10 @@ for patch, color in zip(bp['boxes'], my_colors):
 	patch.set_facecolor(color)
 ax.axhline(y = plotdata.stack().median(), color = "g", label="median")
 fig.tight_layout()
-print("Saving figure to pdf", flush = True)
+print(f"Saving figure to pdf to {plot_pdf_fpath}", flush = True)
 pdf.savefig( fig )
 
-print("Saving pdf", flush = True)
+print("Closing pdf", flush = True)
 pdf.close()
-
-plotdata.to_csv(os.path.join(home_dir,"metastudies","output","summary_pvalue_plot.csv"))
 
 print(f"{__file__} complete!")

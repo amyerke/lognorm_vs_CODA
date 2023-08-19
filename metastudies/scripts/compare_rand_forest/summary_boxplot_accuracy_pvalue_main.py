@@ -53,34 +53,26 @@ plotdata_fpath = os.path.join(home_dir,"metastudies","output","main_summary_pval
 # --------------------------------------------------------------------------
 print("Establishing other constants.", flush = True)
 # --------------------------------------------------------------------------
-ds_color = {"alr_prev_filt_DADA2" : 'white',
+ds_color = {
+	"alr_prev_filt_DADA2" : 'white',
 	"clr_prev_filt_DADA2" : 'white',
 	"raw_prev_filt_DADA2" : 'white',
 			"propotions_prev_filt_DADA2" : 'y',
 			"Heilinger_prev_filt_DADA2" : 'y',
-			"propotions_prev_filt_DADA2" : 'y',
-			"lognorm_prev_filt_DADA2" : 'y',
 			"lognorm_prev_filt_DADA2" : 'y',
 	"rarefied_prev_filt_DADA2" : "plum",
-			"Silva_prev_filt_DADA2" : 'white',
-			"prev_filt90_Silva_DADA2_blw.sqrt_enorm" : '#050598',
-			"Shuffle1_PhILR_prev_filt90_Silva_DADA2_blw.sqrt_enorm" : '#f7d8a0',
-			"Shuffle2_PhILR_prev_filt90_Silva_DADA2_blw.sqrt_enorm" : '#f7d8a0',
-			"Shuffle3_PhILR_prev_filt90_Silva_DADA2_blw.sqrt_enorm" : '#f7d8a0',
-	'alr_DADA2' : 'white',
-	"clr_DADA2" : 'white',
+			"UPGMA_prev_filt_DADA2" : 'white',
+			"prev_filt90_UPGMA_DADA2_blw.sqrt_enorm" : '#050598',
+			"Shuffle1_PhILR_prev_filt90_UPGMA_DADA2_blw.sqrt_enorm" : '#f7d8a0',
+			"Shuffle2_PhILR_prev_filt90_UPGMA_DADA2_blw.sqrt_enorm" : '#f7d8a0',
+			"Shuffle3_PhILR_prev_filt90_UPGMA_DADA2_blw.sqrt_enorm" : '#f7d8a0',
 	"raw_DADA2" : 'white',
-			"propotions_DADA2" : 'y',
 			"Heilinger_DADA2" : 'y',
-			'lognorm_DADA2' : 'y',
-			# "lognorm_Silva_DADA2" : 'y',
-	"rarefied_DADA2" : "plum",
 			'Silva_DADA2' : 'white',
 			'Silva_DADA2_blw.sqrt_enorm' : '#050598',
 			'Shuffle1_PhILR_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
 			'Shuffle2_PhILR_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
 			'Shuffle3_PhILR_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
-			'Filtered_Silva_DADA2' : 'white',
 	    }
 
 comp_ds = list(ds_color.keys())

@@ -29,7 +29,7 @@ opt <- optparse::parse_args(opt_parser);
 print(opt)
 
 home_dir <- opt$homedir
-output_dir <- file.path(home_dir, "ref_tree_objs")
+output_dir <- file.path(home_dir, "lib", "ref_tree_objs")
 
 setwd(file.path(output_dir))
 

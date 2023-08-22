@@ -18,9 +18,10 @@ make_PhILR_transform_tables <- function(counts_table,
                                         tree,
                                         table_name,
                                         output_folder,
-                                        philr_taxa_weights = c("uniform","gm.counts","enorm","enorm.x.gm.counts"),
                                         # philr_taxa_weights = c("uniform","gm.counts","anorm","anorm.x.gm.counts","enorm","enorm.x.gm.counts"),
-                                        philr_ilr_weights = c("uniform","blw","blw.sqrt","mean.descendants"),
+                                        # philr_ilr_weights = c("uniform","blw","blw.sqrt","mean.descendants"),
+                                        philr_taxa_weights = c("enorm"),
+                                        philr_ilr_weights = c("blw.sqrt"),
                                         save_counts_table = FALSE
                                         ){
   print(paste0("Making all possible PhILR Weighted transformations of ", table_name, "." ))
@@ -74,8 +75,9 @@ make_random_tree_philrs <- function(counts_table,
                                     output_folder,#combines all output into same folder
                                     num_random_trees,
                                     # philr_taxa_weights = c("uniform","gm.counts","anorm","anorm.x.gm.counts","enorm","enorm.x.gm.counts"),
-                                    philr_taxa_weights = c("uniform","gm.counts","enorm","enorm.x.gm.counts"),
-                                    philr_ilr_weights = c("uniform","blw","blw.sqrt","mean.descendants")
+                                    # philr_ilr_weights = c("uniform","blw","blw.sqrt","mean.descendants"),
+                                    philr_taxa_weights = c("enorm"),
+                                    philr_ilr_weights = c("blw.sqrt")
                                     ){
   random_seed <- 36
   print(paste("Setting random seed to:", random_seed))
@@ -138,97 +140,98 @@ source(file.path(home_dir, "lib", "table_manipulations.R"))
 print("Setting up other constants.")
 
 main_output_label <- paste0("philr_weights_shuffled")
-# philr_taxa_weights <- c("uniform","gm.counts","anorm","anorm.x.gm.counts","enorm","enorm.x.gm.counts")
-philr_taxa_weights <- c("uniform","gm.counts", "enorm","enorm.x.gm.counts")
+philr_taxa_weights <- c("uniform","gm.counts","anorm","anorm.x.gm.counts","enorm","enorm.x.gm.counts")
 philr_ilr_weights <- c("uniform","blw","blw.sqrt","mean.descendants")
 
 ####-Import and prepping Silva_DADA2----------------------------------####
 print("Transforming non-filtered phyloseq objects first.")
 print("Importing and prepping Silva_DADA2.")
 
-# pdf(file = file.path(output_dir, "graphics", paste0("trees_", main_output_label, ".pdf")))
-# phylo_obj <- readRDS(file.path(output_dir, "r_objects", "ref_tree_phyloseq_obj.rds"))
-# phylo_label <- "Silva_DADA2"
-# print(paste0("Counts table dimensions of ", phylo_label, ": ", dim(phylo_obj@otu_table), collapse = ""))
-# make_PhILR_transform_tables(phylo_obj@otu_table,
-#                             phylo_obj@phy_tree,
-#                             phylo_label,
-#                             file.path(output_dir, "tables", phylo_label),
-#                             save_counts_table = TRUE)
-# make_random_tree_philrs(phylo_obj@otu_table,
-#                         phylo_obj@phy_tree,
-#                         phylo_label,
-#                         file.path(output_dir, "tables", phylo_label),
-#                         3)
-# phyloseq::plot_tree(phylo_obj, method = "treeonly", nodelabf=nodeplotblank, title = paste0("orig_ref"))
-# 
-# phy_tree(phylo_obj) <- ape::makeNodeLabel(phy_tree(phylo_obj), method="number", prefix='n')
-# print("Cleaning Silva tree otu with philr tutorial normalization")
-# phylo_obj <- raw_ps_to_clean_ps(phylo_obj)
-# phylo_label <- "Filtered_Silva_DADA2"
-# phyloseq::plot_tree(phylo_obj, method = "treeonly", nodelabf=nodeplotblank, title = paste0("cln_ref"))
-# print(paste0("Counts table dimensions of ", phylo_label, ": ", dim(phylo_obj@otu_table), collapse = ""))
-# make_PhILR_transform_tables(phylo_obj@otu_table,
-#                             phylo_obj@phy_tree,
-#                             phylo_label,
-#                             file.path(output_dir, "tables", phylo_label),
-#                             save_counts_table = TRUE)
-# make_random_tree_philrs(phylo_obj@otu_table,
-#                         phylo_obj@phy_tree,
-#                         phylo_label,
-#                         file.path(output_dir, "tables", phylo_label),
-#                         3)
-# 
-# ####-Import and prepping UPGMA_DADA2----------------------------------####
-# print("Importing UPGMA phyloseq")
-# 
-# phylo_obj <- readRDS(file.path(output_dir, "r_objects", "denovo_tree_UPGMA_phyloseq_obj.rds"))
-# phy_tree(phylo_obj) <- ape::makeNodeLabel(phy_tree(phylo_obj), method="number", prefix='n')
-# phyloseq::plot_tree(phylo_obj, method = "treeonly", nodelabf=nodeplotblank, title = paste0("orig_upgma"))
-# print("Cleaning UPGMA with philr tutorial normalization")
-# phylo_obj <- raw_ps_to_clean_ps(phylo_obj)
-# phylo_obj <- phyloseq::transform_sample_counts(phylo_obj, function(x) x + 1 )
-# phyloseq::plot_tree(phylo_obj, method = "treeonly", nodelabf=nodeplotblank, title = paste0("cln_upgma"))
-# phylo_label <- "Filtered_UPGMA_DADA2"
-# print(paste0("Counts table dimensions of ", phylo_label, ": ", dim(phylo_obj@otu_table), collapse = ""))
-# make_PhILR_transform_tables(phylo_obj@otu_table,
-#                             phylo_obj@phy_tree,
-#                             phylo_label,
-#                             file.path(output_dir, "tables", phylo_label),
-#                             save_counts_table = TRUE)
-# make_random_tree_philrs(phylo_obj@otu_table,
-#                         phylo_obj@phy_tree,
-#                         phylo_label,
-#                         file.path(output_dir, "tables", phylo_label),
-#                         3)
-# 
-# ####-Import and prepping IQTREE2_DADA2--------------------------------####
-# print("Importing IQTree phyloseq")
-# 
-# phylo_obj <- readRDS(file.path(output_dir, "r_objects", "denovo_tree_iqtree_phyloseq_obj.rds"))
-# phy_tree(phylo_obj) <- ape::makeNodeLabel(phy_tree(phylo_obj), method="number", prefix='n')
-# phyloseq::plot_tree(phylo_obj, method = "treeonly", nodelabf=nodeplotblank, title = paste0("orig_iqtree"))
-# print("Cleaning IQ-tree with philr tutorial normalization")
-# phylo_obj <- raw_ps_to_clean_ps(phylo_obj)
-# phyloseq::plot_tree(phylo_obj, method = "treeonly", nodelabf=nodeplotblank, title = paste0("cln_iqtree"))
-# phylo_label <- "Filtered_IQtree"
-# print(paste0("Counts table dimensions of ", phylo_label, ": ", dim(phylo_obj@otu_table), collapse = ""))
-# make_PhILR_transform_tables(phylo_obj@otu_table,
-#                             phylo_obj@phy_tree,
-#                             phylo_label,
-#                             file.path(output_dir, "tables", phylo_label),
-#                             save_counts_table = TRUE)
-# make_random_tree_philrs(phylo_obj@otu_table,
-#                         phylo_obj@phy_tree,
-#                         phylo_label,
-#                         file.path(output_dir, "tables", phylo_label),
-#                         3)
-# 
-# dev.off()
+pdf(file = file.path(output_dir, "graphics", paste0("trees_", main_output_label, ".pdf")))
+phylo_obj <- readRDS(file.path(output_dir, "r_objects", "ref_tree_phyloseq_obj.rds"))
+phylo_label <- "Silva_DADA2"
+print(paste0("Counts table dimensions of ", phylo_label, ": ", dim(phylo_obj@otu_table), collapse = ""))
+make_PhILR_transform_tables(phylo_obj@otu_table,
+                            phylo_obj@phy_tree,
+                            phylo_label,
+                            file.path(output_dir, "tables", phylo_label),
+                            save_counts_table = TRUE)
+make_random_tree_philrs(phylo_obj@otu_table,
+                        phylo_obj@phy_tree,
+                        phylo_label,
+                        file.path(output_dir, "tables", phylo_label),
+                        3)
+phyloseq::plot_tree(phylo_obj, method = "treeonly", nodelabf=nodeplotblank, title = paste0("orig_ref"))
+
+phy_tree(phylo_obj) <- ape::makeNodeLabel(phy_tree(phylo_obj), method="number", prefix='n')
+print("Cleaning Silva tree otu with philr tutorial normalization")
+phylo_obj <- raw_ps_to_clean_ps(phylo_obj)
+phylo_label <- "Filtered_Silva_DADA2"
+phyloseq::plot_tree(phylo_obj, method = "treeonly", nodelabf=nodeplotblank, title = paste0("cln_ref"))
+print(paste0("Counts table dimensions of ", phylo_label, ": ", dim(phylo_obj@otu_table), collapse = ""))
+make_PhILR_transform_tables(phylo_obj@otu_table,
+                            phylo_obj@phy_tree,
+                            phylo_label,
+                            file.path(output_dir, "tables", phylo_label),
+                            save_counts_table = TRUE)
+make_random_tree_philrs(phylo_obj@otu_table,
+                        phylo_obj@phy_tree,
+                        phylo_label,
+                        file.path(output_dir, "tables", phylo_label),
+                        3)
+
+####-Import and prepping UPGMA_DADA2----------------------------------####
+print("Importing UPGMA phyloseq")
+
+phylo_obj <- readRDS(file.path(output_dir, "r_objects", "denovo_tree_UPGMA_phyloseq_obj.rds"))
+phy_tree(phylo_obj) <- ape::makeNodeLabel(phy_tree(phylo_obj), method="number", prefix='n')
+phyloseq::plot_tree(phylo_obj, method = "treeonly", nodelabf=nodeplotblank, title = paste0("orig_upgma"))
+print("Cleaning UPGMA with philr tutorial normalization")
+phylo_obj <- raw_ps_to_clean_ps(phylo_obj)
+phylo_obj <- phyloseq::transform_sample_counts(phylo_obj, function(x) x + 1 )
+phyloseq::plot_tree(phylo_obj, method = "treeonly", nodelabf=nodeplotblank, title = paste0("cln_upgma"))
+phylo_label <- "Filtered_UPGMA_DADA2"
+print(paste0("Counts table dimensions of ", phylo_label, ": ", dim(phylo_obj@otu_table), collapse = ""))
+make_PhILR_transform_tables(phylo_obj@otu_table,
+                            phylo_obj@phy_tree,
+                            phylo_label,
+                            file.path(output_dir, "tables", phylo_label),
+                            save_counts_table = TRUE)
+make_random_tree_philrs(phylo_obj@otu_table,
+                        phylo_obj@phy_tree,
+                        phylo_label,
+                        file.path(output_dir, "tables", phylo_label),
+                        3)
+
+####-Import and prepping IQTREE2_DADA2--------------------------------####
+print("Importing IQTree phyloseq")
+
+phylo_obj <- readRDS(file.path(output_dir, "r_objects", "denovo_tree_iqtree_phyloseq_obj.rds"))
+phy_tree(phylo_obj) <- ape::makeNodeLabel(phy_tree(phylo_obj), method="number", prefix='n')
+phyloseq::plot_tree(phylo_obj, method = "treeonly", nodelabf=nodeplotblank, title = paste0("orig_iqtree"))
+print("Cleaning IQ-tree with philr tutorial normalization")
+phylo_obj <- raw_ps_to_clean_ps(phylo_obj)
+phyloseq::plot_tree(phylo_obj, method = "treeonly", nodelabf=nodeplotblank, title = paste0("cln_iqtree"))
+phylo_label <- "Filtered_IQtree"
+print(paste0("Counts table dimensions of ", phylo_label, ": ", dim(phylo_obj@otu_table), collapse = ""))
+make_PhILR_transform_tables(phylo_obj@otu_table,
+                            phylo_obj@phy_tree,
+                            phylo_label,
+                            file.path(output_dir, "tables", phylo_label),
+                            save_counts_table = TRUE)
+make_random_tree_philrs(phylo_obj@otu_table,
+                        phylo_obj@phy_tree,
+                        phylo_label,
+                        file.path(output_dir, "tables", phylo_label),
+                        3)
+
+dev.off()
 
 pdf(file = file.path(output_dir, "graphics", paste0("trees_prev_filtered_90", main_output_label, ".pdf")))
-####-Import and prepping prevelence filtered Silva_DA-----------------####
+####-Import and prepping prevelance filtered Silva_DADA2-----------------####
 print("Transforming 90% prevalence filtered phyloseq objects.")
+philr_taxa_weights <- c("enorm")
+philr_ilr_weights <- c("blw.sqrt")
 print("Importing and prepping prevalence filtered filtered Silva_DADA2.")
 
 phylo_obj <- readRDS(file.path(output_dir, "r_objects", "ltp_90prcnt_filt.rds"))
@@ -236,43 +239,40 @@ phylo_label <- "prev_filt90_Silva_DADA2"
 print(paste0("Counts table dimensions of ", phylo_label, ": ", dim(phylo_obj@otu_table), collapse = ""))
 make_PhILR_transform_tables(phylo_obj@otu_table,
                             phylo_obj@phy_tree,
-                            phylo_label, 
+                            phylo_label,
                             file.path(output_dir, "tables", phylo_label),
                             save_counts_table = TRUE)
 make_random_tree_philrs(phylo_obj@otu_table,
                         phylo_obj@phy_tree,
-                        phylo_label, 
+                        phylo_label,
                         file.path(output_dir, "tables", phylo_label),
                         3)
 phyloseq::plot_tree(phylo_obj, method = "treeonly", nodelabf=nodeplotblank, title = paste0("orig_ref_90prcnt_filt"))
 
-# phy_tree(phylo_obj) <- ape::makeNodeLabel(phy_tree(phylo_obj), method="number", prefix='n')
-# print("Cleaning prevalence filtered Silva tree otu with philr tutorial normalization")
-# phylo_obj <- raw_ps_to_clean_ps(phylo_obj)
-# phylo_label <- "prev_filt90_Filtered_Silva_DADA2"
-# phyloseq::plot_tree(phylo_obj, method = "treeonly", nodelabf=nodeplotblank, title = paste0("cln_ref_90prcnt_filt"))
-# print(paste0("Counts table dimensions of ", phylo_label, ": ", dim(phylo_obj@otu_table), collapse = ""))
-# make_PhILR_transform_tables(phylo_obj@otu_table,
-#                             phylo_obj@phy_tree,
-#                             phylo_label, 
-#                             file.path(output_dir, "tables", phylo_label),
-#                             save_counts_table = TRUE)
-# make_random_tree_philrs(phylo_obj@otu_table,
-#                         phylo_obj@phy_tree,
-#                         phylo_label, 
-#                         file.path(output_dir, "tables", phylo_label),
-#                         3)
+phy_tree(phylo_obj) <- ape::makeNodeLabel(phy_tree(phylo_obj), method="number", prefix='n')
+print("Cleaning prevalence filtered Silva tree otu with philr tutorial normalization")
+phylo_obj <- raw_ps_to_clean_ps(phylo_obj)
+phylo_label <- "prev_filt90_Filtered_Silva_DADA2"
+phyloseq::plot_tree(phylo_obj, method = "treeonly", nodelabf=nodeplotblank, title = paste0("cln_ref_90prcnt_filt"))
+print(paste0("Counts table dimensions of ", phylo_label, ": ", dim(phylo_obj@otu_table), collapse = ""))
+make_PhILR_transform_tables(phylo_obj@otu_table,
+                            phylo_obj@phy_tree,
+                            phylo_label,
+                            file.path(output_dir, "tables", phylo_label),
+                            save_counts_table = TRUE)
+make_random_tree_philrs(phylo_obj@otu_table,
+                        phylo_obj@phy_tree,
+                        phylo_label,
+                        file.path(output_dir, "tables", phylo_label),
+                        3)
 
 ####-Import and prepping UPGMA_DADA2----------------------------------####
 print("Importing UPGMA phyloseq")
 
 phylo_obj <- readRDS(file.path(output_dir, "r_objects", "filtered_90prcntdenovo_tree_UPGMA_phyloseq_obj.rds"))
 phy_tree(phylo_obj) <- ape::makeNodeLabel(phy_tree(phylo_obj), method="number", prefix='n')
-# phyloseq::plot_tree(phylo_obj, method = "treeonly", nodelabf=nodeplotblank, title = paste0("orig_upgma_90prcnt_filt"))
-# print("Cleaning prevalence filtered UPGMA with philr tutorial normalization")
-# phylo_obj <- raw_ps_to_clean_ps(phylo_obj)
+phyloseq::plot_tree(phylo_obj, method = "treeonly", nodelabf=nodeplotblank, title = paste0("orig_upgma_90prcnt_filt"))
 phylo_obj <- phyloseq::transform_sample_counts(phylo_obj, function(x) x + 1 )
-phyloseq::plot_tree(phylo_obj, method = "treeonly", nodelabf=nodeplotblank, title = paste0("cln_upgma_90prcnt_filt"))
 phylo_label <- "prev_filt90_UPGMA_DADA2"
 print(paste0("Counts table dimensions of ", phylo_label, ": ", dim(phylo_obj@otu_table), collapse = ""))
 make_PhILR_transform_tables(phylo_obj@otu_table,
@@ -285,6 +285,21 @@ make_random_tree_philrs(phylo_obj@otu_table,
                         phylo_label,
                         file.path(output_dir, "tables", phylo_label),
                         3)
+# print("Cleaning prevalence filtered UPGMA with philr tutorial normalization")
+# phylo_obj <- raw_ps_to_clean_ps(phylo_obj)
+# phyloseq::plot_tree(phylo_obj, method = "treeonly", nodelabf=nodeplotblank, title = paste0("cln_upgma_90prcnt_filt"))
+# phylo_label <- "prev_filt90_Filtered_UPGMA_DADA2"
+# print(paste0("Counts table dimensions of ", phylo_label, ": ", dim(phylo_obj@otu_table), collapse = ""))
+# make_PhILR_transform_tables(phylo_obj@otu_table,
+#                             phylo_obj@phy_tree,
+#                             phylo_label,
+#                             file.path(output_dir, "tables", phylo_label),
+#                             save_counts_table = TRUE)
+# make_random_tree_philrs(phylo_obj@otu_table,
+#                         phylo_obj@phy_tree,
+#                         phylo_label,
+#                         file.path(output_dir, "tables", phylo_label),
+#                         3)
 ####-Import and prepping IQTree_DADA2----------------------------------####
 print("Importing prevalence filtered IQTree phyloseq")
 

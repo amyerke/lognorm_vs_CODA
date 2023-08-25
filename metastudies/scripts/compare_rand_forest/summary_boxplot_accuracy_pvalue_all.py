@@ -24,7 +24,6 @@ import math as math
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle
 import matplotlib.backends.backend_pdf
 import argparse
 import random
@@ -58,8 +57,6 @@ ds_color = {"alr_prev_filt_DADA2" : 'white',
 	"raw_prev_filt_DADA2" : 'white',
 			"propotions_prev_filt_DADA2" : 'y',
 			"Heilinger_prev_filt_DADA2" : 'y',
-			"propotions_prev_filt_DADA2" : 'y',
-			"lognorm_prev_filt_DADA2" : 'y',
 			"lognorm_prev_filt_DADA2" : 'y',
 	"rarefied_prev_filt_DADA2" : "plum",
 			"Silva_prev_filt_DADA2" : 'white',

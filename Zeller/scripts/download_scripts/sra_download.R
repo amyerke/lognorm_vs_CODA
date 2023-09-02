@@ -1,21 +1,21 @@
 # Author: Aaron Yerke
 # Script to download from the SRA
-# This was helepful: https://github.com/jsilve24/philr/blob/master/vignettes/philr-intro.Rmd#L142
 
 rm(list = ls()) #clear workspace
 
 ##-Load Depencencies------------------------------------------------##
 print("Establishing constants.")
-home_dir <- file.path('~','git',"lognorm_vs_CODA")
+home_dir <- file.path("~", "git", "lognorm_vs_CODA")
 project <- "Zeller"
 download_dir <- file.path(home_dir, project, "downloaded_seqs")
-
 print(paste("Download destination:", download_dir))
+if (!dir.exists(download_dir)) dir.create(download_dir) #create dir if needed
 
 sra_run_table <- read.table(file.path(home_dir, project, "SraRunTable.txt"),
                             sep = "\t",
                             header = TRUE)
-print(paste("There are", nrow(sra_run_table), "rows and", ncol(sra_run_table), "columns in SraRunTable.txt"))
+print(paste("There are", nrow(sra_run_table),
+"rows and", ncol(sra_run_table), "columns in SraRunTable.txt"))
 
 print("Creating SRR list.")
 my_rows <- sra_run_table$Assay.Type == "AMPLICON"
@@ -26,7 +26,8 @@ print(paste("number of rows:", length(my_accessions)))
 downloaded_files <- list.files(path = download_dir)
 print(paste("number of files already downloaded:", length(downloaded_files)))
 
-print(paste("need to download this many more:", length(my_accessions) - length(downloaded_files)))
+print(paste("need to download this many more:", 
+length(my_accessions) - length(downloaded_files)))
 
 ##-Download SRA files ----------------------------------------------##
 setwd(download_dir)
@@ -38,22 +39,13 @@ for (run in my_accessions) {
                         "fasterq-dump -S", run)
     print(paste("my command:", my_command))
     system(command = my_command, wait = TRUE)
-  }else{
+  }else {
     print(paste(run, "was already there!"))
   }
-  Sys.sleep(1)  
-}  
+  Sys.sleep(1)
+}
 
 downloaded_files <- list.files(path = download_dir)
 print(paste("number of files after running:", length(downloaded_files)))
 
 print("Script completed.")
-# bash download commands:
-# module load sra-tools
-# nohup fasterq-dump $SRR -O ../../downloaded_seqs
-# 
-# Output format:
-#   SRR5799852_1.fastq.gz
-
-
-

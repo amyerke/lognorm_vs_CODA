@@ -68,8 +68,7 @@ print("Establishing other constants.")
 # --------------------------------------------------------------------------
 
 output_label = "sklearn_ml_acc"
-philr_groups = ["Silva_DADA2", "Filtered_Silva_DADA2", "Filtered_UPGMA_DADA2", "Filtered_IQtree",
-		"prev_filt90_Silva_DADA2", "prev_filt90_UPGMA_DADA2", "prev_filt90_IQtree"]
+philr_groups = ["Silva_DADA2", "Filtered_Silva_DADA2", "Filtered_UPGMA_DADA2", "Filtered_IQtree"]
 philr_part_weights = ["uniform","gm.counts","anorm","anorm.x.gm.counts","enorm","enorm.x.gm.counts"]
 philr_ilr_weights = ["uniform","blw","blw.sqrt","mean.descendants"]
 scoring = "accuracy"

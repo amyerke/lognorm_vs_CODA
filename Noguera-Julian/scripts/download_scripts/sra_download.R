@@ -10,7 +10,7 @@ print("Establishing constants")
 home_dir <- file.path('~','git',"lognorm_vs_CODA")
 project <- "Noguera-Julian"
 download_dir <- file.path(home_dir, project, "downloaded_seqs")
-
+if (!dir.exists(download_dir)) dir.create(download_dir) #create dir if needed
 print(paste("Download destination:", download_dir))
 
 sra_run_table <- read.table(file.path(home_dir, project, "SraRunTable.txt"),

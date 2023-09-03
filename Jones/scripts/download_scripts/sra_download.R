@@ -1,31 +1,61 @@
 # Author: Aaron Yerke
 # Script to download from the SRA
-# This was helepful: https://github.com/jsilve24/philr/blob/master/vignettes/philr-intro.Rmd#L142
 
 rm(list = ls()) #clear workspace
 
-##-Load Depencencies------------------------------------------------##
-if (!requireNamespace("SRAdb", quietly = TRUE)){
-  install.packages("SRAdb")
-}
-library(SRAdb)
-srafile = getSRAdbFile()
-con = dbConnect('SQLite',srafile)
-##-Establish directory layout---------------------------------------##
-home_dir <- file.path('~','git',"lognorm_vs_CODA")
+####-Load dependencies------------------------------------------------####
+if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager")
+if (!requireNamespace("data.table", quietly = TRUE)) BiocManager::install("data.table")
+library("data.table")
+print("finished loading libraries")
+
+####-Establish directory layout---------------------------------------####
+home_dir <- file.path("~", "git", "lognorm_vs_CODA")
 project <- "Jones"
 download_dir <- file.path(home_dir, project, "downloaded_seqs")
-##-Download SRA files ----------------------------------------------##
-sra_run_table <- read.table(file.path(home_dir, project, "SraRunTable.txt"),
-                            sep = ",",
+print(paste("Download destination:", download_dir))
+if (!dir.exists(download_dir)) dir.create(download_dir) #create dir if needed
+sra_path <- file.path(home_dir, project, "SraRunTable.csv")
+sra_run_table <- read.table(sra_path,
+                            sep = ",", check.names = F,
                             header = TRUE)
 
-my_rows <- sra_run_table$Assay.Type == "AMPLICON"
+print("Established constants.")
+
+####-Processing data and downloading----------------------------------####
+
+print(paste("There are", nrow(sra_run_table),
+"rows and", ncol(sra_run_table), "columns in", sra_path))
+
+print("Creating SRR list.")
+my_rows <- sra_run_table$`Assay Type` == "AMPLICON"
 my_accessions <- sra_run_table$Run[my_rows]
 
+print(paste("number of rows:", length(my_accessions)))
+
+downloaded_files <- list.files(path = download_dir)
+print(paste("number of files already downloaded:", length(downloaded_files)))
+
+print(paste("need to download this many more:", 
+length(my_accessions) - length(downloaded_files)))
+
+##-Download SRA files ----------------------------------------------##
 setwd(download_dir)
 for (run in my_accessions) {
-  getSRAfile(run,con,fileType='sra')
-}  
-  
+  my_file <- paste0(run, "_1.fastq.gz")
+  if (!my_file %in% downloaded_files){
+    print(paste("attempting download of:", run))
+    my_command <- paste("module load sra-tools ;",
+                        "fasterq-dump -S", run)
+    print(paste("my command:", my_command))
+    system(command = my_command, wait = TRUE)
+  }else {
+    print(paste(run, "was already there!"))
+  }
+  Sys.sleep(1)
+}
 
+downloaded_files <- list.files(path = download_dir)
+print(paste("number of files after running:", length(downloaded_files)))
+
+print("Script completed.")

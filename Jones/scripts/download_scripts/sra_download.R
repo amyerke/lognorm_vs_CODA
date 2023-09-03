@@ -15,7 +15,7 @@ project <- "Jones"
 download_dir <- file.path(home_dir, project, "downloaded_seqs")
 print(paste("Download destination:", download_dir))
 if (!dir.exists(download_dir)) dir.create(download_dir) #create dir if needed
-sra_path <- file.path(home_dir, project, "SraRunTable.csv")
+sra_path <- file.path(home_dir, project, "SraRunTable.txt")
 sra_run_table <- read.table(sra_path,
                             sep = ",", check.names = F,
                             header = TRUE)

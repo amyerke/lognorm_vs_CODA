@@ -28,8 +28,7 @@ print(paste("There are", nrow(sra_run_table),
 "rows and", ncol(sra_run_table), "columns in", sra_path))
 
 print("Creating SRR list.")
-my_rows <- sra_run_table$`Assay Type` == "AMPLICON"
-my_accessions <- sra_run_table$Run[my_rows]
+my_accessions <- sra_run_table$run_accession
 
 print(paste("number of rows:", length(my_accessions)))
 

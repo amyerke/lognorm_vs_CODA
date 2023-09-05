@@ -157,7 +157,7 @@ ax.set_ylabel(f"Average accuracy for each metadata feature")
 bp = ax.boxplot(plotdata, patch_artist = True, labels=plotdata.columns,showfliers=False, medianprops=median_props)
 for patch, color in zip(bp['boxes'], my_colors):
 	patch.set_facecolor(color)
-ax.axhline(y = plotdata.stack().median(), color = "g", label="median")
+ax.axhline(y = plotdata.stack().median(), color = "brown", label="median")
 fig.tight_layout()
 print(f"Saving figure to pdf to {plot_pdf_fpath}", flush = True)
 pdf.savefig( fig )

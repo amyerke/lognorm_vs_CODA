@@ -66,7 +66,7 @@ comp_ds = ['alr_DADA2', 'clr_DADA2', 'raw_DADA2', 'lognorm_DADA2', 'Silva_DADA2'
 	'Shuffle2_PhILR_Filtered_IQtree_blw.sqrt_enorm',\
 	'Shuffle3_PhILR_Filtered_IQtree_blw.sqrt_enorm']
 
-my_colors = ['white', 'white', 'white', 'y', 'white', '#050598', \
+my_colors = ['white', 'white', 'white', "lime", 'white', '#050598', \
 '#f7d8a0', '#f7d8a0', '#f7d8a0', 'white', '#050598', '#f7d8a0', \
 '#f7d8a0', '#f7d8a0', 'white', '#050598', '#f7d8a0', '#f7d8a0', \
 '#f7d8a0', 'white', '#050598', '#f7d8a0', '#f7d8a0', '#f7d8a0']

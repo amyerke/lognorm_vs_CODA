@@ -157,7 +157,7 @@ print("Setting up tables to feed the random forest model.", flush = True)
 # --------------------------------------------------------------------------
 tables = []
 
-tables.append(("lognorm_Silva_DADA2", (os.path.join(output_dir, "tables", "lognorm_Silva.csv"), ","), "y"))
+tables.append(("lognorm_Silva_DADA2", (os.path.join(output_dir, "tables", "lognorm_Silva.csv"), ","), "lime"))
 
 colors = list([sublist[-1] for sublist in tables])
 print(colors)

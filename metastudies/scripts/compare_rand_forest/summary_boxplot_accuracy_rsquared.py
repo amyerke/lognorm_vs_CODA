@@ -121,7 +121,7 @@ ax.set_xticklabels(labels = plotdata.columns, rotation=90)
 # plt.annotate(label, (x_lst[i], y_lst[i]))
 ax.set_xlabel(f"Tranformations")
 ax.set_ylabel(f"Correlation coefficient")
-ax.axhline(y = plotdata.stack().median(), color = "g", label="median")
+ax.axhline(y = plotdata.stack().median(), color = "brown", label="median")
 # ax.legend(loc="upper center", framealpha=0.1, prop={'size': 8})
 for i in range(len(plotdata.columns)):
 	y = plotdata.iloc[:,i]

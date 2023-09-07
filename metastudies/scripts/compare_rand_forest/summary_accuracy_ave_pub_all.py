@@ -111,7 +111,7 @@ print(f"My mean: {plotdata.mean()}")
 #--------------------------------------------------------------------------
 print("Generating graphic")
 #--------------------------------------------------------------------------
-fig = plt.figure(figsize=(19,11))
+fig = plt.figure(figsize=(19,13))
 fig.suptitle(f"Metastudy {train_percent}training each dataset vs others by accuracy, Sklearn RF")
 plt.subplots_adjust(bottom=0.8, left=0.8)
 ax = fig.add_subplot(1,1,1)
@@ -119,7 +119,7 @@ ax = fig.add_subplot(1,1,1)
 ax.set_xticklabels(labels = plotdata.columns, rotation=90)
 # plt.annotate(label, (x_lst[i], y_lst[i]))
 ax.set_xlabel(f"Transformations")
-ax.set_ylabel(f"Average accuracy for each metadata feature")
+ax.set_ylabel(f"Average accuracy")
 # ax.legend(loc="upper center", framealpha=0.1, prop={'size': 8})
 bp = ax.boxplot(plotdata, patch_artist = True, labels=plotdata.columns,showfliers=False, medianprops=median_props)
 for patch, color in zip(bp['boxes'], my_colors):

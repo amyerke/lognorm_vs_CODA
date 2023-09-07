@@ -147,7 +147,7 @@ for d2 in range(len(comp_ds)):
 		if flag_old_label != my_proj:
 			flag_old_label = my_proj
 			feature_counter = 0
-		print(f"{my_proj} {ds1_score[i]} {ds2_score[i]}, {ds1_proj_feat[i]}, {ds2_proj_feat[i]}, featcount: {feature_counter}")
+		# print(f"{my_proj} {ds1_score[i]} {ds2_score[i]}, {ds1_proj_feat[i]}, {ds2_proj_feat[i]}, featcount: {feature_counter}")
 		my_color = my_colors[my_projects.index(my_proj)]
 		ax.scatter(ds1_score[i], ds2_score[i], s=100, color=my_color, label=ds1_feature[i], marker=my_markers[feature_counter])
 		# ax.text(ds1_score[i], ds2_score[i], ds1_proj_feat[i], color=my_color, fontsize=5)

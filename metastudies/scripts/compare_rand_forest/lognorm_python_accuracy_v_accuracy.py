@@ -216,9 +216,9 @@ pdf.close()
 first_df = "placeholder"
 print(f"Joining tables from {ln_folder}.")
 for d2 in range(len(comp_ds)):
-	print(f"counter = {d2}")
+	# print(f"counter = {d2}")
 	ds2 = comp_ds[d2]
-	print(f"DS2: {ds2}")
+	# print(f"DS2: {ds2}")
 	file_pth = os.path.join(ln_folder, f"lnVs_{ds2}.csv")
 	if d2 == 0:
 		first_df = pd.read_csv(file_pth)
@@ -227,7 +227,7 @@ for d2 in range(len(comp_ds)):
 		my_df = pd.read_csv(file_pth)
 		my_cols = [s for s in my_df.columns if "ln_" in s]
 		my_df = my_df.drop(my_cols, axis=1)
-		print(my_df)
+		# print(my_df)
 		first_df = pd.merge(first_df, my_df, on="proj_feat")
 
 first_df.to_csv(os.path.join(ln_folder, f"final_ln.csv"), index=False)
@@ -236,7 +236,7 @@ my_cols = [s for s in first_df.columns if "_score" in s]
 my_cols.insert(0, "proj_feat")
 print(my_cols)
 first_df = first_df.filter(my_cols)
-print(first_df)
+# print(first_df)
 first_df.to_csv(os.path.join(ln_folder, f"final_ln_scoreOnly.csv"), index=False)
 
 print(f"{__file__} complete!")

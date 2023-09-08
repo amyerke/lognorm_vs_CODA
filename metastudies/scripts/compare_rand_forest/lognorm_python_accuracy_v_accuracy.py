@@ -179,7 +179,7 @@ print("Saving figure to pdf", flush = True)
 pdf.savefig( fig )
 
 print("Making seperate legend.")
-fig = plt.figure(figsize=(11,25))
+fig = plt.figure(figsize=(11,27.5))
 ax = fig.add_subplot(1,1,1)
 flag_old_label = ds1_project[0]
 feature_counter = 0
@@ -193,7 +193,7 @@ for i in range(len(ds1_score)):
 	my_color = my_colors[my_projects.index(my_proj)]
 	ax.scatter(ds1_score[i], ds2_score[i], s=100, color=my_color, label=ds1_feature[i], marker=my_markers[feature_counter])
 	ax.text(ds1_score[i], ds2_score[i], ds1_feature[i], color=my_color, fontsize=5)
-	ax.legend(title="",  loc="center", framealpha=1, mode = "expand", markerscale=2)
+	ax.legend(title="",  loc="center", framealpha=1, mode = "expand", markerscale=2, prop={'size': 20})
 	feature_counter += 1
 print("Saving figure to pdf", flush = True)
 pdf.savefig( fig )

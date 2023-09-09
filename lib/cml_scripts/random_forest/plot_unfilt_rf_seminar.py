@@ -31,7 +31,7 @@ parser.add_argument("-p", "--project", default="Jones",
                   help="project folder", metavar="project")
 parser.add_argument("-a", "--use_all_meta", default=False,
                   help="use all metadata", metavar="use_all_meta")
-parser.add_argument("-f", "--metada_fn", default="string", dest="meta_fn",
+parser.add_argument("-f", "--metada_fn", default="patient_metadata.tsv", dest="meta_fn",
                   help="Name of file at the top of the project folder to use as metadata.", 
 									metavar="meta_fn")
 parser.add_argument("-l", "--delimiter", default="\t",

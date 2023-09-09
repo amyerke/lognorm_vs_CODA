@@ -122,9 +122,9 @@ num_iterations = 20
 col_names = col_names + [f"split{x}" for x in range(num_iterations)]
 print(col_names)
 #info for random forest feature importance
-feature_pdf_fpath = os.path.join(output_dir, "graphics", f"feature_imp_{main_output_label}.pdf")
+feature_pdf_fpath = os.path.join(output_dir, "graphics", f"seminar_feature_imp_{main_output_label}.pdf")
 #info for boxplot
-boxplot_pdf_fpath = os.path.join(output_dir, "graphics", f"bp_no_filt{main_output_label}.pdf")
+boxplot_pdf_fpath = os.path.join(output_dir, "graphics", f"seminar_bp_no_filt{main_output_label}.pdf")
 
 # --------------------------------------------------------------------------
 print("Importing data to working env.", flush = True)

@@ -64,11 +64,6 @@ ds_color = {
 			'Shuffle1_PhILR_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
 			'Shuffle2_PhILR_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
 			'Shuffle3_PhILR_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
-			'Filtered_Silva_DADA2' : 'white',
-			'Filtered_Silva_DADA2_blw.sqrt_enorm' : '#050598',
-			'Shuffle1_PhILR_Filtered_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
-			'Shuffle2_PhILR_Filtered_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
-			'Shuffle3_PhILR_Filtered_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
 	    }
 
 comp_ds = list(ds_color.keys())
@@ -112,7 +107,7 @@ print(f"My mean: {plotdata.mean()}")
 #--------------------------------------------------------------------------
 print("Generating graphic")
 #--------------------------------------------------------------------------
-fig = plt.figure(figsize=(11,19))
+fig = plt.figure(figsize=(16,12))
 fig.suptitle(f"Metastudy {train_percent}training each dataset vs others by accuracy, Sklearn RF")
 plt.subplots_adjust(bottom=0.8, left=0.8)
 ax = fig.add_subplot(1,1,1)

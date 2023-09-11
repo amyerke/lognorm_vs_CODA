@@ -121,7 +121,8 @@ fig = plt.figure(figsize=(16,12))
 fig.suptitle(f"Metastudy {train_percent}training each dataset vs others by accuracy, Sklearn RF")
 plt.subplots_adjust(bottom=0.8, left=0.8)
 ax = fig.add_subplot(1,1,1)
-bp = ax.boxplot(plotdata, patch_artist = True, labels=plotdata.columns,showfliers=False)
+bp = ax.boxplot(plotdata.fillna(0), patch_artist=True, labels=plotdata.columns, showfliers=False)
+
 for patch, color in zip(bp['boxes'], my_colors):
 	patch.set_facecolor(color)
 ax.set_xticklabels(labels = plotdata.columns, rotation=90)
@@ -139,7 +140,8 @@ ax.set_ylabel(f"log10 pvalue")
 for i in range(len(plotdata.columns)):
 	y = plotdata.iloc[:,i]
 	x = np.random.normal(1+i, 0.04, size=len(y))
-	ax.plot(x, y, color="b",marker=".", linestyle = "None", alpha=0.5)
+	ax.plot(x, y, color="b",marker="o", linestyle = "None", alpha=0.5)
+
 fig.tight_layout()
 print("Saving figure to pdf", flush = True)
 pdf.savefig( fig )

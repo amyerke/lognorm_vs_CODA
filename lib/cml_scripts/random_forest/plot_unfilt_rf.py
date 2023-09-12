@@ -152,7 +152,7 @@ tables.append(("clr_DADA2", (os.path.join(output_dir, "tables", "clr_asv.csv"), 
 tables.append(("raw_DADA2",(os.path.join(output_dir, "tables", "ForwardReads_DADA2.txt"),"\t"),"white"))
 # tables.append(("HashSeq", (os.path.join(output_dir,  "hashseq", "hashseq.csv"),","), "r"))
 # tables.append(("proportions_DADA2", (os.path.join(output_dir, "tables", "propotions_asv.csv"), ","), "lime"))
-# tables.append(("propotions_DADA2", (os.path.join(output_dir, "tables", "propotions_asv.csv"), ","), "lime"))
+tables.append(("propotions_DADA2", (os.path.join(output_dir, "tables", "propotions_asv.csv"), ","), "lime"))
 # tables.append(("Heilinger_DADA2", (os.path.join(output_dir, "tables", "heilinger_asv.csv"), ","), "lime"))
 tables.append(("lognorm_DADA2", (os.path.join(output_dir, "tables", "lognorm_dada2.csv"), ","), "lime"))
 # tables.append(("lognorm_Silva_DADA2", (os.path.join(output_dir, "tables", "lognorm_Silva.csv"), ","), "lime"))

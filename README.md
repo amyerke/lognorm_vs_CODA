@@ -13,7 +13,7 @@ In order to ensure that each dataset is handled in the same way, common scripts 
 - [random_forest](https://github.com/amyerke/lognorm_vs_CODA/tree/main/lib/cml_scripts/random_forest) holds scripts for running random forest.
 - [transformations](https://github.com/amyerke/lognorm_vs_CODA/tree/main/lib/cml_scripts/transformations) holds scripts for building transformations other than the reference tree.
 
-### Lib directory layout:
+### /lib dir layout (location of common scripts):
 	lib
 	├── CODA_demo
 	├── cml_scripts
@@ -31,7 +31,7 @@ In order to ensure that each dataset is handled in the same way, common scripts 
 	├── taxonomy
 	└── unit_tests
 
-### Project directory layout:
+### Project dir layout:
 	[project]
 	├── output
 	│   ├── graphics
@@ -41,16 +41,18 @@ In order to ensure that each dataset is handled in the same way, common scripts 
 	│   ├── tree_process_blast
 	│   └── trees
 	└── scripts
-			├── data_preprocessing
-			├── download_scripts
-			├── make_ref_tree
-			├── mlm_weighting_py
-			├── random_forest
-			├── read_depth
-			└── transformations
+	    ├── data_preprocessing
+	    ├── download_scripts
+	    ├── make_ref_tree
+	    ├── mlm_weighting_py
+	    ├── random_forest
+	    ├── read_depth
+	    └── transformations
 
 
 Many of the scripts used in this project assume that this repository is located at ~/git/lognorm_vs_CODA, where ~ represents the computer's home directory.
+
+This repository was built to be used on the HPC environment at UNC Charlotte running Red Hat Enterprise Linux 8.3 (Ootpa) and batching jobs with Slurm, thus many of the commands for running the scripts are wrapped in slurm batch files.
 
 ### Dataset/project scripts
 Each project has it's own "scripts" subdirectory at the top level that closely matches the common command line scripts. This is where slurm and R scripts are located that launch jobs using common command line scripts. The ultimate goal of these scripts is to build the transformations and find the accuracy of each one with the random forest.
@@ -78,19 +80,23 @@ The various scripts used in this repository output various types of files. Each 
 
 The exception is that for output the metastudies is all in the metastudies/output folder and not seperated.
 
+# Building Random Forest Accuracy output from scratch
+Skip to section called "Manuscript figures" if you want to use the random forest accuracy scores that were generated for the publicaton.
+
 ## Processing the sequencing data
 In order to create downstream figures, the sequcencing data from each project must be processed and run through the random forest so that the accuracies can be recorded.
 ### Downloading sequencing data
- Each project contains a comma seperated file that holds the SRA accessions called "SraRunTable.txt" for that projects sequences. In each project's "scripts/download_scripts" folder there is an R script for downloading the fastQ files. This can be run with:
+ Each project contains a comma seperated file that holds the SRA accessions called "SraRunTable.txt" for that projects sequences. In each project's "scripts/download_scripts" folder there is an R script for downloading the fastQ files. This can be run with^*^:
 
 `Rscript sra_download.R`
 
 - **Output**: fastq files in [project]/downloaded_seqs/
 
-For this repository, only the fastQ files of the forward reads were used. 
+For this repository, only the fastQ files of the forward reads were used.
+^*^For some projects, a bash script called download.sh was also created that will do the same task and can be run with the command `bash download.sh`.
 
 ### Running DADA2
-#### Step 0: Determining truncation length
+#### Step 0: Determining truncation length (only necessary for new projects)
 In order to determine where to truncate the sequences: 
 - **common script**: [lib/cml_scripts/data_preprocessing/p0_dada2_find_trunLen.R](https://github.com/amyerke/lognorm_vs_CODA/lib/cml_scripts/data_preprocessing/p0_dada2_find_trunLen.R)
 - **project specific script**: `[project]/scripts/data_preprocessing/run_p0_dada2_find_trunLen.slurm`
@@ -113,7 +119,8 @@ Truncation as determined in previous script
 - Proportions: $$\frac{x_i}{\sum{x_{ij}}}$$
 - Heilinger: $$\sqrt{\frac{x_i}{\sum{x_{ij}}}}$$
 - lognorm: $$log(\frac{x_i}{\sum{x_{ij}}}*\frac{n}{N} + PC)$$
-Where RC = raw counts in a cell, Σx = number of sequences in a sample, n = total number of counts in the table, N = total number of samples, PC = pseudo-count, for this project was equal to 1.
+Where RC = raw counts in a cell, Σx = number of sequences in a sample, n = total number of counts in the table, N = total number of samples, PC = pseudo-count, for this project was equal to 1. i and j represent the first and last elements from the sample.
+
 - Rarefaction to read depth of 1000 
 <!-- log_10⁡((RC/n)×(∑(x/N)+PC))t -->
 ### Compositional transformations
@@ -246,10 +253,8 @@ The first step is to make proper input for the BLAST database in the form of a f
 
 ## For building the IQTREE trees:
   IQTREE requires aligned sequences. We experimented with both ClustalW and the DECIPHER R library, though ultimately decided to use DECIPHER because it can just be added as a line to the DADA2 script. However, the follow P0 will create an alignment for anyone who used an older version of p1_dada2_rd1.R.
-### ~~P0 ClustalW~~
-  ~~Using input from the build fasta step from~~ `p1_make_asv_fasta.R`
-`/path/to/clustalo -in input.fasta -out output.fasta -fasta`
-### Step 0 Make DECIEPHER Alignment*
+
+### Step 0 Make DECIEPHER Alignment
 - **common script**: [lib/cml_scripts/transformations/make_alignment.R](https://github.com/amyerke/lognorm_vs_CODA/lib/cml_scripts/transformations/make_alignment.R)
 - **project specific scripts**:
 	- `[project]/scripts/make_ref_tree/Noguera-Julian/scripts/transformations/run_make_90prcent_alignment.slurm`
@@ -313,10 +318,8 @@ Blue boxes are different transformations that are tested.
 - For Jones, Vangay, and Noguera-Julian, not all PhILR weighting schemes worked with prevalence filtering alone as the tree was too big for ape's node distance function, which is internally used by PhILR.
 - For Jones dataset UPGMA, prevelance filtering and PhILR tutorial filtering removed all the sequences.
 
-## Steps for Accuracy Metastudies
-
-### 1. Random forest accuracy for each dataset
-#### For each dataset:
+## Random forest accuracy
+### For each dataset:
 ```
 lib/cml_scripts/random_forest/random_forest_manual_train.py
 ```
@@ -331,17 +334,62 @@ python ~/git/lognorm_vs_CODA/lib/cml_scripts/random_forest/random_forest_manual_
   --training 0.75
 ```
 #### Output
+##### table output
 * filename: sklearn_random_forest_manual_0.75train.csv
 * found in: [project]/output/tables
 * Provides: accuracy scores
+###### graphic output
+* filename: sklearn_random_forest_manual_0.75train.csv
+* found in: [project]/output/graphics
+* Provides: accuracy scores
 
-### 2. Metastudy accuracy vs accuracy
+
+# Manuscript figures
+## 1. Random forest accuracy boxplots
+### See previous section called: Random forest accuracy - the pdf output includes all metadata groups
+## 2. Metastudy accuracy vs accuracy
+![Transformations](lib/readme_images/agg_summary_mla_philr.jpg)
 #### Combines data from all studies
+Command:
+```
+python ~/git/lognorm_vs_CODA/metastudies/scripts/mlm_metrics/aggregated_summary_ml.py
+```
+* location: metastudies/output/agg_summary_mla_philr.pdf
 * requires: sklearn_random_forest_manual_0.75train.csv in output/tables
-* Compares each transformation to each other one.
+* Compares each machine learning algorthm to each verseion of PhILR for Silva/LTP.
+
+## 3. Boxplot summary figure comparing all transformations with medians medians
+![All_ave_summary](lib/readme_images/all_summary_ave_acc_vs_acc_python_by_transformation.jpg)
+#### Combines data from all studies
+Command:
 ```
-lib/cml_scripts/random_forest/random_forest_manual_train.py
+python ~/git/lognorm_vs_CODA/lmetastudies/scripts/compare_rand_forest/summary_accuracy_ave_all.py
 ```
+* location: metastudies/output/all_summary_ave_acc_vs_acc_python_by_transformation.pdf
+* requires: sklearn_random_forest_manual_0.75train.csv in output/tables
+* Compares each transformation.
+
+## 4. Boxplot summary figure comparing all PhILR transformations with medians
+![philr_ave_summary](lib/readme_images/philr_summary_ave_acc_vs_acc_python_by_transformation.jpg)
+#### Combines data from all studies
+Command:
+```
+python ~/git/lognorm_vs_CODA/lmetastudies/scripts/compare_rand_forest/summary_accuracy_ave_philr.py
+```
+* location: metastudies/output/philr_summary_ave_acc_vs_acc_python_by_transformation.pdf
+* requires: sklearn_random_forest_manual_0.75train.csv in output/tables
+* Compares each PhILR transformation.
+
+## 4. Boxplot summary figure comparing all PhILR transformations with medians
+![philr_ave_summary](lib/readme_images/philr_summary_ave_acc_vs_acc_python_by_transformation.jpg)
+#### Combines data from all studies
+Command:
+```
+python ~/git/lognorm_vs_CODA/lmetastudies/scripts/compare_rand_forest/summary_accuracy_ave_philr.py
+```
+* location: metastudies/output/philr_summary_ave_acc_vs_acc_python_by_transformation.pdf
+* requires: sklearn_random_forest_manual_0.75train.csv in output/tables
+* Compares each PhILR transformation.
 
 
-
+lib/readme_images/all_summary_ave_acc_vs_acc_python_by_transformation.jpg

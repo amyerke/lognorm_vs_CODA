@@ -54,13 +54,9 @@ plotdata_fpath = os.path.join(home_dir,"metastudies","output","relative_summary_
 print("Establishing other constants.", flush = True)
 # --------------------------------------------------------------------------
 ds_color = {
-	"raw_prev_filt_DADA2" : 'white',
 			"propotions_prev_filt_DADA2" : "lime",
 			"Heilinger_prev_filt_DADA2" : "lime",
-			"propotions_prev_filt_DADA2" : "lime",
 			"lognorm_prev_filt_DADA2" : "lime",
-			"lognorm_prev_filt_DADA2" : "lime",
-		"raw_DADA2" : 'white',
 			"propotions_DADA2" : "lime",
 			"Heilinger_DADA2" : "lime",
 			'lognorm_DADA2' : "lime",

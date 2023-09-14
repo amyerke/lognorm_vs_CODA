@@ -196,7 +196,7 @@ for meta_c in metadata_cats:
 	fig.tight_layout()
 	pdf.savefig( fig )
 
-print(f"Saving pdf to f{boxplot_pdf_fpath}", flush = True)
+print(f"Saving pdf to {boxplot_pdf_fpath}", flush = True)
 pdf.close()
 
 # --------------------------------------------------------------------------

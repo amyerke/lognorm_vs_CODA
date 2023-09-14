@@ -56,6 +56,8 @@ ds_color = {
 	'alr_DADA2' : 'white',
 	"clr_DADA2" : 'white',
 	"raw_DADA2" : 'white',
+			"propotions_DADA2" : "lime",
+			"Heilinger_DADA2" : "lime",
 			'lognorm_DADA2' : "lime",
 			# "lognorm_Silva_DADA2" : "lime",
 			'Silva_DADA2' : 'white',
@@ -63,11 +65,6 @@ ds_color = {
 			'Shuffle1_PhILR_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
 			'Shuffle2_PhILR_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
 			'Shuffle3_PhILR_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
-			'Filtered_Silva_DADA2' : 'white',
-			'Filtered_Silva_DADA2_blw.sqrt_enorm' : '#050598',
-			'Shuffle1_PhILR_Filtered_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
-			'Shuffle2_PhILR_Filtered_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
-			'Shuffle3_PhILR_Filtered_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
 	    }
 
 comp_ds = list(ds_color.keys())

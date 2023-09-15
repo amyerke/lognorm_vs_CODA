@@ -47,18 +47,18 @@ home_dir = os.path.expanduser(options.homedir)
 projects = ["Jones", "Vangay", "Zeller", "Noguera-Julian"]
 output_dir = os.path.join(home_dir, "metastudies", "output")
 assert os.path.exists(output_dir)
-plot_pdf_fpath = os.path.join(output_dir, "all_summary_pval_acc_vs_acc_python_by_transformation.pdf")
+plot_pdf_fpath = os.path.join(output_dir, "all_summary_pval_acc.pdf")
 plotdata_fpath = os.path.join(home_dir,"metastudies","output","all_summary_pvalue_plot.csv")
 # --------------------------------------------------------------------------
 print("Establishing other constants.", flush = True)
 # --------------------------------------------------------------------------
-ds_color = {"alr_prev_filt_DADA2" : 'white',
+ds_color = {	"rarefied_prev_filt_DADA2" : "plum",
+	"alr_prev_filt_DADA2" : 'white',
 	"clr_prev_filt_DADA2" : 'white',
 	"raw_prev_filt_DADA2" : 'white',
 			"propotions_prev_filt_DADA2" : "lime",
 			"Heilinger_prev_filt_DADA2" : "lime",
 			"lognorm_prev_filt_DADA2" : "lime",
-	"rarefied_prev_filt_DADA2" : "plum",
 			"Silva_prev_filt_DADA2" : 'white',
 			"prev_filt90_Silva_DADA2_blw.sqrt_enorm" : '#050598',
 			"Shuffle1_PhILR_prev_filt90_Silva_DADA2_blw.sqrt_enorm" : '#f7d8a0',
@@ -74,6 +74,7 @@ ds_color = {"alr_prev_filt_DADA2" : 'white',
 			"Shuffle1_PhILR_prev_filt90_IQtree_blw.sqrt_enorm" : '#f7d8a0',
 			"Shuffle2_PhILR_prev_filt90_IQtree_blw.sqrt_enorm" : '#f7d8a0',
 			"Shuffle3_PhILR_prev_filt90_IQtree_blw.sqrt_enorm" : '#f7d8a0',
+				"rarefied_DADA2" : "plum",
 	'alr_DADA2' : 'white',
 	"clr_DADA2" : 'white',
 	"raw_DADA2" : 'white',
@@ -81,7 +82,6 @@ ds_color = {"alr_prev_filt_DADA2" : 'white',
 			"Heilinger_DADA2" : "lime",
 			'lognorm_DADA2' : "lime",
 			# "lognorm_Silva_DADA2" : "lime",
-	"rarefied_DADA2" : "plum",
 			'Silva_DADA2' : 'white',
 			'Silva_DADA2_blw.sqrt_enorm' : '#050598',
 			'Shuffle1_PhILR_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
@@ -195,7 +195,7 @@ pdf.savefig( fig )
 # print(f"Saving figure to pdf at {plot_pdf_fpath}", flush = True)
 # pdf.savefig( fig )
 
-print("Saving pdf", flush = True)
+print(f"Saving pdf to {plot_pdf_fpath}", flush = True)
 pdf.close()
 
 plotdata.to_csv(plotdata_fpath)

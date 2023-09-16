@@ -52,13 +52,19 @@ plotdata_fpath = os.path.join(home_dir,"metastudies","output","prev_filt_main_su
 # --------------------------------------------------------------------------
 print("Establishing other constants.", flush = True)
 # --------------------------------------------------------------------------
-ds_color = {	"rarefied_prev_filt_DADA2" : "plum",
+ds_color = {
+		"rarefied_prev_filt_DADA2" : "plum",
 	"alr_prev_filt_DADA2" : 'white',
 	"clr_prev_filt_DADA2" : 'white',
 	"raw_prev_filt_DADA2" : 'white',
 			"propotions_prev_filt_DADA2" : "lime",
 			"Heilinger_prev_filt_DADA2" : "lime",
 			"lognorm_prev_filt_DADA2" : "lime",
+			"UPGMA_prev_filt_DADA2" : 'white',
+			"prev_filt90_UPGMA_DADA2_blw.sqrt_enorm" : '#050598',
+			"Shuffle1_PhILR_prev_filt90_UPGMA_DADA2_blw.sqrt_enorm" : '#f7d8a0',
+			"Shuffle2_PhILR_prev_filt90_UPGMA_DADA2_blw.sqrt_enorm" : '#f7d8a0',
+			"Shuffle3_PhILR_prev_filt90_UPGMA_DADA2_blw.sqrt_enorm" : '#f7d8a0',
 			"IQtree_prev_filt_DADA2" : 'white',
 			"prev_filt90_IQtree_blw.sqrt_enorm" : '#050598',
 			"Shuffle1_PhILR_prev_filt90_IQtree_blw.sqrt_enorm" : '#f7d8a0',

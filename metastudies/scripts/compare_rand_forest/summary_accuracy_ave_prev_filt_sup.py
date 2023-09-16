@@ -59,22 +59,10 @@ ds_color = {
 			"propotions_prev_filt_DADA2" : "lime",
 			"Heilinger_prev_filt_DADA2" : "lime",
 			"lognorm_prev_filt_DADA2" : "lime",
-			"Silva_prev_filt_DADA2" : 'white',
-			"prev_filt90_Silva_DADA2_blw.sqrt_enorm" : '#050598',
-			"Shuffle1_PhILR_prev_filt90_Silva_DADA2_blw.sqrt_enorm" : '#f7d8a0',
-			"Shuffle2_PhILR_prev_filt90_Silva_DADA2_blw.sqrt_enorm" : '#f7d8a0',
-			"Shuffle3_PhILR_prev_filt90_Silva_DADA2_blw.sqrt_enorm" : '#f7d8a0',
-			"UPGMA_prev_filt_DADA2" : 'white',
-			"prev_filt90_UPGMA_DADA2_blw.sqrt_enorm" : '#050598',
-			"Shuffle1_PhILR_prev_filt90_UPGMA_DADA2_blw.sqrt_enorm" : '#f7d8a0',
-			"Shuffle2_PhILR_prev_filt90_UPGMA_DADA2_blw.sqrt_enorm" : '#f7d8a0',
-			"Shuffle3_PhILR_prev_filt90_UPGMA_DADA2_blw.sqrt_enorm" : '#f7d8a0',
-			"IQtree_prev_filt_DADA2" : 'white',
 			"prev_filt90_IQtree_blw.sqrt_enorm" : '#050598',
 			"Shuffle1_PhILR_prev_filt90_IQtree_blw.sqrt_enorm" : '#f7d8a0',
 			"Shuffle2_PhILR_prev_filt90_IQtree_blw.sqrt_enorm" : '#f7d8a0',
 			"Shuffle3_PhILR_prev_filt90_IQtree_blw.sqrt_enorm" : '#f7d8a0',
-	"rarefied_DADA2" : "plum",
 	    }
 
 comp_ds = list(ds_color.keys())

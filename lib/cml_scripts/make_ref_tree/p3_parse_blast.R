@@ -48,7 +48,7 @@ output_dir <- file.path(home_dir, project, 'output')
 text_output_fn <- paste0("blast_stats_", project, "_", basename(opt$input_file), ".log")
 
 setwd(file.path(output_dir, "tree_process_blast"))
-print(paste0("Creating ", text_output_fn, "in", getwd()))
+print(paste0("Creating ", text_output_fn, " in ", getwd()))
 file.create(text_output_fn)
 
 input_file <- opt$input_file

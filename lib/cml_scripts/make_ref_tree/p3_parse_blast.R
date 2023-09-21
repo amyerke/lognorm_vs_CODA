@@ -33,29 +33,34 @@ option_list <- list(
   make_option(c("-o", "--output"), type="character", 
               default="parsed_output.csv", 
               help="name of output file, will be found in tree_process_blast")
-); 
+);
 
 opt_parser <- OptionParser(option_list=option_list);
 opt <- parse_args(opt_parser);
 
 print(opt)
 
+####-Establish directory constants------------------------------------------####
 print("Establishing directory layout.")
 home_dir <- opt$homedir
 project <- opt$project
 output_dir <- file.path(home_dir, project, 'output')
+text_output_fn <- paste0("blast_stats_", project, ".log")
 
 setwd(file.path(output_dir, "tree_process_blast"))
+print(paste0("Creating ", text_output_fn, "in", getwd()))
+file.create(text_output_fn)
 
 input_file <- opt$input_file
 
-df <- data.frame(#qseqid=character(),
+df <- data.frame(#qseqid=character(),#empty df to fill with parsed results
                  sseqid=character(),
                  bitscore=integer(),
                  count_matched=integer(),
                  stringsAsFactors=FALSE)
 
 print("Parsing blast output.")
+all_qseq <- c()
 con <- file(input_file, "r")
 while ( TRUE ) {
   line = readLines(con, n = 1)
@@ -68,30 +73,52 @@ while ( TRUE ) {
   evalue = as.numeric(result[5])
   bitsc = as.integer(result[6])
   # print(paste(sseq, bitsc))
+  all_qseq <- unique(c(all_qseq, qseq))
   if (evalue < 10^-10){
-    if ( qseq %in% row.names(df)){
-      if (bitsc > df[qseq, "bitscore"]){
-        count = df[qseq,count_matched]
-        df[qseq,] = list(sseq, bitsc, count + 1)
+    if ( qseq %in% row.names(df)){ #check if query already in df
+      if (bitsc > df[qseq, "bitscore"]){#higher bitscore is better
+        count = df[qseq,"count_matched"]
+        df[qseq,] = list(sseq, bitsc, count + 1)#increase bitsc & count of existing row
       }
-    }else{
+    }else{#if qseq not already in df
       newRow <- data.frame(sseqid=sseq,
                            bitscore=bitsc,
                            count_matched=1) 
       row.names(newRow) = qseq
       df = rbind(df, newRow)
     }
-  }
-}
+  }#close if eval
+}# close while
 close(con)
 
+####-Record results---------------------------------------------------------####
 print(paste("original nrow:", nrow(df)))
+write(paste("original nrow:", nrow(df)),
+      file=text_output_fn,
+      append=TRUE)
 
-print(paste("number of unique rows:", length(unique(rownames(df)))))
+print(paste("number of unique hits:", length(unique(rownames(df)))))
+write(paste("number of unique hits:", length(unique(rownames(df)))),
+      file=text_output_fn,
+      append=TRUE)
+
+print(paste("number of unique queries:", length(unique(all_qseq))))
+write(paste("number of unique queries:", length(unique(all_qseq))),
+      file=text_output_fn,
+      append=TRUE)
+
+mapped_fraction <- length(unique(rownames(df)))/length(unique(all_qseq))
+print(paste("mapped_fraction:", mapped_fraction))
+write(paste("mapped_fraction:", mapped_fraction),
+      file=text_output_fn,
+      append=TRUE)
 
 myT <- table(df[,"sseqid"])
 
 print(paste("ave seq/node:", mean(myT), "\nmax seq/node:", max(myT)))
+write(paste("ave seq/node:", mean(myT), "\nmax seq/node:", max(myT)),
+      file=text_output_fn,
+      append=TRUE)
 
 pdf(file = file.path(output_dir, "graphics", "p3_parse_blast.pdf"))
 hist(myT, breaks = 150, xlab = "Sequences per node tip", main = "Histogram of seqs per node tip")

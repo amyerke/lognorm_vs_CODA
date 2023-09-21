@@ -1,15 +1,15 @@
 #!/bin/bash
 
 #SBATCH --partition=Orion                                    		# Partition/queue requested on server
-#SBATCH --job-name=run_p3_parse_blast_raw                 # Job name
+#SBATCH --job-name=run_p3_parse_blast_raw_Zeller                # Job name
 #SBATCH --time=24:00:00                                      		# Time limit (hrs:min:sec)
 #SBATCH --nodes=1                                         			# Number of nodes requested
 #SBATCH --ntasks-per-node=1                          			# Number of CPUs (processor cores/tasks)
 #SBATCH --mem=50gb                                          		# Memory limit
 #SBATCH --mail-type=BEGIN,END,FAIL                              	# Mail events (NONE, BEGIN, END, FAIL, ALL)
 #SBATCH --mail-user=amyerke@uncc.edu                            	# Specified email address
-#SBATCH --output=/users/amyerke/slurmLogs/Vangay_%x.%j.out     # Set directory for standard output
-#SBATCH --error=/users/amyerke/slurmLogs/Vangay_%x.%j.out      # Set directory for error log
+#SBATCH --output=/users/amyerke/slurmLogs/%x.%j.out     # Set directory for standard output
+#SBATCH --error=/users/amyerke/slurmLogs/%x.%j.out      # Set directory for error log
 ##SBATCH --uid=amyerke
 #SBATCH --get-user-env
 
@@ -22,7 +22,7 @@ module load R
 
 Rscript ~/git/lognorm_vs_CODA/lib/cml_scripts/make_ref_tree/p3_parse_blast.R \
   -d ~/git/lognorm_vs_CODA \
-  -p Vangay \
+  -p Zeller \
   -i output.txt \
   -o parsed_output.csv
 

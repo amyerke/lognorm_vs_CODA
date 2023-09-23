@@ -194,7 +194,7 @@ pdf.savefig( fig, bbox_inches='tight')
 print("Saving pdf", flush = True)
 pdf.close()
 
-r_details = f"""min(r_sq): {min(r_sq)}, max(r_sq): {max(r_sq)}, med(r_sq): {median(r_sq)}"""
+r_details = f"""num trials: {len(r_sq)}, min(r_sq): {min(r_sq)}, max(r_sq): {max(r_sq)}, med(r_sq): {median(r_sq)}"""
 
 print(r_details)
 print(f"Accuracy vs accuracy R squared plots")

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # Author: Aaron Yerke, aaronyerke@gmail.com
-# This is a script for comparing random forest output to pvalues
+# This is a script for comparing random forest output 
+# of each transformation to each other transformation
 
 print(f"""Running {__file__}.
 This is a script for comparing random forest output with pvalues.
@@ -44,7 +45,7 @@ print("Establishing other constants.", flush = True)
 # --------------------------------------------------------------------------
 font1 = {'family':'serif','color':'blue','size':20}
 font2 = {'family':'serif','color':'darkred','size':15}
-s_color = {
+ds_color = {
 		"rarefied_prev_filt_DADA2" : "plum",
 	"alr_prev_filt_DADA2" : 'white',
 	"clr_prev_filt_DADA2" : 'white',

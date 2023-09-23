@@ -9,7 +9,7 @@ This is a script for comparing random forest output with pvalues.
 print("Loading external libraries.",flush = True)
 # --------------------------------------------------------------------------
 import os
-from statistics import mean
+from statistics import mean, median
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -44,21 +44,59 @@ print("Establishing other constants.", flush = True)
 # --------------------------------------------------------------------------
 font1 = {'family':'serif','color':'blue','size':20}
 font2 = {'family':'serif','color':'darkred','size':15}
-comp_ds = ['alr_DADA2', 'clr_DADA2', 'raw_DADA2', 'Filtered_IQtree', \
-	'Filtered_IQtree_blw.sqrt_enorm', 'Shuffle1_PhILR_Filtered_IQtree_blw.sqrt_enorm',\
-	'Shuffle2_PhILR_Filtered_IQtree_blw.sqrt_enorm', 'Shuffle3_PhILR_Filtered_IQtree_blw.sqrt_enorm',\
-	'Filtered_Silva_DADA2', 'Filtered_Silva_DADA2_blw.sqrt_enorm', \
-	'Shuffle1_PhILR_Filtered_Silva_DADA2_blw.sqrt_enorm', \
-	'Shuffle2_PhILR_Filtered_Silva_DADA2_blw.sqrt_enorm', \
-	'Shuffle3_PhILR_Filtered_Silva_DADA2_blw.sqrt_enorm',\
-	'Filtered_UPGMA_DADA2', \
-	'Filtered_UPGMA_DADA2_blw.sqrt_enorm', 'Shuffle1_PhILR_Filtered_UPGMA_DADA2_blw.sqrt_enorm',\
-	'Shuffle2_PhILR_Filtered_UPGMA_DADA2_blw.sqrt_enorm', 
-	'Shuffle3_PhILR_Filtered_UPGMA_DADA2_blw.sqrt_enorm',\
-	'lognorm_DADA2', 'Silva_DADA2', \
-	'Silva_DADA2_blw.sqrt_enorm', 'Shuffle1_PhILR_Silva_DADA2_blw.sqrt_enorm', \
-	'Shuffle2_PhILR_Silva_DADA2_blw.sqrt_enorm', 'Shuffle3_PhILR_Silva_DADA2_blw.sqrt_enorm']
-
+s_color = {
+		"rarefied_prev_filt_DADA2" : "plum",
+	"alr_prev_filt_DADA2" : 'white',
+	"clr_prev_filt_DADA2" : 'white',
+	"raw_prev_filt_DADA2" : 'white',
+			"propotions_prev_filt_DADA2" : "lime",
+			"Heilinger_prev_filt_DADA2" : "lime",
+			"lognorm_prev_filt_DADA2" : "lime",
+			"Silva_prev_filt_DADA2" : 'white',
+			"prev_filt90_Silva_DADA2_blw.sqrt_enorm" : '#050598',
+			"Shuffle1_PhILR_prev_filt90_Silva_DADA2_blw.sqrt_enorm" : '#f7d8a0',
+			"Shuffle2_PhILR_prev_filt90_Silva_DADA2_blw.sqrt_enorm" : '#f7d8a0',
+			"Shuffle3_PhILR_prev_filt90_Silva_DADA2_blw.sqrt_enorm" : '#f7d8a0',
+			"UPGMA_prev_filt_DADA2" : 'white',
+			"prev_filt90_UPGMA_DADA2_blw.sqrt_enorm" : '#050598',
+			"Shuffle1_PhILR_prev_filt90_UPGMA_DADA2_blw.sqrt_enorm" : '#f7d8a0',
+			"Shuffle2_PhILR_prev_filt90_UPGMA_DADA2_blw.sqrt_enorm" : '#f7d8a0',
+			"Shuffle3_PhILR_prev_filt90_UPGMA_DADA2_blw.sqrt_enorm" : '#f7d8a0',
+			"IQtree_prev_filt_DADA2" : 'white',
+			"prev_filt90_IQtree_blw.sqrt_enorm" : '#050598',
+			"Shuffle1_PhILR_prev_filt90_IQtree_blw.sqrt_enorm" : '#f7d8a0',
+			"Shuffle2_PhILR_prev_filt90_IQtree_blw.sqrt_enorm" : '#f7d8a0',
+			"Shuffle3_PhILR_prev_filt90_IQtree_blw.sqrt_enorm" : '#f7d8a0',
+	"rarefied_DADA2" : "plum",
+	'alr_DADA2' : 'white',
+	"clr_DADA2" : 'white',
+	"raw_DADA2" : 'white',
+			"propotions_DADA2" : "lime",
+			"Heilinger_DADA2" : "lime",
+			'lognorm_DADA2' : "lime",
+			# "lognorm_Silva_DADA2" : "lime",
+			'Silva_DADA2' : 'white',
+			'Silva_DADA2_blw.sqrt_enorm' : '#050598',
+			'Shuffle1_PhILR_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
+			'Shuffle2_PhILR_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
+			'Shuffle3_PhILR_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
+			'Filtered_Silva_DADA2' : 'white',
+			'Filtered_Silva_DADA2_blw.sqrt_enorm' : '#050598',
+			'Shuffle1_PhILR_Filtered_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
+			'Shuffle2_PhILR_Filtered_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
+			'Shuffle3_PhILR_Filtered_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
+			'Filtered_UPGMA_DADA2' : 'white',
+			'Filtered_UPGMA_DADA2_blw.sqrt_enorm' : '#050598',
+			'Shuffle1_PhILR_Filtered_UPGMA_DADA2_blw.sqrt_enorm' : '#f7d8a0',
+			'Shuffle2_PhILR_Filtered_UPGMA_DADA2_blw.sqrt_enorm' : '#f7d8a0',
+			'Shuffle3_PhILR_Filtered_UPGMA_DADA2_blw.sqrt_enorm' : '#f7d8a0',
+			'Filtered_IQtree' : 'white',
+			'Filtered_IQtree_blw.sqrt_enorm' : '#050598',
+			'Shuffle1_PhILR_Filtered_IQtree_blw.sqrt_enorm' : '#f7d8a0',
+			'Shuffle2_PhILR_Filtered_IQtree_blw.sqrt_enorm' : '#f7d8a0',
+			'Shuffle3_PhILR_Filtered_IQtree_blw.sqrt_enorm' : '#f7d8a0',
+	    }
+comp_ds = list(ds_color.keys())
 pdf = matplotlib.backends.backend_pdf.PdfPages(plot_pdf_fpath)
 #set font sizes
 plt.rc('font', size=15) 
@@ -156,12 +194,16 @@ pdf.savefig( fig, bbox_inches='tight')
 print("Saving pdf", flush = True)
 pdf.close()
 
+r_details = f"""min(r_sq): {min(r_sq)}, max(r_sq): {max(r_sq)}, med(r_sq): {median(r_sq)}"""
+
+print(r_details)
 print(f"Accuracy vs accuracy R squared plots")
 pdf = matplotlib.backends.backend_pdf.PdfPages(r_sq_boxplot_pdf_fpath)
 fig = plt.figure(figsize=(11,11))
 fig.suptitle(f"Accuracy vs accuracy R squared")
 plt.subplots_adjust(bottom=0.8)
 ax = fig.add_subplot(1,1,1)
+ax.set_title(r_details)
 bp = ax.boxplot(r_sq)
 fig.tight_layout()
 pdf.savefig( fig )

@@ -117,7 +117,7 @@ print(f"My mean: {plotdata.mean()}")
 #--------------------------------------------------------------------------
 print("Generating graphic")
 #--------------------------------------------------------------------------
-fig = plt.figure(figsize=(19,11))
+fig = plt.figure(figsize=(24,17))
 fig.suptitle(f"Metastudy {train_percent}training each dataset vs others by accuracy, Sklearn RF")
 plt.subplots_adjust(bottom=0.8, left=0.8)
 ax = fig.add_subplot(1,1,1)

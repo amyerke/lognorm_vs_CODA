@@ -75,7 +75,6 @@ ds_color = {
 			"propotions_DADA2" : "lime",
 			"Heilinger_DADA2" : "lime",
 			'lognorm_DADA2' : "lime",
-			# "lognorm_Silva_DADA2" : "lime",
 			'Silva_DADA2' : 'white',
 			'Silva_DADA2_blw.sqrt_enorm' : '#050598',
 			'Shuffle1_PhILR_Silva_DADA2_blw.sqrt_enorm' : '#f7d8a0',
